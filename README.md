@@ -5,12 +5,18 @@ Please consider starring the project to show your :heart: and support.
 
 
 ## Steps to install
-Well, this is a pre-configure and ready to install repo for VaahCMS. All you need do it run following command to download all dependencies:
+Well, this is a pre-configure and ready to install repo for VaahCMS.
 
+#### Step 1:
+Rename `.env.example` to `.env`
+
+#### Step 2:
+Run following command:
 ```bash
 composer install
 ```
 
+#### Step 3:
 Then visit following url to setup the CMS:
 ```bash
 <root-url>/vaahcms/setup
