@@ -35,8 +35,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "VaahCms\\Modules\\": "vaahcms/Modules/",
-            "VaahCms\\Themes\\": "vaahcms/Themes/"
+            "VaahCms\\Modules\\": "VaahCms/Modules/",
+            "VaahCms\\Themes\\": "VaahCms/Themes/"
         },
         "classmap": [
             "database/seeds",
