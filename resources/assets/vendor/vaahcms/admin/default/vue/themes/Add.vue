@@ -5,7 +5,7 @@
             <div class="col-sm">
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <div>
-                        <h4 class="mg-b-0 tx-spacing--1">Add Modules</h4>
+                        <h4 class="mg-b-0 tx-spacing--1">Add Themes</h4>
                     </div>
 
                     <div class="d-flex flex-row-reverse">
@@ -14,12 +14,12 @@
 
 
                             <router-link class="btn btn-sm pd-x-15 btn-primary btn-uppercase"
-                                         :to="{ path: '/'}">
+                                         :to="{ path: '/themes'}">
                                 <i class="fas fa-upload"></i> Upload
                             </router-link>
 
                             <router-link class="btn btn-sm pd-x-15 btn-light btn-uppercase"
-                                         :to="{ path: '/'}">
+                                         :to="{ path: '/themes'}">
                                 <i class="fas fa-arrow-left"></i> Back
                             </router-link>
 
@@ -29,9 +29,9 @@
 
                             <div class="search-form input-group-sm">
                                 <input type="search" class="form-control" v-model="filters.q"
-                                       v-on:keyup.enter="getModules()"
+                                       v-on:keyup.enter="getThemes()"
                                        placeholder="Search">
-                                <button class="btn" v-on:click="getModules()" type="button">
+                                <button class="btn" v-on:click="getThemes()" type="button">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -49,10 +49,16 @@
 
         </div>
 
-
-
         <!--content body-->
+        <div class="row" v-if="!list">
 
+            <div class="col">
+
+                <t-loader></t-loader>
+
+            </div>
+
+        </div>
 
         <div class="row mg-t-10 mg-b-10" v-if="list">
             <div class="col-sm-6" v-for="item in list.data" >
@@ -129,10 +135,10 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="list">
 
             <div class="col">
-                <pagination  v-if="list" :limit="6" :data="list" @pagination-change-page="getModules"></pagination>
+                <pagination   :limit="6" :data="list" @pagination-change-page="getThemes"></pagination>
             </div>
 
         </div>
@@ -141,4 +147,4 @@
 
     </div>
 </template>
-<script src="./ModulesAddJs.js"></script>
+<script src="./AddJs.js"></script>
