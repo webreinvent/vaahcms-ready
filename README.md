@@ -22,7 +22,7 @@ composer install
 #### Step 4:
 Then visit following url to setup the CMS:
 ```bash
-<root-url>/vaahcms/setup
+<base-url>/vaahcms/setup
 ```
 
 
