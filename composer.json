@@ -12,7 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "webreinvent/vaahcms": "dev-develop"
+        "webreinvent/vaahcms": "0.1.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

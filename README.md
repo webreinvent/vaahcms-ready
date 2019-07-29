@@ -19,6 +19,12 @@ Run following command:
 composer install
 ```
 
+#### Step 3:
+Publish VaahCms Assets:
+```bash
+php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets
+```
+
 #### Step 4:
 Then visit following url to setup the CMS:
 ```bash
