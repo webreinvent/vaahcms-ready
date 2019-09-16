@@ -28,7 +28,7 @@ php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvide
 #### Step 4:
 Then visit following url to setup the CMS:
 ```bash
-<base-url>/vaahcms/setup
+<base-url>/public/vaahcms/setup
 ```
 
 
