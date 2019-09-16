@@ -13,3 +13,5 @@ yarn-error.log
 composer.lock
 package.lock
 yarn.lock
+
+*.log
