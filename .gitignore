@@ -3,7 +3,6 @@
 /node_modules
 /public/hot
 /public/storage
-/storage/*.key
 /vendor
 .env
 Homestead.json
@@ -11,7 +10,14 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 composer.lock
-package.lock
+package-lock.json
 yarn.lock
 
 *.log
+
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
