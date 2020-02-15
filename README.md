@@ -22,7 +22,7 @@ composer install
 #### Step 3:
 Publish VaahCms Assets:
 ```bash
-php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets
+php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force
 ```
 
 #### Step 4:
