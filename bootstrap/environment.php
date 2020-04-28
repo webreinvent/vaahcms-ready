@@ -14,37 +14,62 @@ use Dotenv\Dotenv;
 */
 $env = $app->detectEnvironment(function(){
 
+    $vaahcms_file = base_path('/vaahcms.json');
+    $env_file_name = null;
 
-
-    $host = null;
-    $actual_link = null;
-
-    if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
+    if(file_exists($vaahcms_file))
     {
-        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
-        $host = $_SERVER['HTTP_HOST'];
+        $vaahcms = file_get_contents(base_path('/vaahcms.json'));
+        $vaahcms = json_decode($vaahcms, true);
+
+        if(isset($vaahcms['environments']) && isset($vaahcms['environments']['default']))
+        {
+            $env_file_name = $vaahcms['environments']['default']['env_file'];
+        }
+
+
+        $host = null;
+        $actual_url = null;
+
+        if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
+        {
+            $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        }
+
+
+        if($actual_url)
+        {
+
+
+            if(isset($vaahcms['environments']) && is_array($vaahcms['environments'])
+                && count($vaahcms['environments'])>0
+            )
+            {
+                foreach ($vaahcms['environments'] as $environment)
+                {
+                    $environment_url = explode( '://', $environment['app_url']);
+                    if (strpos($actual_url, $environment_url[1]) !== false){
+                        $env_file_name = $environment['env_file'];
+                    }
+                }
+
+
+
+            }
+        }
+
+
+
     }
 
-    $env_file_name = '.env';
 
-    if (strpos($actual_link, '/feature') !== false) {
-        $env_file_name .= '.feature';
-    }  else if(strpos($actual_link, '/develop') !== false)
+    if(!$env_file_name)
     {
-        $env_file_name .= '.develop';
-    } else if(strpos($actual_link, '/release') !== false)
-    {
-        $env_file_name .= '.release';
-    } else if(strpos($host, 'example.com') !== false)
-    {
-        $env_file_name .= '.production';
-    } else if(strpos($actual_link, 'localhost') !== false)
-    {
-        $env_file_name .= '.localhost';
+        $env_file_name = '.env';
     }
-
-
+    
     $dotenv = Dotenv::create(__DIR__.'/../', $env_file_name);
     $dotenv->load();
+
 });
