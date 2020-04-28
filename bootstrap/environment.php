@@ -68,7 +68,7 @@ $env = $app->detectEnvironment(function(){
     {
         $env_file_name = '.env';
     }
-    
+
     $dotenv = Dotenv::create(__DIR__.'/../', $env_file_name);
     $dotenv->load();
 
