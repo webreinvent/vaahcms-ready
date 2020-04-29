@@ -11,21 +11,12 @@ Well, this is a pre-configure and ready to install repo for VaahCMS.
 Download this repository and unzip.
 
 #### Step 2:
-Rename `.env.example` to `.env`
-
-#### Step 3:
 Run following command:
 ```bash
 composer install
 ```
 
 #### Step 3:
-Publish VaahCms Assets:
-```bash
-php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force
-```
-
-#### Step 4:
 Then visit following url to setup the CMS:
 ```bash
 <base-url>/public/vaahcms/setup
