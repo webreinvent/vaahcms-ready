@@ -13,7 +13,7 @@
         "laravel/framework": "^6.0.3",
         "laravel/tinker": "^1.0",
         "zanysoft/laravel-zip": "^1.0",
-        "webreinvent/vaahcms": "dev-master"
+        "webreinvent/vaahcms": "dev-develop"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
