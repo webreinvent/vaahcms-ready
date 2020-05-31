@@ -69,7 +69,10 @@ $env = $app->detectEnvironment(function(){
         $env_file_name = '.env';
     }
 
-    $dotenv = Dotenv::create(__DIR__.'/../', $env_file_name);
-    $dotenv->load();
+    if(file_exists(base_path($env_file_name)))
+    {
+        $dotenv = Dotenv::createImmutable(__DIR__.'/../', $env_file_name);
+        $dotenv->load();
+    }
 
 });
