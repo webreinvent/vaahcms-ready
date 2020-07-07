@@ -41,23 +41,24 @@ $env = $app->detectEnvironment(function(){
         if($actual_url)
         {
 
-
             if(isset($vaahcms['environments']) && is_array($vaahcms['environments'])
                 && count($vaahcms['environments'])>0
             )
             {
+                $actual_url = explode( '://', $actual_url);
+
                 foreach ($vaahcms['environments'] as $environment)
                 {
-                    $environment_url = explode( '://', $environment['app_url']);
-                    if (strpos($actual_url, $environment_url[1]) !== false){
+                    if (strpos($environment['app_url'], $actual_url[1]) !== false){
                         $env_file_name = $environment['env_file'];
                     }
                 }
 
-
-
             }
         }
+
+
+
     }
 
 
@@ -71,6 +72,5 @@ $env = $app->detectEnvironment(function(){
         $dotenv = Dotenv::createImmutable(__DIR__.'/../', $env_file_name);
         $dotenv->load();
     }
-
 
 });
