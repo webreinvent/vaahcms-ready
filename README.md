@@ -28,6 +28,21 @@ Then visit following url to setup the CMS:
 <base-url>/public/vaahcms/setup
 ```
 
+## Steps to upgrade and fresh reinstall
+
+DO NO REPEAT THESE STEPS FOR PRODUCTION ENVIRONMENT 
+
+#### Step 1:
+Delete `vaahcms.json`, `composer.lock` and all `.env` files like `.env.local` etc. Create new `.env` file from `.env.example` 
+
+#### Step 2:
+Delete database table and run `composer update`
+
+#### Step 3:
+Run `php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force`
+
+#### Step 4:
+Visit `<base-url>/public/vaahcms/setup` to reinstall the VaahCMS
 
 ## Support us
 
