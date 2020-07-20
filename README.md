@@ -36,7 +36,7 @@ DO NO REPEAT THESE STEPS FOR PRODUCTION ENVIRONMENT
 Delete `vaahcms.json`, `composer.lock` and all `.env` files like `.env.local` etc. Create new `.env` file from `.env.example` 
 
 #### Step 2:
-Delete database table and run `composer update`
+Delete database table, `CMS` module folder, `BtFourPointFour` theme folder  and run `composer update`
 
 #### Step 3:
 Run `php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force`
