@@ -28,7 +28,6 @@ $env = $app->detectEnvironment(function(){
             $env_file_name = $vaahcms['environments']['default']['env_file'];
         }
 
-
         $host = null;
         $actual_url = null;
 
@@ -36,7 +35,6 @@ $env = $app->detectEnvironment(function(){
         {
             $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }
-
 
         if($actual_url)
         {
@@ -49,14 +47,16 @@ $env = $app->detectEnvironment(function(){
 
                 foreach ($vaahcms['environments'] as $environment)
                 {
-                    if (strpos($environment['app_url'], $actual_url[1]) !== false){
+
+                    $environment_app_url = explode( '://', $environment['app_url']);
+
+                    if (strpos($actual_url[1], $environment_app_url[1]) !== false){
                         $env_file_name = $environment['env_file'];
                     }
                 }
 
             }
         }
-
 
 
     }
