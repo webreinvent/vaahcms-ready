@@ -30,13 +30,25 @@ $env = $app->detectEnvironment(function(){
 
         $host = null;
         $actual_url = null;
+        $is_sub_domain = null;
+        $sub_domain = null;
 
         if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
         {
             $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }
 
-        if($actual_url)
+
+        $url_arr = explode('.', $actual_url);
+
+        if(count($url_arr) > 2 )
+        {
+            $is_sub_domain = true;
+            $sub_domain = $_SERVER['HTTP_HOST'];
+        }
+
+
+        if($actual_url && is_null($is_sub_domain))
         {
 
             if(isset($vaahcms['environments']) && is_array($vaahcms['environments'])
@@ -55,6 +67,52 @@ $env = $app->detectEnvironment(function(){
                     }
                 }
 
+            }
+        } else if(!is_null($is_sub_domain))
+        {
+
+
+
+
+            foreach ($vaahcms['environments'] as $key => $environment)
+            {
+
+                $environment_app_url = explode( '.', $environment['app_url']);
+
+                if (
+                    isset($environment_app_url[1])
+                    && isset($sub_domain)
+                ){
+
+                    //Stared sub domain
+                    if($environment_app_url['0'] == '*')
+                    {
+                        $sub_domain_arr = explode('.', $sub_domain);
+
+                        unset($sub_domain_arr[0]);
+                        unset($environment_app_url[0]);
+
+                        $sub_domain_derived = implode('.', $sub_domain_arr);
+                        $environment_app_url = implode('.', $sub_domain_arr);
+
+                        if($sub_domain_derived == $environment_app_url)
+                        {
+                            $env_file_name = $environment['env_file'];
+                        }
+                    } else{
+
+                        $actual_url = explode( '://', $actual_url);
+
+                        $environment_app_url = explode( '://', $environment['app_url']);
+
+                        if (strpos($actual_url[1], $environment_app_url[1]) !== false){
+                            $env_file_name = $environment['env_file'];
+                        }
+                    }
+
+
+
+                }
             }
         }
 
