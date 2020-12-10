@@ -62,7 +62,9 @@ $env = $app->detectEnvironment(function(){
 
                     $environment_app_url = explode( '://', $environment['app_url']);
 
-                    if (strpos($actual_url[1], $environment_app_url[1]) !== false){
+                    if ( isset($environment_app_url[1])
+                        && isset($actual_url[1])
+                        && strpos(strval($actual_url[1]), strval($environment_app_url[1])) !== false){
                         $env_file_name = $environment['env_file'];
                     }
                 }
@@ -70,9 +72,6 @@ $env = $app->detectEnvironment(function(){
             }
         } else if(!is_null($is_sub_domain))
         {
-
-
-
 
             foreach ($vaahcms['environments'] as $key => $environment)
             {
