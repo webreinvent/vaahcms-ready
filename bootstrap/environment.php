@@ -48,6 +48,7 @@ $env = $app->detectEnvironment(function(){
         }
 
 
+
         if($actual_url && is_null($is_sub_domain))
         {
 
@@ -73,18 +74,24 @@ $env = $app->detectEnvironment(function(){
         } else if(!is_null($is_sub_domain))
         {
 
+
+
             foreach ($vaahcms['environments'] as $key => $environment)
             {
 
                 $environment_app_url = explode( '.', $environment['app_url']);
 
+                $environment_app_d = explode("://", $environment_app_url[0]);
+
+
+
                 if (
-                    isset($environment_app_url[1])
+                    isset($environment_app_d[1])
                     && isset($sub_domain)
                 ){
 
                     //Stared sub domain
-                    if($environment_app_url['0'] == '*')
+                    if($environment_app_d['1'] == '*')
                     {
                         $sub_domain_arr = explode('.', $sub_domain);
 
@@ -98,15 +105,17 @@ $env = $app->detectEnvironment(function(){
                         {
                             $env_file_name = $environment['env_file'];
                         }
+
                     } else{
 
-                        $actual_url = explode( '://', $actual_url);
+                        $actual_d = explode( '://', $actual_url);
 
                         $environment_app_url = explode( '://', $environment['app_url']);
 
-                        if (strpos($actual_url[1], $environment_app_url[1]) !== false){
+                        if (strpos($actual_d[1], $environment_app_url[1]) !== false){
                             $env_file_name = $environment['env_file'];
                         }
+
                     }
 
 
@@ -115,14 +124,13 @@ $env = $app->detectEnvironment(function(){
             }
         }
 
-
     }
-
 
     if(!$env_file_name)
     {
         $env_file_name = '.env';
     }
+
 
     if(file_exists(base_path($env_file_name)))
     {
