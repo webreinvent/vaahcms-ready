@@ -2,6 +2,32 @@
 
 use Dotenv\Dotenv;
 
+function tld( $uri ) {
+    $parts = explode('.', $uri);
+    return (sizeof($parts) ? ('.' . end($parts)) : false);
+}
+
+function vh_get_root_domain($str)
+{
+    $pattern = "((?<=\.)[a-z0-9]*(?=\.)(?=[a-z]*))";
+     preg_match($pattern, $str, $matches);
+     $tld = tld($str);
+    return $matches[0].$tld;
+}
+
+function vh_get_sub_domain($str)
+{
+    $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
+    preg_match($pattern, $str, $matches);
+
+    if(isset($matches[0]))
+    {
+        return $matches[0];
+    }
+    return null;
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -32,35 +58,34 @@ $env = $app->detectEnvironment(function(){
         $actual_url = null;
         $is_sub_domain = null;
         $sub_domain = null;
+        $env_sub_domain = null;
+        $env_root_domain = null;
+        $root_domain = null;
 
         if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
         {
             $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }
 
-
         $url_arr = explode('.', $actual_url);
 
         if(count($url_arr) > 2 )
         {
             $is_sub_domain = true;
-            $sub_domain = $_SERVER['HTTP_HOST'];
+            $root_domain = vh_get_root_domain($_SERVER["HTTP_HOST"]);
+            $sub_domain = vh_get_sub_domain($actual_url);
         }
-
-
 
         if($actual_url && is_null($is_sub_domain))
         {
-
-            if(isset($vaahcms['environments']) && is_array($vaahcms['environments'])
+            if(isset($vaahcms['environments'])
+                && is_array($vaahcms['environments'])
                 && count($vaahcms['environments'])>0
             )
             {
                 $actual_url = explode( '://', $actual_url);
-
-                foreach ($vaahcms['environments'] as $environment)
+                foreach ($vaahcms['environments'] as $key => $environment)
                 {
-
                     $environment_app_url = explode( '://', $environment['app_url']);
 
                     if ( isset($environment_app_url[1])
@@ -74,24 +99,23 @@ $env = $app->detectEnvironment(function(){
         } else if(!is_null($is_sub_domain))
         {
 
-
-
             foreach ($vaahcms['environments'] as $key => $environment)
             {
-
                 $environment_app_url = explode( '.', $environment['app_url']);
-
                 $environment_app_d = explode("://", $environment_app_url[0]);
-
-
 
                 if (
                     isset($environment_app_d[1])
                     && isset($sub_domain)
                 ){
+                    $env_sub_domain = vh_get_sub_domain($environment['app_url']);
 
+                    if(!$env_sub_domain)
+                    {
+                        continue;
+                    }
                     //Stared sub domain
-                    if($environment_app_d['1'] == '*')
+                    if($environment_app_d['1'] == '*' && $sub_domain == $env_sub_domain)
                     {
                         $sub_domain_arr = explode('.', $sub_domain);
 
@@ -107,24 +131,19 @@ $env = $app->detectEnvironment(function(){
                         }
 
                     } else{
-
                         $actual_d = explode( '://', $actual_url);
-
                         $environment_app_url = explode( '://', $environment['app_url']);
-
                         if (strpos($actual_d[1], $environment_app_url[1]) !== false){
                             $env_file_name = $environment['env_file'];
                         }
-
                     }
-
-
 
                 }
             }
         }
 
     }
+
 
     if(!$env_file_name)
     {
