@@ -103,7 +103,15 @@ $env = $app->detectEnvironment(function(){
                     isset($environment_app_d[1])
                     && isset($sub_domain)
                 ){
-                    $env_sub_domain = vh_get_sub_domain($environment['app_url']);
+
+                    $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
+                    preg_match($pattern, $environment['app_url'], $matches);
+
+                    if(isset($matches[0]))
+                    {
+                        $env_sub_domain =  $matches[0];
+                    }
+
 
                     if(!$env_sub_domain)
                     {
