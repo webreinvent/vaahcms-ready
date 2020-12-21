@@ -2,32 +2,6 @@
 
 use Dotenv\Dotenv;
 
-function tld( $uri ) {
-    $parts = explode('.', $uri);
-    return (sizeof($parts) ? ('.' . end($parts)) : false);
-}
-
-function vh_get_root_domain($str)
-{
-    $pattern = "((?<=\.)[a-z0-9]*(?=\.)(?=[a-z]*))";
-     preg_match($pattern, $str, $matches);
-     $tld = tld($str);
-    return $matches[0].$tld;
-}
-
-function vh_get_sub_domain($str)
-{
-    $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
-    preg_match($pattern, $str, $matches);
-
-    if(isset($matches[0]))
-    {
-        return $matches[0];
-    }
-    return null;
-}
-
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -65,16 +39,37 @@ $env = $app->detectEnvironment(function(){
         if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
         {
             $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $url_arr = explode('.', $actual_url);
+
+
+            // Get Root Domain
+            $pattern = "((?<=\.)[a-z0-9]*(?=\.)(?=[a-z]*))";
+            preg_match($pattern, $_SERVER["HTTP_HOST"], $matches);
+            $parts = explode('.', $_SERVER["HTTP_HOST"]);
+            $tld = (sizeof($parts) ? ('.' . end($parts)) : false);
+
+            if(isset($matches[0]))
+            {
+                $root_domain = $matches[0].$tld;
+            }
+
+            // Get Sub domain
+            if(count($url_arr) > 2 )
+            {
+                $is_sub_domain = true;
+
+                $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
+                preg_match($pattern, $actual_url, $matches);
+
+                if(isset($matches[0]))
+                {
+                    $sub_domain =  $matches[0];
+                }
+
+            }
         }
 
-        $url_arr = explode('.', $actual_url);
 
-        if(count($url_arr) > 2 )
-        {
-            $is_sub_domain = true;
-            $root_domain = vh_get_root_domain($_SERVER["HTTP_HOST"]);
-            $sub_domain = vh_get_sub_domain($actual_url);
-        }
 
         if($actual_url && is_null($is_sub_domain))
         {
