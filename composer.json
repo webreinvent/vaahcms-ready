@@ -17,8 +17,8 @@
         "creativeorange/gravatar": "^1.0",
         "laravel/tinker": "^2.5",
         "zanysoft/laravel-zip": "^1.0",
-        "sentry/sentry-laravel": "^2.3",
-        "webreinvent/vaahcms": "dev-develop"
+        "webreinvent/vaahcms": "dev-develop",
+        "webreinvent/vaahextend": "0.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

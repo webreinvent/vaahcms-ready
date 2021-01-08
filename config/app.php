@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        WebReinvent\VaahExtend\VaahExtendServiceProvider::class,
         WebReinvent\VaahCms\VaahCmsServiceProvider::class,
 
 
