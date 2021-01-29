@@ -1,48 +1,35 @@
 # vaahcms-ready
-> VaahCms Pre-configured and ready to install
+> VaahCMS: Develop enterprise application with content management
 
 Please consider starring the project to show your :heart: and support.
 
+VaahCMS is a web application development platform shipped with headless content management system.
 
-## Steps to install
-Well, this is a pre-configure and ready to install repo for VaahCMS.
+Built with `laravel`, `vue`, `vuex`, `buefy` and `bulma` with structured Modules & Themes.
 
-#### Step 1:
-Download this repository and unzip.
-
-#### Step 2:
-Run following command:
-```bash
-composer install
+## Quick Start
+```shell
+npm i vaah -g
 ```
 
-#### Step 4:
-Publish VaahCms Assets:
-```bash
-php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force
+```shell
+vaah cms:install
 ```
 
-#### Step 5:
-Then visit following url to setup the CMS:
-```bash
-<base-url>/public/vaahcms/setup
-```
+## How is VaahCMS different?
 
-## Steps to upgrade and fresh reinstall
+- It's purposed to develop large applications
 
-DO NO REPEAT THESE STEPS FOR PRODUCTION ENVIRONMENT 
+- Structured (**HMVC**) based modules & themes
 
-#### Step 1:
-Delete `vaahcms.json`, `composer.lock` and all `.env` files like `.env.local` etc. Create new `.env` file from `.env.example` 
+- Shipped with **headless** CMS
 
-#### Step 2:
-Delete database table, `CMS` module folder, `BtFourPointFour` theme folder  and run `composer update`
+- Encourages to use latest technologies like Vue, Vuex
 
-#### Step 3:
-Run `php artisan vendor:publish --provider="WebReinvent\VaahCms\VaahCmsServiceProvider" --tag=assets --force`
+## Why VaahCMS?
 
-#### Step 4:
-Visit `<base-url>/public/vaahcms/setup` to reinstall the VaahCMS
+Well, to answer that, ask a question to yourself: Do you want to develop an enterprise application with content management that doesn't come in your way? If answer is yes, VaahCMS is for you.
+
 
 ## Support us
 

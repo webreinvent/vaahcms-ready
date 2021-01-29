@@ -69,4 +69,3 @@ $app->environment();
 */
 
 return $app;
-
