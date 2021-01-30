@@ -16,7 +16,7 @@
         "intervention/image": "^2.5",
         "creativeorange/gravatar": "^1.0",
         "laravel/tinker": "^2.5",
-        "zanysoft/laravel-zip": "^1.0",
+        "macellan/laravel-zip": "^1.0",
         "webreinvent/vaahcms": "^1.2",
         "webreinvent/vaahextend": "0.0.*"
     },
