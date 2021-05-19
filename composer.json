@@ -15,7 +15,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
         "intervention/image": "^2.5",
-        "laravel/framework": "^8.41",
+        "laravel/framework": "8.41.0",
         "laravel/tinker": "^2.6",
         "zanysoft/laravel-zip": "^1.0",
         "webreinvent/laravel-cpanel": "^1.3",
