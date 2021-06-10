@@ -21,7 +21,6 @@
         "webreinvent/laravel-cpanel": "^1.3",
         "webreinvent/vaahcms": "dev-develop",
         "webreinvent/vaahextend": "dev-develop",
-        "php-imap/php-imap": "^4.1",
         "ext-json": "*"
     },
     "require-dev": {
