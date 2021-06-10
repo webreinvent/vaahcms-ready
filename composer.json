@@ -54,7 +54,7 @@
             "WebReinvent\\VaahExtend\\": "packages/webreinvent/vaahextend"
         },
         "classmap": [
-            "database/seeds",
+            "database/seeders",
             "database/factories"
         ]
     },
