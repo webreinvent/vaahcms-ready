@@ -153,11 +153,19 @@ $env = $app->detectEnvironment(function(){
         $env_file_name = '.env';
     }
 
+    $env_file_path = __DIR__.'/../'.$env_file_name;
 
-    if(file_exists(base_path($env_file_name)))
+    if(!file_exists($env_file_path))
     {
-        $dotenv = Dotenv::createImmutable(__DIR__.'/../', $env_file_name);
-        $dotenv->load();
+        header("HTTP/1.1 500 Internal Server Error", true, 500);
+        echo $env_file_name.' file does not exist.';//html for 500 page
+        exit(1);
     }
+
+
+    putenv("ENV_FILE=".$env_file_name);
+
+    $dotenv = Dotenv::createImmutable(__DIR__.'/../', $env_file_name);
+    $dotenv->load();
 
 });
