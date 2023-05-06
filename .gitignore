@@ -23,3 +23,4 @@ yarn-error.log
 !/storage/framework/views/.gitkeep
 /storage/framework/cache/*
 !/storage/framework/cache/.gitkeep
+/storage/debugbar/*
