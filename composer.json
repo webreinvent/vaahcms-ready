@@ -20,7 +20,7 @@
         "webreinvent/laravel-nestable": "^0.0.3",
         "zanysoft/laravel-zip": "^2.0",
         "ext-gd": "*",
-        "webreinvent/vaahextend": "*",
+        "webreinvent/vaahextend": "^2.*",
         "webreinvent/vaahcms": "2.*"
     },
     "require-dev": {
