@@ -63,7 +63,7 @@ $env = $app->detectEnvironment(function(){
             {
                 $is_sub_domain = true;
 
-                $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
+                $pattern = "((?<=:\/\/)[a-z0-9+_ -]*(?=\.))";
                 preg_match($pattern, $actual_url, $matches);
 
                 if(isset($matches[0]))
