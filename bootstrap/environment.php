@@ -39,7 +39,12 @@ $env = $app->detectEnvironment(function(){
         if(isset($_SERVER) && isset($_SERVER['HTTP_HOST']))
         {
             $actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-            $url_arr = explode('.', $actual_url);
+
+            $url_arr = [$actual_url];
+
+            if(!str_contains($actual_url, '127.0.0.1')){
+                $url_arr = explode('.', $actual_url);
+            }
 
 
             // Get Root Domain
@@ -58,7 +63,7 @@ $env = $app->detectEnvironment(function(){
             {
                 $is_sub_domain = true;
 
-                $pattern = "((?<=:\/\/)[a-z0-9]*(?=\.))";
+                $pattern = "((?<=:\/\/)[a-z0-9+_ -]*(?=\.))";
                 preg_match($pattern, $actual_url, $matches);
 
                 if(isset($matches[0]))

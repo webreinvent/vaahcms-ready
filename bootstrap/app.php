@@ -41,8 +41,6 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Load Environment File on Startup
@@ -55,6 +53,7 @@ $app->singleton(
 require __DIR__.'/environment.php';
 
 $app->environment();
+
 
 
 /*
