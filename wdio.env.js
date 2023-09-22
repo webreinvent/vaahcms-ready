@@ -1,44 +1,21 @@
-let params = {
-    debug: true,
-    is_human: false,
-    is_human_pause: 2, // in seconds
-    env: null,
-    base_url: null,
-    version: null,
-};
-/*
-|--------------------------------------------------------------------------
-| Site Environment
-|--------------------------------------------------------------------------
-*/
-params.env = 'localhost';
-//params.env = 'develop';
-//params.env = 'staging';
-//params.env = 'production';
 
-switch(params.env)
-{
-    case 'localhost':
-        params.base_url = 'http://localhost'
-        break;
+module.exports = class Env {
 
-    case 'develop':
-        params.base_url = null
-        break;
+    constructor() {
+        this.params = {
+            debug: true,
+            is_human: false,
+            is_human_pause: 2, // in seconds
+            env: null,
+            base_url: 'http://localhost/vaahcms-ready/public',
+            version: null,
+        };
 
-    case 'staging':
-        params.base_url = null
-        break;
+    }
 
-    case 'production':
-        params.base_url = null
-        break;
-
-    default:
-        params.base_url = null
-        break;
+    //-------------------------------------------------
+    getParams () {
+        return this.params;
+    }
 
 }
-
-
-module.exports = params;

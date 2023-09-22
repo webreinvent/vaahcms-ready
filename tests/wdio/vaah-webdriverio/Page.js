@@ -1,5 +1,13 @@
-const chalk = require('chalk');
+const chalk = import("chalk").then(m=>m.default);
 const env = require('./../../../wdio.env');
+
+//import {chalk} from "chalk";
+
+
+const envObj = new env();
+
+const params = envObj.getParams();
+
 
 /**
 * main page object containing all methods, selectors and functionality
@@ -8,7 +16,7 @@ const env = require('./../../../wdio.env');
 module.exports = class Page {
 
     constructor() {
-        this.base_url = env.base_url;
+        this.base_url = params.base_url;
         this.params = {
             page: {
                 id: null,
