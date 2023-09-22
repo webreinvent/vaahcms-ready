@@ -17,6 +17,7 @@ yarn-error.log
 /.idea
 /.vscode
 
+/storage/debugbar
 /storage/framework/sessions/*
 !/storage/framework/sessions/.gitkeep
 /storage/framework/views/*
