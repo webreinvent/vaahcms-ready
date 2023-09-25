@@ -6,9 +6,9 @@ class Login extends Page {
 
     constructor() {
         super();
-        this.params.page.id = "LI"; // Page ID, Please keep this unique for all the pages.
-        this.params.page.name = "Login";
-        this.params.page.path = "login";
+        this.params.page.id = "SP"; // Page ID, Please keep this unique for all the pages.
+        this.params.page.name = "Setup";
+        this.params.page.path = "/backend#/setup";
         this.params.page.url = this.base_url + this.params.page.path;
     }
 

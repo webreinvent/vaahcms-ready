@@ -1,7 +1,10 @@
-const chalk = import("chalk").then(m=>m.default);
+//const chalk = import("chalk").then(m=>m.default);
+const chalk = require("chalk");
 const env = require('./../../../wdio.env');
 
 //import {chalk} from "chalk";
+let color  = require("cli-color");
+
 
 
 const envObj = new env();
@@ -58,7 +61,7 @@ module.exports = class Page {
     groupId(params)
     {
         let id = chalk.red(`
----------------------------------------------------------------`);
+--------------------------------------------------------------------------------------------------------`);
         id += this.pageId(params);
         id += `
 [GROUP ID: `+this.highlight(params.page.id+"_"+params.group.count)+"] "+params.group.name;
@@ -72,7 +75,7 @@ module.exports = class Page {
         if(params.test.expect)
         {
             id += `
-    ${chalk.blue('Expect:')} ${params.test.expect}`;
+    ${color.blue('Expect:')} ${params.test.expect}`;
         }
 
 
