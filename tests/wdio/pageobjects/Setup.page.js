@@ -1,5 +1,6 @@
 const Page = require('./../Page');
 const Sl = require('./../Selector');
+const assert = require('../vaah-webdriverio/Assert')
 
 class SetupPage extends Page{
     constructor() {
@@ -12,7 +13,16 @@ class SetupPage extends Page{
     }
 
     async getButton(data){
-        await expect(sl.$())
+        await expect(Sl.$(data.element.install_button).toExist());
     }
 
+    async clickButton(data){
+        await expect(Sl.$(data.element.install_button).click());
+    }
+    async buttonNavigation(data){
+        await this.clickButton(data);
+        await assert.pageTitle(data.value.Title);
+    }
 }
+
+module.exports = new SetupPage()
