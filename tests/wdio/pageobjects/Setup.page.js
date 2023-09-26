@@ -1,5 +1,5 @@
-const Page = require('./../Page');
-const Sl = require('./../Selector');
+const Page = require('../vaah-webdriverio/Page');
+const Sl = require('../vaah-webdriverio/Selector');
 const assert = require('../vaah-webdriverio/Assert')
 
 class SetupPage extends Page{
@@ -19,6 +19,7 @@ class SetupPage extends Page{
     async clickButton(data){
         await expect(Sl.$(data.element.install_button).click());
     }
+
     async buttonNavigation(data){
         await this.clickButton(data);
         await assert.pageTitle(data.value.Title);

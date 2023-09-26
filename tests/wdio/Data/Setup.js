@@ -28,11 +28,13 @@ class Setup{
                         count: 1.1,
                         name: "Verify the URL",
                         expect: "The URL should be: http://localhost/vaahcms-ready/public/backend#/setup",
+                        assert: 'http://localhost/vaahcms-ready/public/backend#/setup'
                     },
                     {
                         count: 1.2,
                         name: "Verify the Title",
                         expect: "The title should be: Setup",
+                        assert: "Setup"
                     },
                     {
                         count: 1.3,
