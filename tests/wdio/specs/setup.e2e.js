@@ -32,7 +32,7 @@ describe(Page.groupId(params), () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[2];
         await Page.open();
-        await Page.checkButton(Data, inputs.assert);
+        await Page.installButtonAssert(Data, inputs.assert);
 
     })
 
@@ -41,7 +41,7 @@ describe(Page.groupId(params), () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[3];
         await Page.open();
-        await Page.buttonNavigation(Data, inputs.assert);
+        await Page.installButtonNavigation(Data, inputs.assert);
 
     })
 })

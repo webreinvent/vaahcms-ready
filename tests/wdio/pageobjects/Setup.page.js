@@ -18,7 +18,7 @@ class SetupPage extends Page{
         await super.open(this.params.page.url);
     }
 
-    async buttonIsExist(data, assert){
+    async installButtonAssert(data, assert){
         await expect(Sl.$(data.element.install_button)).toHaveTextContaining(assert);
     }
 
@@ -26,7 +26,7 @@ class SetupPage extends Page{
         await expect(Sl.$(data.element.install_button).click());
     }
 
-    async buttonNavigation(data, assert){
+    async installButtonNavigation(data, assert){
         await this.clickButton(data);
         await browser.pause(3000)
         await asserts.pageUrl(assert);
