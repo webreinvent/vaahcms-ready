@@ -1,6 +1,6 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
-const asserts = require('../vaah-webdriverio/Assert')
+const asserts = require('../vaah-webdriverio/Assert');
 
 class SetupPage extends Page{
     constructor() {
@@ -14,7 +14,7 @@ class SetupPage extends Page{
 
     async open()
     {
-        await browser.pause(1200)
+        await browser.pause(this.is_human_pause)
         await super.open(this.params.page.url);
     }
 
@@ -27,8 +27,9 @@ class SetupPage extends Page{
     }
 
     async installButtonNavigation(data, assert){
+
         await this.clickButton(data);
-        await browser.pause(3000)
+        await browser.pause(this.is_human_pause);
         await asserts.pageUrl(assert);
     }
 }

@@ -12,9 +12,6 @@ class Setup extends Page{
         this.element = {
             install_button: '//span[text()= "Install"]'
         }
-        this.value = {
-            Title: 'Setup',
-        }
         this.params.page = {
             id: "SP",
             name: "Setup",
@@ -23,7 +20,7 @@ class Setup extends Page{
         this.groups = [
             {
                 count: 1,
-                name: "SP",
+                name: "Setup",
                 tests: [
                     {
                         count: 1.1,
