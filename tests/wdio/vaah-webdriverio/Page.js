@@ -20,6 +20,7 @@ module.exports = class Page {
 
     constructor() {
         this.base_url = params.base_url;
+        this.is_human_pause = params.is_human_pause;
         this.params = {
             page: {
                 id: null,

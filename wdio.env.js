@@ -5,7 +5,7 @@ module.exports = class Env {
         this.params = {
             debug: true,
             is_human: false,
-            is_human_pause: 2, // in seconds
+            is_human_pause: 3000,
             env: null,
             base_url: 'http://localhost/vaahcms-ready/public',
             version: null,
