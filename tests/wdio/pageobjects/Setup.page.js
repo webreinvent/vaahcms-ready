@@ -1,6 +1,6 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert')
+const asserts = require('../vaah-webdriverio/Assert')
 
 class SetupPage extends Page{
     constructor() {
@@ -12,17 +12,24 @@ class SetupPage extends Page{
 
     }
 
-    async getButton(data){
-        await expect(Sl.$(data.element.install_button).toExist());
+    async open(data)
+    {
+        await browser.pause(1200)
+        await super.open(this.params.page.url);
+    }
+
+    async buttonIsExist(data, assert){
+        await expect(Sl.$(data.element.install_button)).toHaveTextContaining(assert);
     }
 
     async clickButton(data){
         await expect(Sl.$(data.element.install_button).click());
     }
 
-    async buttonNavigation(data){
+    async buttonNavigation(data, assert){
         await this.clickButton(data);
-        await assert.pageTitle(data.value.Title);
+        await browser.pause(3000)
+        await asserts.pageUrl(assert);
     }
 }
 

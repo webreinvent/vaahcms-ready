@@ -7,7 +7,7 @@ class Setup{
             }
         }
         this.element = {
-            install_button: 'aria/Submit'
+            install_button: '//span[text()= "Install"]'
         }
         this.value = {
             URL: 'http://localhost/vaahcms-ready/public/backend#/setup',
@@ -17,7 +17,7 @@ class Setup{
         this.params.page = {
             id: "SP",
             name: "Setup",
-            url: '/'
+            url: 'http://localhost/vaahcms-ready/public/backend#/setup'
         }
         this.groups = [
             {
@@ -39,18 +39,15 @@ class Setup{
                     {
                         count: 1.3,
                         name: "Verify if the Install button exist or not",
-                        expect: "The install button should exist",
+                        expect: "The button should exist",
+                        assert: "Install"
                     },
                     {
                         count: 1.4,
-                        name: "Verify if the button is clickable or not",
-                        expect: "The install button should be clickable",
+                        name: "Verify if the button lead to a proper landing page or not",
+                        expect: "The button should lead to a proper landing page.",
+                        assert: "http://localhost/vaahcms-ready/public/backend#/setup/install/configuration"
                     },
-                    {
-                        count: 1.5,
-                        name: "Verify if the install button leads to proper landing page or not",
-                        expect: "The button should lead to a proper landing page",
-                    }
                 ]
 
             }
