@@ -18,9 +18,7 @@
         "wdio-chromedriver-service": "^8.1.1",
         "wdio-docker-service": "^3.2.1",
         "wdio-intercept-service": "^4.4.0",
-        "webdriverio": "^8.16.12"
-    },
-    "dependencies": {
+        "webdriverio": "^8.16.12",
         "chalk": "^4.1.0",
         "cli-color": "^2.0.3"
     }

@@ -10,7 +10,7 @@ class Setup extends Page{
             }
         }
         this.element = {
-            install_button: '//span[text()= "Install"]'
+            install_button: 'span=Install'
         }
         this.params.page = {
             id: "SP",
