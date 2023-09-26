@@ -1,4 +1,3 @@
-const { expect } = require('@wdio/globals')
 const Page = require('../pageobjects/Setup.page')
 const Data = require('../Data/Setup')
 const assert = require('../vaah-webdriverio/Assert')

@@ -12,7 +12,7 @@ class SetupPage extends Page{
 
     }
 
-    async open(data)
+    async open()
     {
         await browser.pause(1200)
         await super.open(this.params.page.url);
