@@ -11,82 +11,51 @@ class Setup extends Page{
         }
         this.element = {
             Env: 'span=Select Env',
+            Env_Option_One: '#pv_id_4_0',
+            Env_Option_Custom: '#pv_id_4_1',
+            Env_Option_Local: '#pv_id_4_2',
+            Env_Option_Develop: '#pv_id_4_3',
+            Env_Option_Staging: '#pv_id_4_4',
+            Env_Option_Production: '#pv_id_4_5',
+            Env_Option_Abhijeet1: '#pv_id_4_6',
+            Env_Option_Wdiojs: '#pv_id_4_7',
+            Env_File_Name: '#app-env-custom',
             Debug : 'span=True',
+            Debug_Option_True: '#pv_id_5_0',
+            Debug_Option_False: '#pv_id_5_1',
             Timezone: '(GMT) UTC',
             App_Name: '#app-name',
             Database_Type: 'span=MySQL',
-            Database_Host : {
-                attribute: 'placeholder',
-                value: 'Database Host'
-            },
-            Database_Port: {
-                attribute: 'placeholder',
-                value: 'Database Port'
-            },
-            Database_Name: {
-                attribute: 'placeholder',
-                value: 'Database Name'
-            },
-            Database_Username: {
-                attribute: 'placeholder',
-                value: 'Database Username'
-            },
-            Database_Password: {
-                attribute: 'placeholder',
-                value: 'Database Password'
-            },
-            Database_Connection_Button: {
-                attribute: 'aria-label',
-                value: 'Test Database connection'
-            },
+            Database_Type_Option_MySQL: '#pv_id_7_0',
+            Database_Type_Option_PostgreSQL: '#pv_id_7_1',
+            Database_Type_Option_SQLite: '#pv_id_7_2',
+            Database_Type_Option_SQL_Server: '#pv_id_7_3',
+            Database_Host : '[placeholder="Database Host"]',
+            Database_Port: '[placeholder="Database Port"]',
+            Database_Name: '[placeholder="Database Name"]',
+            Database_Username: '[placeholder="Database Username"]',
+            Database_Password: '[placeholder="Database Password"]',
+            Database_Connection_Button: '[aria-label="Test Database connection"]',
             Database_Connection_Message: 'div*=Enter database name',
             Mail_Provider: 'span=Select Mail Provider',
-            Mail_Driver: {
-                attribute: 'placeholder',
-                value: 'Mail Driver'
-            },
-            Mail_Host: {
-                attribute: 'placeholder',
-                value: 'Mail Host'
-            },
-            Mail_Port: {
-                attribute: 'placeholder',
-                value: 'Mail Port'
-            },
-            Mail_Username: {
-                attribute: 'placeholder',
-                value: 'Mail Username'
-            },
-            Mail_Password: {
-                attribute: 'placeholder',
-                value: 'Mail Password'
-            },
+            Mail_Provider_Option_MailTrap: '#pv_id_8_0',
+            Mail_Provider_Option_GMail: '#pv_id_8_1',
+            Mail_Provider_Option_Other: '#pv_id_8_2',
+            Mail_Driver: '[placeholder="Mail Driver"]',
+            Mail_Host: '[placeholder="Mail Host"]',
+            Mail_Port: '[placeholder="Mail Port"]',
+            Mail_Username: '[placeholder="Mail Username"]',
+            Mail_Password: '[placeholder="Mail Password"]',
             Mail_Encryption: 'span=Select Mail Encryption',
-            From_Name: {
-                attribute: 'placeholder',
-                value: 'From Name'
-            },
-            From_Email: {
-                attribute: 'placeholder',
-                value: 'From Email'
-            },
+            From_Name: '[placeholder="From Name"]',
+            From_Email: '[placeholder="From Email"]',
             Test_Mail_Button : 'span=Test Mail Configuration',
             Save_Button: 'span=Save & Next',
-            alert_message: {
-                attribute: 'role',
-                value: 'alert'
-            },
+            alert_message: '[role="alert"]',
             Mail_Username_Heading: 'h5=Mail Username',
-            Mail_Username_Close_Button: {
-                attribute: 'aria-label',
-                value: 'Close'
-            },
+            Mail_Username_Close_Button: '[aria-label="Close"]',
             Mail_Username_Send_Button: 'span=Send Email',
-            Success_Message: 'div=Configuration Saved',
-
-
-
-
+            Success_Message: 'div*=Configuration Saved',
         }
         this.value = {
             env: 'Abhijeet',
@@ -138,7 +107,7 @@ class Setup extends Page{
                         count: 1.2,
                         name: 'Verify the functionality of Test Database connection button when mandatory fields are filled',
                         expect: 'The button should open a webpage with database details',
-                        assert: ''
+                        assert: 'Successfully connect with Database'
                     },
                     {
                         count: 1.3,
@@ -188,6 +157,22 @@ class Setup extends Page{
                         expect: 'The user should be able to select an option from the Mail Encryption dropdown menu',
                         assert: 'SSL'
                     },
+                    {
+                        count: 1.11,
+                        name: 'Verify if a textbox appears or not when the user selects Custom option from the ENV Dropdown Menu ',
+                        expect: 'A textbox should appear for the Custom option in ENV Dropdown menu',
+                        assert: {
+                            attribute: 'placeholder',
+                            value: 'Env File Name'
+                        }
+                    },
+                    {
+                        count: 1.12,
+                        name: 'Verify if the database connection is established for the MySQL Database Type',
+                        expect: 'The Database connection should establish for MySQL if all the data is valid',
+                        assert: 'Successfully connect with Database'
+                    },
+
                 ]
             },
             {
@@ -208,10 +193,36 @@ class Setup extends Page{
                     },
                     {
                         count: 1.3,
-                        name: 'Verify if the user can proceed by leaving the mandatory fields blank',
-                        expect: 'User should not be able to proceed and the save button should be disabled',
-                        assert: ''
-                    }
+                        name: 'Verify if the user can proceed by selecting a Custom option from the Env Dropdown menu and valid data in the other fields',
+                        expect: 'The user should be able to proceed if a Env File name is provided for Custom Option',
+                        assert: 'Configuration Saved'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify if the user can proceed by selecting a Develop option from the Env Dropdown menu and valid data in the other fields',
+                        expect: 'The user should be able to proceed if valid data is entered and Develop Option is selected',
+                        assert: 'Configuration Saved'
+                    },
+                    {
+                        count: 1.5,
+                        name: 'Verify if the user can proceed by selecting a Staging option from the Env Dropdown menu and valid data in the other fields',
+                        expect: 'The user should be able to proceed if valid data is entered and Staging Option is selected',
+                        assert: 'Configuration Saved'
+                    },
+                    {
+                        count: 1.6,
+                        name: 'Verify if the user can proceed by selecting a Production option from the Env Dropdown menu and valid data in the other fields',
+                        expect: 'The user should be able to proceed if valid data is entered and Production Option is selected',
+                        assert: 'Configuration Saved'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify if the user can proceed by selecting a Wdiojs option from the Env Dropdown menu and valid data in the other fields',
+                        expect: 'The user should be able to proceed if valid data is entered and Wdiojs Option is selected',
+                        assert: 'Configuration Saved'
+                    },
+
+
                 ]
 
             }
