@@ -58,15 +58,15 @@ class Setup extends Page{
             Success_Message: 'div*=Configuration Saved',
         }
         this.value = {
-            env: 'Abhijeet',
+            env: 'Custom',
             dbName: 'vaahcms',
             dbUsername: 'root',
             dbPassword: 'testing'
         }
         this.params.page = {
-            id: "SP",
-            name: "Setup",
-            url : this.base_url+"/backend#/setup"
+            id: "CG",
+            name: "Configuration",
+            url : this.base_url+"/backend#/setup/install/configuration"
         }
         this.groups = [
             {
@@ -75,18 +75,30 @@ class Setup extends Page{
                 test: [
                     {
                         count: 1.1,
+                        name: 'Verify the URL of the Configuration Page',
+                        expect: 'The URL should be: '+params.page.url,
+                        assert: params.page.url
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify the Title of the Configuration Page',
+                        expect: 'The title of the page should be: Configuration - Setup',
+                        assert: 'Configuration - Setup'
+                    },
+                    {
+                        count: 1.3,
                         name: 'Verify the if the Test Database Connection Button exists or not',
                         expect: 'The Test Database Connection button should exist on the page',
                         assert: 'Test Database Connection'
                     },
                     {
-                        count: 1.2,
+                        count: 1.4,
                         name: 'Verify the if the Test Mail Configuration Button exists or not',
                         expect: 'The Test Mail Configuration button should exist on the page',
                         assert: 'Test Mail Configuration'
                     },
                     {
-                        count: 1.3,
+                        count: 1.5,
                         name: 'Verify the if the Test Mail Configuration Button exists or not',
                         expect: 'The Test Mail Configuration button should exist on the page',
                         assert: 'Save & Next'
@@ -94,7 +106,61 @@ class Setup extends Page{
                 ]
             },
             {
-                count: 1,
+                count: 2,
+                name: 'Validation',
+                tests: [
+                    {
+                        count: 1.1,
+                        name: 'Verify the response of Test Database Button with invalid DataBase Host',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'No such host is known'
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify the response of Test Database Button with blank DataBase Host',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Enter database host'
+                    },
+                    {
+                        count: 1.3,
+                        name: 'Verify the response of Test Database Button with blank DataBase Port',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Enter database port'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify the response of Test Database Button with invalid DataBase Port',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'No such port is known'
+                    },
+                    {
+                        count: 1.5,
+                        name: 'Verify the response of Test Database Button with blank DataBase Name',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Enter database name'
+                    },
+                    {
+                        count: 1.6,
+                        name: 'Verify the response of Test Database Button with invalid DataBase Name',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Unknown database'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify the response of Test Database Button with blank DataBase Username',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Enter database username'
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify the response of Test Database Button with invalid DataBase Username',
+                        expect: 'The user should see an validation message regarding the error.',
+                        assert: 'Access denied for user'
+                    },
+                ]
+            },
+            {
+                count: 3,
                 name: 'Functionality',
                 tests: [
                     {
@@ -172,11 +238,46 @@ class Setup extends Page{
                         expect: 'The Database connection should establish for MySQL if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
-
+                    {
+                        count: 1.13,
+                        name: 'Verify if the database connection is established for the PostgreSQL Database Type',
+                        expect: 'The Database connection should establish for PostgreSQL if all the data is valid',
+                        assert: 'Successfully connect with Database'
+                    },
+                    {
+                        count: 1.14,
+                        name: 'Verify if the database connection is established for the SQLite Database Type',
+                        expect: 'The Database connection should establish for SQLite if all the data is valid',
+                        assert: 'Successfully connect with Database'
+                    },
+                    {
+                        count: 1.15,
+                        name: 'Verify if the database connection is established for the SQL Server Database Type',
+                        expect: 'The Database connection should establish for SQL Server if all the data is valid',
+                        assert: 'Successfully connect with Database'
+                    },
+                    {
+                        count: 1.16,
+                        name: 'Verify the functionality of eye icon of the Database Password field',
+                        expect: 'Clicking on the eye icon should make the text in the Password field visible',
+                        assert: {
+                            attribute: 'type',
+                            value: 'text'
+                        }
+                    },
+                    {
+                        count: 1.17,
+                        name: 'Verify the functionality of eye icon of the Mail Password field',
+                        expect: 'Clicking on the eye icon should make the text in the Password field visible',
+                        assert: {
+                            attribute: 'type',
+                            value: 'text'
+                        }
+                    },
                 ]
             },
             {
-                count: 2,
+                count: 4,
                 name: "End to End",
                 tests: [
                     {
@@ -221,10 +322,19 @@ class Setup extends Page{
                         expect: 'The user should be able to proceed if valid data is entered and Wdiojs Option is selected',
                         assert: 'Configuration Saved'
                     },
-
-
+                    {
+                        count: 1.8,
+                        name: 'Verify if the user can proceed or not if the App Name fields blank',
+                        expect: 'The user should not be able to proceed if App Name field is blank',
+                        assert: 'The app name field is required'
+                    },
+                    {
+                        count: 1.9,
+                        name: 'Verify the response of the page App Name fields is blank',
+                        expect: 'The user should not be able to proceed if App Name field is blank',
+                        assert: 'The app name field is required'
+                    },
                 ]
-
             }
         ]
     }
