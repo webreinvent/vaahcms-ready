@@ -39,6 +39,7 @@ class Setup extends Page{
                 attribute: 'aria-label',
                 value: 'Test Database connection'
             },
+            Database_Connection_Message: 'div*=Enter database name',
             Mail_Provider: 'span=Select Mail Provider',
             Mail_Driver: {
                 attribute: 'placeholder',
@@ -61,9 +62,6 @@ class Setup extends Page{
                 value: 'Mail Password'
             },
             Mail_Encryption: 'span=Select Mail Encryption',
-            Mail_Encryption_None: '#pv_id_25_0',
-            Mail_Encryption_SSL: '#pv_id_25_1',
-            Mail_Encryption_TLS: '#pv_id_25_2',
             From_Name: {
                 attribute: 'placeholder',
                 value: 'From Name'
@@ -84,13 +82,17 @@ class Setup extends Page{
                 value: 'Close'
             },
             Mail_Username_Send_Button: 'span=Send Email',
+            Success_Message: 'div=Configuration Saved',
 
 
 
 
         }
         this.value = {
-
+            env: 'Abhijeet',
+            dbName: 'vaahcms',
+            dbUsername: 'root',
+            dbPassword: 'testing'
         }
         this.params.page = {
             id: "SP",
@@ -100,43 +102,109 @@ class Setup extends Page{
         this.groups = [
             {
                 count: 1,
-                name: 'Functionality',
-                tests: [
+                name: 'UI',
+                test: [
                     {
                         count: 1.1,
-                        name: 'Verify if the the Test Database connection button is clickable or not',
-                        expect: 'The verify button should be clickable',
-                        assert: '1) Enter database name  2) Enter database username'
+                        name: 'Verify the if the Test Database Connection Button exists or not',
+                        expect: 'The Test Database Connection button should exist on the page',
+                        assert: 'Test Database Connection'
                     },
                     {
-                        count: 1.2  ,
-                        name: 'Verify if the the Test Mail Configuration button is clickable or not',
-                        expect: 'Test Mail Configuration button must be clickable',
-                        assert: 'Mail Username'
-                    }
+                        count: 1.2,
+                        name: 'Verify the if the Test Mail Configuration Button exists or not',
+                        expect: 'The Test Mail Configuration button should exist on the page',
+                        assert: 'Test Mail Configuration'
+                    },
                     {
-                        count: 1.3  ,
-                        name: 'Verify if the close button in Mail Username dialog box is functional or not',
-                        expect: 'The Send Mail button should be clickable',
-                        assert: 'False'
+                        count: 1.3,
+                        name: 'Verify the if the Test Mail Configuration Button exists or not',
+                        expect: 'The Test Mail Configuration button should exist on the page',
+                        assert: 'Save & Next'
                     }
                 ]
             },
             {
                 count: 1,
+                name: 'Functionality',
+                tests: [
+                    {
+                        count: 1.1,
+                        name: 'Verify the functionality of Test Database connection button when mandatory fields are blank',
+                        expect: 'The verify button should be clickable',
+                        assert: 'Enter database name'
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify the functionality of Test Database connection button when mandatory fields are filled',
+                        expect: 'The button should open a webpage with database details',
+                        assert: ''
+                    },
+                    {
+                        count: 1.3,
+                        name: 'Verify the functionality of Test Mail Configuration button',
+                        expect: 'Test Mail Configuration should open a dialog box with Mail Username field',
+                        assert: 'Mail Username'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify if the close button in Mail Username dialog box is functional or not',
+                        expect: 'The Send Mail button should be clickable',
+                        assert: 'False'
+                    },
+                    {
+                        count: 1.5,
+                        name: 'Verify if the user can select options from ENV dropdown menu',
+                        expect: 'The user should be able to select an option from the Debug dropdown menu',
+                        assert: 'Abhijeet'
+                    },
+                    {
+                        count: 1.6,
+                        name: 'Verify if the user can select options from Debug dropdown menu',
+                        expect: 'The user should be able to select an option from the Debug dropdown menu',
+                        assert: 'False'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify if the user can select options from Timezone dropdown menu',
+                        expect: 'The user should be able to select an option from the Timezone dropdown menu',
+                        assert: '(GMT+01:00) Paris'
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify if the user can select options from Database Type dropdown menu',
+                        expect: 'The user should be able to select an option from the Database Type dropdown menu',
+                        assert: 'SQLite'
+                    },
+                    {
+                        count: 1.9,
+                        name: 'Verify if the user can select options from Mail Provider dropdown menu',
+                        expect: 'The user should be able to select an option from the Mail Provider dropdown menu',
+                        assert: 'GMail'
+                    },
+                    {
+                        count: 1.10,
+                        name: 'Verify if the user can select options from Mail Encryption dropdown menu',
+                        expect: 'The user should be able to select an option from the Mail Encryption dropdown menu',
+                        assert: 'SSL'
+                    },
+                ]
+            },
+            {
+                count: 2,
                 name: "End to End",
                 tests: [
                     {
                         count: 1.1,
                         name: 'Verify if the user can proceed by filling all the mandatory fields',
                         expect: 'The user should be able to proceed if data is entered in the fields',
-                        assert: ''
+                        assert: 'Configuration Saved'
                     },
                     {
                         count: 1.2,
                         name: 'Verify if the user can proceed by leaving the mandatory fields blank',
                         expect: 'User should not be able to proceed and the save button should be disabled',
-                        assert: ''
+                        assert: 'disabled'
                     },
                     {
                         count: 1.3,
