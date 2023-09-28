@@ -32,7 +32,7 @@ class SetupPage extends Page{
 
     async setEnv(data){
         await Sl.$(data.element.Env).click();
-        await Sl.$(data.element.Env_Option_Custom).click();
+        await Sl.$(data.element.Env_Option_Staging).click();
     }
 
     async setDatabaseValues(data){
@@ -116,6 +116,98 @@ class SetupPage extends Page{
         await expect(Sl.$(data.element.Mail_Username_Heading).toHaveTextContaining(assert));
     }
 
+    async mailUsernameCloseButton(data){
+        await Sl.$(data.element.Test_Mail_Button).click();
+        await Sl.$(data.element.Mail_Username_Close_Button).click();
+        await expect(Sl.$(data.element.Mail_Username_Heading)).not.toExist();
+    }
+
+    async envDropdownTest(data, assert){
+        await this.setEnv(data);
+        await expect(Sl.$(data.element.Env)).toHaveTextContaining(assert);
+    }
+
+    async debugDropdownTest(data, assert){
+        await Sl.$(data.element.Debug).click();
+        await Sl.$(data.element.Debug_Option_False).click();
+        await expect(Sl.$(data.element.Debug)).toHaveTextContaining(assert);
+    }
+
+    async timezoneDropdownTest(data, assert){
+        await Sl.$(data.element.Timezone).click();
+        await Sl.$(data.element.Timezone_Option_Paris).click();
+        await expect(Sl.$(data.element.Timezone)).toHaveTextContaining(assert);
+    }
+
+    async databaseTypeDropdownTest(data, assert){
+        await Sl.$(data.element.Database_Type).click();
+        await Sl.$(data.element.Database_Type_Option_SQLite).click();
+        await expect(Sl.$(data.element.Database_Type)).toHaveTextContaining(assert);
+    }
+
+    async mailProviderDropdownTest(data, assert){
+        await Sl.$(data.element.Mail_Provider).click();
+        await Sl.$(data.element.Mail_Provider_Option_GMail).click();
+        await expect(Sl.$(data.element.Mail_Provider)).toHaveTextContaining(assert);
+    }
+
+    async mailEncryptionDropdownText(data, assert){
+        await Sl.$(data.element.Mail_Encryption).click();
+        await Sl.$(data.element.Mail_Encryption_SSL).click();
+        await expect(Sl.$(data.element.Mail_Encryption)).toHaveTextContaining(assert);
+    }
+
+    async envFileNameTextbox(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Custom).click();
+        await expect(Sl.$(assert)).toExist();
+    }
+
+    async mysqlDatabaseTest(data, assert){
+        await this.setEnv(data);
+        await Sl.$(data.element.Database_Type).click();
+        await Sl.$(data.element.Database_Type_Option_MySQL).click();
+        await this.setDatabaseValues(data);
+        await this.assertErrorMessage(data, assert);
+    }
+
+    async postgresqlDatabaseTest(data, assert){
+        await this.setEnv(data);
+        await Sl.$(data.element.Database_Type).click();
+        await Sl.$(data.element.Database_Type_Option_PostgreSQL).click();
+        await this.setDatabaseValues(data);
+        await this.assertErrorMessage(data, assert);
+    }
+
+    async sqliteDatabaseTest(data, assert){
+        await this.setEnv(data);
+        await Sl.$(data.element.Database_Type).click();
+        await Sl.$(data.element.Database_Type_Option_SQLite).click();
+        await this.setDatabaseValues(data);
+        await this.assertErrorMessage(data, assert);
+    }
+
+    async sqlServerDatabaseTest(data, assert){
+        await this.setEnv(data);
+        await Sl.$(data.element.Database_Type).click();
+        await Sl.$(data.element.Database_Type_Option_SQL_Server).click();
+        await this.setDatabaseValues(data);
+        await this.assertErrorMessage(data, assert);
+    }
+
+    async databasePasswordEyeIconFunctionality(data, assert){
+        await Sl.$(data.element.Database_Password).setValue(data.value.dbPassword);
+        await Sl.$(data.element.Database_Password_Eye_Button).click();
+        await expect(Sl.$(data.element.Database_Password)).toHaveAttribute(assert.attribute,assert.value);
+    }
+
+    async mailPasswordEyeIconFunctionality(data, assert){
+        await Sl.$(data.element.Mail_Password).setValue(data.value.mailPassword);
+        await Sl.$(data.element.Mail_Password_Eye_Button).click();
+        await expect(Sl.$(data.element.Mail_Password)).toHaveAttribute(assert.attribute,assert.value);
+    }
+
+    async
 }
 
 module.exports = new SetupPage()

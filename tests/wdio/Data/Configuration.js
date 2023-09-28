@@ -24,6 +24,7 @@ class Setup extends Page{
             Debug_Option_True: '#pv_id_5_0',
             Debug_Option_False: '#pv_id_5_1',
             Timezone: '(GMT) UTC',
+            Timezone_Option_Paris: '#pv_id_20_43',
             App_Name: '#app-name',
             Database_Type: 'span=MySQL',
             Database_Type_Option_MySQL: '#pv_id_7_0',
@@ -35,6 +36,7 @@ class Setup extends Page{
             Database_Name: '[placeholder="Database Name"]',
             Database_Username: '[placeholder="Database Username"]',
             Database_Password: '[placeholder="Database Password"]',
+            Database_Password_Eye_Button: '',
             Database_Connection_Button: 'span=Test Database connection',
             Database_Connection_Message: 'div*=Enter database name',
             Mail_Provider: 'span=Select Mail Provider',
@@ -46,7 +48,11 @@ class Setup extends Page{
             Mail_Port: '[placeholder="Mail Port"]',
             Mail_Username: '[placeholder="Mail Username"]',
             Mail_Password: '[placeholder="Mail Password"]',
+            Mail_Password_Eye_Button: '',
             Mail_Encryption: 'span=Select Mail Encryption',
+            Mail_Encryption_None: '#pv_id_23_0',
+            Mail_Encryption_SSL: '#pv_id_23_1',
+            Mail_Encryption_TLS: '#pv_id_23_2',
             From_Name: '[placeholder="From Name"]',
             From_Email: '[placeholder="From Email"]',
             Test_Mail_Button : 'span=Test Mail Configuration',
@@ -64,6 +70,7 @@ class Setup extends Page{
             dbName: 'vaahcms',
             dbUsername: 'root',
             dbPassword: 'testing',
+            mailPassword: 'testing',
             invalid_dbhost: 'test123',
             invalid_dbport: 'test',
             invalid_dbname: 'test123',
@@ -192,13 +199,12 @@ class Setup extends Page{
                         count: 1.4,
                         name: 'Verify if the close button in Mail Username dialog box is functional or not',
                         expect: 'The Send Mail button should be clickable',
-                        assert: 'False'
                     },
                     {
                         count: 1.5,
                         name: 'Verify if the user can select options from ENV dropdown menu',
                         expect: 'The user should be able to select an option from the Debug dropdown menu',
-                        assert: 'Abhijeet'
+                        assert: 'Custom'
                     },
                     {
                         count: 1.6,
@@ -234,10 +240,7 @@ class Setup extends Page{
                         count: 1.11,
                         name: 'Verify if a textbox appears or not when the user selects Custom option from the ENV Dropdown Menu ',
                         expect: 'A textbox should appear for the Custom option in ENV Dropdown menu',
-                        assert: {
-                            attribute: 'placeholder',
-                            value: 'Env File Name'
-                        }
+                        assert: '[placeholder=Env File Name]'
                     },
                     {
                         count: 1.12,
