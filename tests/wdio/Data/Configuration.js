@@ -35,7 +35,7 @@ class Setup extends Page{
             Database_Name: '[placeholder="Database Name"]',
             Database_Username: '[placeholder="Database Username"]',
             Database_Password: '[placeholder="Database Password"]',
-            Database_Connection_Button: '[aria-label="Test Database connection"]',
+            Database_Connection_Button: 'span=Test Database connection',
             Database_Connection_Message: 'div*=Enter database name',
             Mail_Provider: 'span=Select Mail Provider',
             Mail_Provider_Option_MailTrap: '#pv_id_8_0',
@@ -56,12 +56,19 @@ class Setup extends Page{
             Mail_Username_Close_Button: '[aria-label="Close"]',
             Mail_Username_Send_Button: 'span=Send Email',
             Success_Message: 'div*=Configuration Saved',
+            Error_Message: ''
         }
         this.value = {
             env: 'Custom',
+            env_file: 'Test',
             dbName: 'vaahcms',
             dbUsername: 'root',
-            dbPassword: 'testing'
+            dbPassword: 'testing',
+            invalid_dbhost: 'test123',
+            invalid_dbport: 'test',
+            invalid_dbname: 'test123',
+            invalid_dbusername: 'testing123',
+            invalid_password: '123'
         }
         this.params.page = {
             id: "CG",
@@ -99,8 +106,8 @@ class Setup extends Page{
                     },
                     {
                         count: 1.5,
-                        name: 'Verify the if the Test Mail Configuration Button exists or not',
-                        expect: 'The Test Mail Configuration button should exist on the page',
+                        name: 'Verify the if the Save & Next Button exists or not',
+                        expect: 'The Save & Next button should exist on the page',
                         assert: 'Save & Next'
                     }
                 ]
@@ -166,13 +173,13 @@ class Setup extends Page{
                     {
                         count: 1.1,
                         name: 'Verify the functionality of Test Database connection button when mandatory fields are blank',
-                        expect: 'The verify button should be clickable',
+                        expect: 'The user should see an error message with the fields that are mandatory',
                         assert: 'Enter database name'
                     },
                     {
                         count: 1.2,
                         name: 'Verify the functionality of Test Database connection button when mandatory fields are filled',
-                        expect: 'The button should open a webpage with database details',
+                        expect: 'A success message should be displayed',
                         assert: 'Successfully connect with Database'
                     },
                     {
