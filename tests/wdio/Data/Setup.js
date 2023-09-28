@@ -10,7 +10,7 @@ class Setup extends Page{
             }
         }
         this.element = {
-            install_button: 'span=Install'
+            install_button: '[data-testid="setup-install_vaahcms"]'
         }
         this.params.page = {
             id: "SP",
@@ -25,8 +25,8 @@ class Setup extends Page{
                     {
                         count: 1.1,
                         name: "Verify the URL",
-                        expect: "The URL should be: "+this.base_url+"/backend#/setup",
-                        assert: this.base_url+'/backend#/setup'
+                        expect: "The URL should be: "+this.params.page.url,
+                        assert: this.params.page.url
                     },
                     {
                         count: 1.2,
@@ -38,13 +38,12 @@ class Setup extends Page{
                         count: 1.3,
                         name: "Verify if the Install button exist or not",
                         expect: "The button should exist",
-                        assert: "Install"
                     },
                     {
                         count: 1.4,
                         name: "Verify if the button lead to a proper landing page or not",
                         expect: "The button should lead to a proper landing page.",
-                        assert: this.base_url+"/backend#/setup/install/configuration"
+                        assert: this.params.page.url+"/install/configuration"
                     },
                 ]
 

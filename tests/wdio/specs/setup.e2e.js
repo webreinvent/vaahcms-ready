@@ -29,9 +29,8 @@ describe(Page.groupId(params), () => {
     params.test = Data.groups[0].tests[2];
 
     it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[2];
         await Page.open();
-        await Page.installButtonAssert(Data, inputs.assert);
+        await Page.installButtonAssert(Data);
 
     })
 
