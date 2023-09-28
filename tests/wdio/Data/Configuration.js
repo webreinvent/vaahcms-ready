@@ -86,12 +86,12 @@ class Setup extends Page{
             {
                 count: 1,
                 name: 'UI',
-                test: [
+                tests: [
                     {
                         count: 1.1,
                         name: 'Verify the URL of the Configuration Page',
-                        expect: 'The URL should be: '+params.page.url,
-                        assert: params.page.url
+                        expect: 'The URL should be: '+this.params.page.url,
+                        assert: this.params.page.url
                     },
                     {
                         count: 1.2,
@@ -103,7 +103,7 @@ class Setup extends Page{
                         count: 1.3,
                         name: 'Verify the if the Test Database Connection Button exists or not',
                         expect: 'The Test Database Connection button should exist on the page',
-                        assert: 'Test Database Connection'
+                        assert: 'Test Database connection'
                     },
                     {
                         count: 1.4,

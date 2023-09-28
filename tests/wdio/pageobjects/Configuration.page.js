@@ -1,6 +1,5 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
-const asserts = require('../vaah-webdriverio/Assert');
 
 class SetupPage extends Page{
     constructor() {
