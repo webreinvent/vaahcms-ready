@@ -45,6 +45,11 @@ class SetupPage extends Page{
         await expect(Sl.$(data.element.Error_Message).toHaveTextContaining(assert));
     }
 
+    async assertSuccessMessage(data, assert){
+        await Sl.$(data.element.Save_Button).click();
+        await expect(Sl.$(data.element.Success_Message)).toHaveTextContaining(assert);
+    }
+
     async invalidDatabaseHost(data, assert){
         await this.setEnv(data);
         await Sl.$(data.element.Database_Host).setValue(data.value.invalid_dbhost);
@@ -207,7 +212,73 @@ class SetupPage extends Page{
         await expect(Sl.$(data.element.Mail_Password)).toHaveAttribute(assert.attribute,assert.value);
     }
 
-    async
+    async validDataResponse(data, assert){
+        await this.setEnv(data);
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async blankDataResponse(data, assert){
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await expect(Sl.$(data.element.Error_Message)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.element.Error_Message)).toBeDisabled();
+    }
+
+    async customOptionPageResponse(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Custom).click();
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async developOptionPageResponse(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Develop).click();
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async stagingOptionPageResponse(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Staging).click();
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async productionOptionPageResponse(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Production).click();
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async wdiojsOptionPageResponse(data, assert){
+        await Sl.$(data.element.Env).click();
+        await Sl.$(data.element.Env_Option_Wdiojs).click();
+        await this.setDatabaseValues(data);
+        await Sl.$(data.element.Database_Connection_Button).click();
+        await browser.pause(this.is_human_pause);
+        await this.assertSuccessMessage(data, assert);
+    }
+
+    async blankAppNameResponse(data, assert){
+        await this.setEnv(data);
+        await Sl.$(data.element.App_Name).clearValue();
+        await this.setDatabaseValues(data);
+        await this.assertTestDatabaseButton(assert);
+        await browser.pause(this.is_human_pause);
+        await expect(Sl.$(data.element.Save_Button)).toBeDisabled();
+    }
 }
 
 module.exports = new SetupPage()

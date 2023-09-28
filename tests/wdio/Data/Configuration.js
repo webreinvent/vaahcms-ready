@@ -300,7 +300,7 @@ class Setup extends Page{
                         count: 1.2,
                         name: 'Verify if the user can proceed by leaving the mandatory fields blank',
                         expect: 'User should not be able to proceed and the save button should be disabled',
-                        assert: 'disabled'
+                        assert: 'Enter database name'
                     },
                     {
                         count: 1.3,
@@ -337,13 +337,7 @@ class Setup extends Page{
                         name: 'Verify if the user can proceed or not if the App Name fields blank',
                         expect: 'The user should not be able to proceed if App Name field is blank',
                         assert: 'The app name field is required'
-                    },
-                    {
-                        count: 1.9,
-                        name: 'Verify the response of the page App Name fields is blank',
-                        expect: 'The user should not be able to proceed if App Name field is blank',
-                        assert: 'The app name field is required'
-                    },
+                    }
                 ]
             }
         ]
