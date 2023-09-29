@@ -10,36 +10,36 @@ class Setup extends Page{
             }
         }
         this.element = {
-            Env_testid: 'configuration-app_url',
-            Env_Option_Custom_id: 'pv_id_4_0',
-            Env_Option_Local_id: 'pv_id_4_1',
-            Env_Option_Develop_id: 'pv_id_4_2',
-            Env_Option_Staging_id: 'pv_id_4_3',
-            Env_Option_Production_id: 'pv_id_4_4',
-            Env_Option_Wdiojs_id: 'pv_id_4_5',
+            Env_testid: 'configuration-env',
+            Env_Option_Custom_label: 'Custom',
+            Env_Option_Local_label: 'Local',
+            Env_Option_Develop_label: 'Develop',
+            Env_Option_Staging_label: 'Staging',
+            Env_Option_Production_label: 'Production',
+            Env_Option_Wdiojs_label: 'Wdiojs',
             Env_File_Name_id: 'app-env-custom',
             Debug_testid: 'configuration-debug',
-            Debug_Option_True_id: 'pv_id_5_0',
-            Debug_Option_False_id: 'pv_id_5_1',
+            Debug_Option_True_label: 'True',
+            Debug_Option_False_label: 'False',
             Timezone_testid: 'configuration-timezone',
-            Timezone_Option_Paris_id: 'pv_id_20_43',
+            Timezone_Option_Paris_label: '(GMT+01:00) Paris',
             App_Name_id: 'app-name',
             Database_Type_testid: 'configuration-db_type',
-            Database_Type_Option_MySQL_id: 'pv_id_7_0',
-            Database_Type_Option_PostgreSQL_id: 'pv_id_7_1',
-            Database_Type_Option_SQLite_id: 'pv_id_7_2',
-            Database_Type_Option_SQL_Server_id: 'pv_id_7_3',
+            Database_Type_Option_MySQL_label: 'MySQL',
+            Database_Type_Option_PostgreSQL_label: 'PostgreSQL',
+            Database_Type_Option_SQLite_label: 'SQLite',
+            Database_Type_Option_SQL_Server_label: 'SQL Server',
             Database_Host_testid: 'configuration-db_host',
             Database_Port_testid: 'configuration-db_port',
             Database_Name_testid: 'configuration-db_name',
             Database_Username_testid: 'configuration-db_username',
             Database_Password_testid: 'configuration-db_password',
             Database_Password_Eye_Button_testid: 'configuration-db_password_eye',
-            Database_Connection_Button_testid: 'configuration-test_db_connection',
+            Database_Connection_Button_testid: 'configuration-test_db_connection_btn_text',
             Mail_Provider_testid: 'configuration-mail_provider',
-            Mail_Provider_Option_MailTrap_id: 'pv_id_8_0',
-            Mail_Provider_Option_GMail_id: 'pv_id_8_1',
-            Mail_Provider_Option_Other_id: 'pv_id_8_2',
+            Mail_Provider_Option_MailTrap_label: 'MailTrap',
+            Mail_Provider_Option_GMail_label: 'GMail',
+            Mail_Provider_Option_Other_label: 'Other',
             Mail_Driver_testid: 'configuration-mail_driver',
             Mail_Host_testid: 'configuration-mail_host',
             Mail_Port_testid: 'configuration-mail_port',
@@ -47,13 +47,13 @@ class Setup extends Page{
             Mail_Password_testid: 'configuration-mail_password',
             Mail_Password_Eye_Button_testid: 'configuration-mail_password_eye',
             Mail_Encryption_testid: 'configuration-mail_encryption',
-            Mail_Encryption_None_id: 'pv_id_23_0',
-            Mail_Encryption_SSL_id: 'pv_id_23_1',
-            Mail_Encryption_TLS_id: 'pv_id_23_2',
+            Mail_Encryption_None_label: 'None',
+            Mail_Encryption_SSL_label: 'SSL',
+            Mail_Encryption_TLS_label: 'TLS',
             From_Name_testid: 'configuration-mail_from_name',
             From_Email_testid: 'configuration-mail_from_address',
-            Test_Mail_Button_testid: 'configuration-test_mail',
-            Save_Button_testid: 'configuration-save',
+            Test_Mail_Button_testid: 'configuration-test_mail_btn_text',
+            Save_Button_testid: 'configuration-save_btn',
             Mail_Username_Dialog_testid: 'configuration-test_email_to',
             Mail_Username_Close_Button_testid: 'configuration-test_mail_close',
             Mail_Username_Send_Button_testid: 'configuration-send_mail',
@@ -198,7 +198,7 @@ class Setup extends Page{
                         count: 1.5,
                         name: 'Verify if the user can select options from ENV dropdown menu',
                         expect: 'The user should be able to select an option from the Debug dropdown menu',
-                        assert: 'Custom'
+                        assert: 'Staging'
                     },
                     {
                         count: 1.6,
@@ -225,43 +225,43 @@ class Setup extends Page{
                         assert: 'GMail'
                     },
                     {
-                        count: 1.10,
+                        count: 2.1,
                         name: 'Verify if the user can select options from Mail Encryption dropdown menu',
                         expect: 'The user should be able to select an option from the Mail Encryption dropdown menu',
                         assert: 'SSL'
                     },
                     {
-                        count: 1.11,
+                        count: 2.2,
                         name: 'Verify if a textbox appears or not when the user selects Custom option from the ENV Dropdown Menu ',
                         expect: 'A textbox should appear for the Custom option in ENV Dropdown menu',
                         assert: 'configuration-custom_evn'
                     },
                     {
-                        count: 1.12,
+                        count: 2.3,
                         name: 'Verify if the database connection is established for the MySQL Database Type',
                         expect: 'The Database connection should establish for MySQL if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 1.13,
+                        count: 2.4,
                         name: 'Verify if the database connection is established for the PostgreSQL Database Type',
                         expect: 'The Database connection should establish for PostgreSQL if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 1.14,
+                        count: 2.5,
                         name: 'Verify if the database connection is established for the SQLite Database Type',
                         expect: 'The Database connection should establish for SQLite if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 1.15,
+                        count: 2.6,
                         name: 'Verify if the database connection is established for the SQL Server Database Type',
                         expect: 'The Database connection should establish for SQL Server if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 1.16,
+                        count: 2.7,
                         name: 'Verify the functionality of eye icon of the Database Password field',
                         expect: 'Clicking on the eye icon should make the text in the Password field visible',
                         assert: {
@@ -270,7 +270,7 @@ class Setup extends Page{
                         }
                     },
                     {
-                        count: 1.17,
+                        count: 2.8,
                         name: 'Verify the functionality of eye icon of the Mail Password field',
                         expect: 'Clicking on the eye icon should make the text in the Password field visible',
                         assert: {

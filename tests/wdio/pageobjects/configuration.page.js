@@ -17,6 +17,7 @@ class SetupPage extends Page{
 
     async open()
     {
+        await browser.maximizeWindow();
         await this.pause(this.is_human);
         await super.open(this.params.page.url);
     }
@@ -35,7 +36,7 @@ class SetupPage extends Page{
 
     async setEnv(data){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Staging_id).click();
+        await Sl.arialabel(data.element.Env_Option_Staging_label).click();
     }
 
     async setDatabaseValues(data){
@@ -43,7 +44,7 @@ class SetupPage extends Page{
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
     }
 
-    async assertErrorMessage(data, assert){
+    async assertMessage(data, assert){
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await expect(Sl.class(data.element.Validation_Message_class).toHaveTextContaining(assert));
     }
@@ -57,71 +58,70 @@ class SetupPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Host_testid).setValue(data.value.invalid_dbhost);
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async blankDatabaseHost(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Host_testid).clearValue();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async blankDatabasePort(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Port_testid).clearValue();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async invalidDatabasePort(data, assert){
-        await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Custom_id).click();
+        await this.setEnv(data);
         await Sl.testid(data.element.Database_Port_testid).setValue(data.value.invalid_dbport);
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async blankDatabaseName(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async invalidDatabaseName(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Name_testid).setValue(data.value.invalid_dbname);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async blankDatabaseUsername(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Name_testid).setValue(data.value.dbName);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async invalidDatabaseUsername(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Name_testid).setValue(data.value.dbName);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.invalid_dbusername);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async databaseButtonBlankTest(data, assert){
         await this.setEnv(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async databaseButtonValidTest(data, assert){
         await this.setEnv(data);
-        await this.setDatabaseValues();
-        await this.assertErrorMessage(data, assert);
+        await this.setDatabaseValues(data);
+        await this.assertMessage(data, assert);
     }
 
     async testMailButtonFunctionality(data){
         await Sl.testid(data.element.Test_Mail_Button_testid).click();
-        await expect(Sl.testid(data.element.Mail_Username_Dialog_testid).toExist());
+        await expect(Sl.testid(data.element.Mail_Username_Dialog_testid)).toExist();
     }
 
     async mailUsernameCloseButton(data){
@@ -137,70 +137,70 @@ class SetupPage extends Page{
 
     async debugDropdownTest(data, assert){
         await Sl.testid(data.element.Debug_testid).click();
-        await Sl.id(data.element.Debug_Option_False_id).click();
+        await Sl.arialabel(data.element.Debug_Option_False_label).click();
         await expect(Sl.testid(data.element.Debug_testid)).toHaveTextContaining(assert);
     }
 
     async timezoneDropdownTest(data, assert){
         await Sl.testid(data.element.Timezone_testid).click();
-        await Sl.id(data.element.Timezone_Option_Paris_id).click();
+        await Sl.arialabel(data.element.Timezone_Option_Paris_label).click();
         await expect(Sl.testid(data.element.Timezone_testid)).toHaveTextContaining(assert);
     }
 
     async databaseTypeDropdownTest(data, assert){
         await Sl.testid(data.element.Database_Type_testid).click();
-        await Sl.id(data.element.Database_Type_Option_SQLite_id).click();
+        await Sl.arialabel(data.element.Database_Type_Option_SQLite_label).click();
         await expect(Sl.testid(data.element.Database_Type_testid)).toHaveTextContaining(assert);
     }
 
     async mailProviderDropdownTest(data, assert){
         await Sl.testid(data.element.Mail_Provider_testid).click();
-        await Sl.id(data.element.Mail_Provider_Option_GMail_id).click();
+        await Sl.arialabel(data.element.Mail_Provider_Option_GMail_label).click();
         await expect(Sl.testid(data.element.Mail_Provider_testid)).toHaveTextContaining(assert);
     }
 
     async mailEncryptionDropdownText(data, assert){
         await Sl.testid(data.element.Mail_Encryption_testid).click();
-        await Sl.id(data.element.Mail_Encryption_SSL_id).click();
+        await Sl.arialabel(data.element.Mail_Encryption_SSL_label).click();
         await expect(Sl.testid(data.element.Mail_Encryption_testid)).toHaveTextContaining(assert);
     }
 
     async envFileNameTextbox(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Custom_id).click();
+        await Sl.arialabel(data.element.Env_Option_Custom_label).click();
         await expect(Sl.testid(assert)).toExist();
     }
 
     async mysqlDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Type_testid).click();
-        await Sl.id(data.element.Database_Type_Option_MySQL_id).click();
+        await Sl.arialabel(data.element.Database_Type_Option_MySQL_label).click();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async postgresqlDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Type_testid).click();
-        await Sl.id(data.element.Database_Type_Option_PostgreSQL_id).click();
+        await Sl.arialabel(data.element.Database_Type_Option_PostgreSQL_label).click();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async sqliteDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Type_testid).click();
-        await Sl.id(data.element.Database_Type_Option_SQLite_id).click();
+        await Sl.arialabel(data.element.Database_Type_Option_SQLite_label).click();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async sqlServerDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Type_testid).click();
-        await Sl.id(data.element.Database_Type_Option_SQL_Server_id).click();
+        await Sl.arialabel(data.element.Database_Type_Option_SQL_Server_label).click();
         await this.setDatabaseValues(data);
-        await this.assertErrorMessage(data, assert);
+        await this.assertMessage(data, assert);
     }
 
     async databasePasswordEyeIconFunctionality(data, assert){
@@ -231,7 +231,7 @@ class SetupPage extends Page{
 
     async customOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Custom_id).click();
+        await Sl.arialabel(data.element.Env_Option_Custom_label).click();
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await this.pause(this.is_human);
@@ -240,7 +240,7 @@ class SetupPage extends Page{
 
     async developOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Develop_id).click();
+        await Sl.arialabel(data.element.Env_Option_Develop_label).click();
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await this.pause(this.is_human);
@@ -249,7 +249,7 @@ class SetupPage extends Page{
 
     async stagingOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Staging_id).click();
+        await Sl.arialabel(data.element.Env_Option_Staging_label).click();
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await this.pause(this.is_human);
@@ -258,7 +258,7 @@ class SetupPage extends Page{
 
     async productionOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Production_id).click();
+        await Sl.arialabel(data.element.Env_Option_Production_label).click();
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await this.pause(this.is_human);
@@ -267,7 +267,7 @@ class SetupPage extends Page{
 
     async wdiojsOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
-        await Sl.id(data.element.Env_Option_Wdiojs_id).click();
+        await Sl.arialabel(data.element.Env_Option_Wdiojs_label).click();
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await this.pause(this.is_human);
