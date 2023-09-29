@@ -20,6 +20,7 @@ class SetupPage extends Page{
     async open()
     {
         await this.pause(this.is_human);
+        await browser.maximizeWindow();
         await super.open(this.params.page.url);
     }
 
