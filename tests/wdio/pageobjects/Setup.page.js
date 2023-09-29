@@ -12,24 +12,29 @@ class SetupPage extends Page{
 
     }
 
+    async pause(is_human){
+        if(is_human)
+            await browser.pause(this.is_human_pause);
+    }
+
     async open()
     {
-        await browser.pause(this.is_human_pause)
+        await this.pause(this.is_human);
         await super.open(this.params.page.url);
     }
 
     async installButtonAssert(data){
-        await expect(Sl.testid(data.element.install_button)).toExist();
+        await expect(Sl.testid(data.element.install_button_testid)).toExist();
     }
 
     async clickButton(data){
-        await expect(Sl.testid(data.element.install_button).click());
+        await expect(Sl.testid(data.element.install_button_testid).click());
     }
 
     async installButtonNavigation(data, assert){
 
         await this.clickButton(data);
-        await browser.pause(this.is_human_pause);
+        await this.pause(this.is_human);
         await asserts.pageUrl(assert);
     }
 }
