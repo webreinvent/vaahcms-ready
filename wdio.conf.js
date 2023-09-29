@@ -1,7 +1,14 @@
 const env = require('./wdio.env');
 
+const envObj = new env();
+
+const params = envObj.getParams();
+
+console.log('params-->', params)
+console.log('base_url-->', params.base_url)
+
 exports.config = {
-    env: env,
+    env: params,
     //
     // ====================
     // Runner Configuration
@@ -25,7 +32,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './tests/wdio/specs/**/*.js'
+        './tests/wdio/specs/setup.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -53,9 +60,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        browserName: 'chrome'
-    }],
+    capabilities: params.capabilities,
 
     //
     // ===================
@@ -88,7 +93,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: env.base_url,
+    baseUrl: params.base_url,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -126,7 +131,19 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: [
+        ['spec', {
+            symbols: {
+                passed: `
+[✓] PASSED: `,
+                failed: `
+[✖] FAILED: `,
+            },
+        },
+        ],
+    ],
+
+
 
 
     //

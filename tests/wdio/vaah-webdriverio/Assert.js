@@ -10,6 +10,12 @@ class Assert{
         }
     }
 
+    pageUrl(text)
+    {
+        return expect(browser).toHaveUrl(text);
+
+    }
+
     pageTitle(text)
     {
         return expect(browser).toHaveTitleContaining(text);
