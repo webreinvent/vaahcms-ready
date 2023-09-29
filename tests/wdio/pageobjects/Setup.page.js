@@ -19,11 +19,11 @@ class SetupPage extends Page{
     }
 
     async installButtonAssert(data){
-        await expect(Sl.$(data.element.install_button)).toExist();
+        await expect(Sl.testid(data.element.install_button)).toExist();
     }
 
     async clickButton(data){
-        await expect(Sl.$(data.element.install_button).click());
+        await expect(Sl.testid(data.element.install_button).click());
     }
 
     async installButtonNavigation(data, assert){
