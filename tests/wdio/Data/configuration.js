@@ -57,7 +57,9 @@ class Setup extends Page{
             Mail_Username_Dialog_testid: 'configuration-test_email_to',
             Mail_Username_Close_Button_testid: 'configuration-test_mail_close',
             Mail_Username_Send_Button_testid: 'configuration-send_mail',
-            Validation_Message_class: 'p-toast-detail'
+            Validation_Message_class: 'p-toast-detail',
+            Validation_Message_close_btn_label: 'Close',
+            Debugger_close_btn_class: 'phpdebugbar-close-btn'
         }
         this.value = {
             env: 'Custom',
@@ -286,52 +288,61 @@ class Setup extends Page{
                 tests: [
                     {
                         count: 1.1,
+                        name: 'Verify if the user can proceed by leaving the mandatory fields blank',
+                        expect: 'User should not be able to proceed and the save button should be disabled',
+                        assert: {
+                            database_btn_assert: 'Enter database name',
+                            save_btn_assert: 'disabled'
+                        }
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify if the user can proceed or not if the App Name fields blank',
+                        expect: 'The user should not be able to proceed if App Name field is blank',
+                        assert: 'The app name field is required'
+                    },
+                    {
+                        count: 1.3,
                         name: 'Verify if the user can proceed by filling all the mandatory fields',
                         expect: 'The user should be able to proceed if data is entered in the fields',
                         assert: 'Configuration Saved'
                     },
+                    // {
+                    //     count: 1.4,
+                    //     name: 'Verify if the user can create multiple environment using the same APP URL',
+                    //     expect: 'Creating multiple environment using same APP URL is not allowed. The user should see an error message',
+                    //     assert: 'Duplicate entries for app_url'
+                    // },
                     {
-                        count: 1.2,
-                        name: 'Verify if the user can proceed by leaving the mandatory fields blank',
-                        expect: 'User should not be able to proceed and the save button should be disabled',
-                        assert: 'Enter database name'
-                    },
-                    {
-                        count: 1.3,
+                        count: 1.5,
                         name: 'Verify if the user can proceed by selecting a Custom option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if a Env File name is provided for Custom Option',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.4,
+                        count: 1.6,
                         name: 'Verify if the user can proceed by selecting a Develop option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Develop Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.5,
+                        count: 1.7,
                         name: 'Verify if the user can proceed by selecting a Staging option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Staging Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.6,
+                        count: 1.8,
                         name: 'Verify if the user can proceed by selecting a Production option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Production Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.7,
+                        count: 1.9,
                         name: 'Verify if the user can proceed by selecting a Wdiojs option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Wdiojs Option is selected',
                         assert: 'Configuration Saved'
                     },
-                    {
-                        count: 1.8,
-                        name: 'Verify if the user can proceed or not if the App Name fields blank',
-                        expect: 'The user should not be able to proceed if App Name field is blank',
-                        assert: 'The app name field is required'
-                    }
                 ]
             }
         ]
