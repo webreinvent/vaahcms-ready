@@ -216,7 +216,6 @@ class ConfigurationPage extends Page{
     }
 
     async blankDataResponse(data, assert){
-        await Sl.class(data.element.Debugger_close_btn_class).click();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert.database_btn_assert);
@@ -245,6 +244,7 @@ class ConfigurationPage extends Page{
     }
 
     async customOptionPageResponse(data, assert){
+        await Sl.class(data.element.Debugger_close_btn_class).click();
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Custom_label).click();
         await this.setDatabaseValues(data);
