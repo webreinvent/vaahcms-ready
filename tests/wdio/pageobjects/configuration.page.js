@@ -37,6 +37,7 @@ class ConfigurationPage extends Page{
     async setEnv(data){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Staging_label).click();
+        await browser.pause(1500);
     }
 
     async setDatabaseValues(data){
@@ -52,7 +53,7 @@ class ConfigurationPage extends Page{
 
     async assertMessage(data, assert){
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
-        await expect(Sl.class(data.element.Validation_Message_class).toHaveTextContaining(assert));
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
     async assertSuccessMessage(data, assert){
@@ -63,35 +64,39 @@ class ConfigurationPage extends Page{
 
     async invalidDatabaseHost(data, assert){
         await this.setEnv(data);
-        await Sl.testid(data.element.Database_Host_testid).setValue(data.value.invalid_dbhost);
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Host_testid).setValue(data.value.invalid_dbhost);
         await this.assertMessage(data, assert);
     }
 
     async blankDatabaseHost(data, assert){
         await this.setEnv(data);
-        await Sl.testid(data.element.Database_Host_testid).clearValue();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Host_testid).doubleClick();
+        await browser.keys('Backspace');
         await this.assertMessage(data, assert);
     }
 
     async blankDatabasePort(data, assert){
         await this.setEnv(data);
-        await Sl.testid(data.element.Database_Port_testid).clearValue();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Port_testid).doubleClick();
+        await browser.keys('Backspace');
         await this.assertMessage(data, assert);
     }
 
     async invalidDatabasePort(data, assert){
         await this.setEnv(data);
-        await Sl.testid(data.element.Database_Port_testid).setValue(data.value.invalid_dbport);
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Port_testid).setValue(data.value.invalid_dbport);
         await this.assertMessage(data, assert);
     }
 
     async blankDatabaseName(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
+        await Sl.testid(data.element.Database_Name_testid).doubleClick();
+        await browser.keys('Backspace');
         await this.assertMessage(data, assert);
     }
 
@@ -104,7 +109,9 @@ class ConfigurationPage extends Page{
 
     async blankDatabaseUsername(data, assert){
         await this.setEnv(data);
-        await Sl.testid(data.element.Database_Name_testid).setValue(data.value.dbName);
+        await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Username_testid).doubleClick();
+        await browser.keys('Backspace');
         await this.assertMessage(data, assert);
     }
 
@@ -117,6 +124,10 @@ class ConfigurationPage extends Page{
 
     async databaseButtonBlankTest(data, assert){
         await this.setEnv(data);
+        await Sl.testid(data.element.Database_Name_testid).doubleClick();
+        await browser.keys('Backspace');
+        await Sl.testid(data.element.Database_Username_testid).doubleClick();
+        await browser.keys('Backspace');
         await this.assertMessage(data, assert);
     }
 
