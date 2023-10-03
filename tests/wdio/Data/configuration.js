@@ -142,7 +142,7 @@ class Setup extends Page{
                         count: 1.4,
                         name: 'Verify the response of Test Database Button with invalid DataBase Port',
                         expect: 'The user should see an validation message regarding the error.',
-                        assert: 'No such port is known'
+                        assert: 'Invalid database port'
                     },
                     {
                         count: 1.5,
