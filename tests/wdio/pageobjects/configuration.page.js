@@ -44,12 +44,19 @@ class ConfigurationPage extends Page{
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
     }
 
+    async setEmailValue(data){
+        await Sl.testid(data.element.From_Name_testid).scrollIntoView();
+        await Sl.testid(data.element.From_Name_testid).setValue(data.value.from_Name);
+        await Sl.testid(data.element.From_Email_testid).setValue(data.value.from_Email);
+    }
+
     async assertMessage(data, assert){
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await expect(Sl.class(data.element.Validation_Message_class).toHaveTextContaining(assert));
     }
 
     async assertSuccessMessage(data, assert){
+        await Sl.testid(data.element.Save_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Save_Button_testid).click();
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
@@ -165,10 +172,17 @@ class ConfigurationPage extends Page{
         await expect(Sl.testid(data.element.Mail_Encryption_testid)).toHaveTextContaining(assert);
     }
 
-    async envFileNameTextbox(data, assert){
+    async customTextbox(data, assert){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Custom_label).click();
         await expect(Sl.testid(assert)).toExist();
+    }
+
+    async customeTextboxFunctionality(data, assert){
+        await Sl.testid(data.element.Env_testid).click();
+        await Sl.arialabel(data.element.Env_Option_Custom_label).click();
+        await Sl.testid(data.element.Env_File_Name_testid).setValue(data.value.env_file);
+        await expect(Sl.testid(data.element.Env_File_Name_testid)).toHaveValueContaining(assert);
     }
 
     async mysqlDatabaseTest(data, assert){
@@ -216,9 +230,11 @@ class ConfigurationPage extends Page{
     }
 
     async blankDataResponse(data, assert){
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert.database_btn_assert);
+        await Sl.testid(data.element.Save_Button_testid).scrollIntoView();
         await expect(Sl.testid(data.element.Save_Button_testid)).toHaveAttribute(assert.save_btn_assert);
     }
 
@@ -228,70 +244,76 @@ class ConfigurationPage extends Page{
         await this.setDatabaseValues(data);
         await Sl.id(data.element.App_Name_id).doubleClick();
         await browser.keys('Backspace');
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await Sl.testid(data.element.Save_Button_testid).click();
-        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+        await this.assertSuccessMessage(data, assert);
     }
 
     async validDataResponse(data, assert){
         await this.setEnv(data);
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
+        await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
 
     async customOptionPageResponse(data, assert){
-        await Sl.class(data.element.Debugger_close_btn_class).click();
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Custom_label).click();
+        await Sl.testid(data.element.Env_File_Name_testid).setValue(data.value.env_file);
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
-        //await this.assertSuccessMessage(data, assert);
+        await this.setEmailValue(data);
+        await this.assertSuccessMessage(data, assert);
     }
 
     async developOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Develop_label).click();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
-        //await this.assertSuccessMessage(data, assert);
+        await this.setEmailValue(data);
+        await this.assertSuccessMessage(data, assert);
     }
 
     async stagingOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Staging_label).click();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
-        //await this.assertSuccessMessage(data, assert);
+        await this.setEmailValue(data);
+        await this.assertSuccessMessage(data, assert);
     }
 
     async productionOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Production_label).click();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
-        //await this.assertSuccessMessage(data, assert);
+        await this.setEmailValue(data);
+        await this.assertSuccessMessage(data, assert);
     }
 
     async wdiojsOptionPageResponse(data, assert){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.arialabel(data.element.Env_Option_Wdiojs_label).click();
         await this.setDatabaseValues(data);
+        await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
         await Sl.arialabel(data.element.Validation_Message_close_btn_label).click();
-        await this.pause(this.is_human);
-        //await this.assertSuccessMessage(data, assert);
+        await this.setEmailValue(data);
+        await this.assertSuccessMessage(data, assert);
     }
 }
 

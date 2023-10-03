@@ -174,47 +174,54 @@ describe(Page.groupId(params), () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[10];
         await Page.open();
-        await Page.envFileNameTextbox(Data, inputs.assert);
+        await Page.customTextbox(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[11];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[11];
         await Page.open();
-        await Page.mysqlDatabaseTest(Data, inputs.assert);
+        await Page.customeTextboxFunctionality(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[12];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[12];
         await Page.open();
-        await Page.postgresqlDatabaseTest(Data, inputs.assert);
+        await Page.mysqlDatabaseTest(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[13];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[13];
         await Page.open();
-        await Page.sqliteDatabaseTest(Data, inputs.assert);
+        await Page.postgresqlDatabaseTest(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[14];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[14];
         await Page.open();
-        await Page.sqlServerDatabaseTest(Data, inputs.assert);
+        await Page.sqliteDatabaseTest(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[15];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[15];
         await Page.open();
-        await Page.databasePasswordEyeIconFunctionality(Data, inputs.assert);
+        await Page.sqlServerDatabaseTest(Data, inputs.assert);
     })
 
     params.test = Data.groups[2].tests[16];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[16];
+        await Page.open();
+        await Page.databasePasswordEyeIconFunctionality(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[2].tests[17];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[17];
         await Page.open();
         await Page.mailPasswordEyeIconFunctionality(Data, inputs.assert);
     })

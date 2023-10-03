@@ -17,7 +17,7 @@ class Setup extends Page{
             Env_Option_Staging_label: 'Staging',
             Env_Option_Production_label: 'Production',
             Env_Option_Wdiojs_label: 'Wdiojs',
-            Env_File_Name_id: 'app-env-custom',
+            Env_File_Name_testid: 'configuration-custom_evn',
             Debug_testid: 'configuration-debug',
             Debug_Option_True_label: 'True',
             Debug_Option_False_label: 'False',
@@ -68,7 +68,7 @@ class Setup extends Page{
             dbUsername: 'root',
             dbPassword: 'testing',
             mailPassword: 'testing',
-            from_Name:'Test Cases',
+            from_Name:'TestCases',
             from_Email: 'we@webreinvent.com',
             invalid_dbhost: 'test123',
             invalid_dbport: 'test',
@@ -240,30 +240,37 @@ class Setup extends Page{
                     },
                     {
                         count: 2.3,
+                        name: 'Verify if the user can type in the Env File Name textbox of Custom Env Option',
+                        expect: 'The user should be able to type in the Env File Name textbox',
+                        assert: 'Test'
+                    },
+
+                    {
+                        count: 2.4,
                         name: 'Verify if the database connection is established for the MySQL Database Type',
                         expect: 'The Database connection should establish for MySQL if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 2.4,
+                        count: 2.5,
                         name: 'Verify if the database connection is established for the PostgreSQL Database Type',
                         expect: 'The Database connection should establish for PostgreSQL if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 2.5,
+                        count: 2.6,
                         name: 'Verify if the database connection is established for the SQLite Database Type',
                         expect: 'The Database connection should establish for SQLite if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 2.6,
+                        count: 2.7,
                         name: 'Verify if the database connection is established for the SQL Server Database Type',
                         expect: 'The Database connection should establish for SQL Server if all the data is valid',
                         assert: 'Successfully connect with Database'
                     },
                     {
-                        count: 2.7,
+                        count: 2.8,
                         name: 'Verify the functionality of eye icon of the Database Password field',
                         expect: 'Clicking on the eye icon should make the text in the Password field visible',
                         assert: {
@@ -272,7 +279,7 @@ class Setup extends Page{
                         }
                     },
                     {
-                        count: 2.8,
+                        count: 2.9,
                         name: 'Verify the functionality of eye icon of the Mail Password field',
                         expect: 'Clicking on the eye icon should make the text in the Password field visible',
                         assert: {
@@ -307,42 +314,39 @@ class Setup extends Page{
                         expect: 'The user should be able to proceed if data is entered in the fields',
                         assert: 'Configuration Saved'
                     },
-                    // {
-                    //     count: 1.4,
-                    //     name: 'Verify if the user can create multiple environment using the same APP URL',
-                    //     expect: 'Creating multiple environment using same APP URL is not allowed. The user should see an error message',
-                    //     assert: 'Duplicate entries for app_url'
-                    // },
                     {
-                        count: 1.5,
+                        count: 1.4,
                         name: 'Verify if the user can proceed by selecting a Custom option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if a Env File name is provided for Custom Option',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.6,
+                        count: 1.5,
                         name: 'Verify if the user can proceed by selecting a Develop option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Develop Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.7,
+                        count: 1.6,
                         name: 'Verify if the user can proceed by selecting a Staging option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Staging Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.8,
+                        count: 1.7,
                         name: 'Verify if the user can proceed by selecting a Production option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Production Option is selected',
                         assert: 'Configuration Saved'
                     },
                     {
-                        count: 1.9,
+                        count: 1.8,
                         name: 'Verify if the user can proceed by selecting a Wdiojs option from the Env Dropdown menu and valid data in the other fields',
                         expect: 'The user should be able to proceed if valid data is entered and Wdiojs Option is selected',
                         assert: 'Configuration Saved'
                     },
+                    {
+
+                    }
                 ]
             }
         ]
