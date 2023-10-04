@@ -22,7 +22,7 @@ class MigratePage extends Page{
         await expect(Sl.testid(data.element.env_file_testid)).toExist();
     }
 
-    async migrationMessageVisibility(data,assert){
+    async migrationMessageVisibility(data, assert){
         await expect(Sl.testid(data.element.migration_message_testid)).toHaveTextContaining(assert);
     }
 
@@ -36,12 +36,6 @@ class MigratePage extends Page{
 
     async saveButtonAvailability(data){
         await expect(Sl.testid(data.element.save_button_testid)).toExist();
-    }
-
-    async deleteMigrationMessageAssert(data, assert){
-        await Sl.testid(data.element.migration_button_testid).click();
-        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).toExist();
-        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).toHaveTextContaining(assert);
     }
 
     async messageCloseButtonFunctionality(data){
