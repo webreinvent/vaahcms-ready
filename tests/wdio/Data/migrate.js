@@ -13,9 +13,12 @@ class Migrate extends Page {
             env_file_testid: 'setup-use_env',
             migration_message_testid: 'migrate-message_text',
             migration_button_testid: 'migrate-run_migration_btn_text',
+            cancel_button_testid: 'migrate-confirmation_cancel_btn',
+            proceed_button_testid: 'migrate-confirmation_proceed_btn',
             back_button_testid: 'migrate-back_btn_text',
             save_button_testid: 'migrate-save_btn_text',
             close_button_testid: 'migrate-message_close_btn',
+            migration_close_button_testid: 'migrate-confirmation_close_btn',
             migration_confirmation_message_testid: 'migrate-confirmation_message',
             Validation_Message_class: 'p-toast-detail'
         }
@@ -60,25 +63,14 @@ class Migrate extends Page {
                     },
                     {
                         count: 1.6,
-                        name: 'Verify the if migrate button is available on the page or not',
-                        expect: 'The migrate button should be available on the page',
-                    },
-                    {
-                        count: 1.7,
                         name: 'Verify if the back button is available on the page or not',
                         expect: 'The back button should be available on the page'
                     },
                     {
-                        count: 1.8,
+                        count: 1.7,
                         name: 'Verify if the Save & Next button is available on the page or not',
                         expect: 'The Save & Next button should be available on the page'
                     },
-                    {
-                        count: 1.9,
-                        name: 'Verify the message in the Delete Existing migration window',
-                        expect: 'The message should clearly convey that proceeding further will delete all the existing migration',
-                        assert: 'This will delete all existing migration'
-                    }
                 ],
             },
             {
@@ -122,6 +114,12 @@ class Migrate extends Page {
                         count: 1.7,
                         name: 'Verify the functionality of the close button in the Deleting Existing migrations window',
                         expect: 'The button should close the window'
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify the message in the Delete Existing migration window',
+                        expect: 'The message should clearly convey that proceeding further will delete all the existing migration',
+                        assert: 'This will delete all existing migration'
                     }
                 ]
             },
