@@ -1,6 +1,6 @@
 const Page = require('../vaah-webdriverio/Page');
 
-class Setup extends Page{
+class Configuration extends Page{
     constructor() {
         super();
         this.params = {
@@ -353,4 +353,4 @@ class Setup extends Page{
     }
 }
 
-module.exports = new Setup();
+module.exports = new Configuration();
