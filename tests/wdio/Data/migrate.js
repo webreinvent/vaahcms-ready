@@ -12,7 +12,8 @@ class Migrate extends Page {
         this.element = {
             env_file_testid: 'setup-use_env',
             migration_message_testid: 'migrate-message_text',
-            migration_button_testid: 'migrate-run_migration_btn_text',
+            migration_message_div_role: 'alert',
+            migration_button_testid: 'migrate-run_migration',
             cancel_button_testid: 'migrate-confirmation_cancel_btn',
             proceed_button_testid: 'migrate-confirmation_proceed_btn',
             back_button_testid: 'migrate-back_btn_text',
@@ -54,7 +55,7 @@ class Migrate extends Page {
                         count: 1.4,
                         name: 'Verify the if the Database Migration message is visible on the page or not',
                         expect: 'The Database migration message should be visible on the page',
-                        assert: ' This step will run database migrations and seeds'
+                        assert: 'This step will run database migrations and seeds.'
                     },
                     {
                         count: 1.5,
@@ -80,7 +81,11 @@ class Migrate extends Page {
                     {
                         count: 1.1,
                         name: 'Verify the functionality of the close button of Database migration message',
-                        expect: 'The Database message should disappear from the page'
+                        expect: 'The Database message should disappear from the page',
+                        assert: {
+                            attribute: 'style',
+                            value: 'display: none;'
+                        }
                     },
                     {
                         count: 1.2,
@@ -89,37 +94,37 @@ class Migrate extends Page {
                     },
                     {
                         count: 1.3,
+                        name: 'Verify the message in the Delete Existing migration window',
+                        expect: 'The message should clearly convey that proceeding further will delete all the existing migration',
+                        assert: 'This will delete all existing migration'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify the functionality of the close button in the Deleting Existing migrations window',
+                        expect: 'The button should close the window'
+                    },
+                    {
+                        count: 1.5,
                         name: 'Verify the functionality of the Cancel button in Delete Existing migration window.',
                         expect: 'The window should close as soon as the user clicks on the cancel button'
                     },
                     {
-                        count: 1.4,
+                        count: 1.6,
                         name: 'Verify the functionality of the Proceed button in Delete Existing migration window.',
                         expect: 'After clicking on the proceed button, the user should see a success message',
                         assert: 'Migration were successful'
                     },
                     {
-                        count: 1.5,
+                        count: 1.7,
                         name: 'Verify the functionality of the back button',
                         expect: 'The back button should be navigate to the configuration page',
                         assert: this.base_url+'/backend#/setup/install/configuration'
                     },
                     {
-                        count: 1.6,
+                        count: 1.8,
                         name: 'Verify the functionality of the Save & Next button',
                         expect: 'After clicking on the button, the user should navigate to the dependencies page',
                         assert: this.base_url+'/backend#/setup/install/dependencies'
-                    },
-                    {
-                        count: 1.7,
-                        name: 'Verify the functionality of the close button in the Deleting Existing migrations window',
-                        expect: 'The button should close the window'
-                    },
-                    {
-                        count: 1.8,
-                        name: 'Verify the message in the Delete Existing migration window',
-                        expect: 'The message should clearly convey that proceeding further will delete all the existing migration',
-                        assert: 'This will delete all existing migration'
                     }
                 ]
             },

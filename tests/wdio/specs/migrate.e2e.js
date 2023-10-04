@@ -63,7 +63,7 @@ describe(Page.groupId(params), () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[0];
         await Page.open();
-        await Page.messageCloseButtonFunctionality(Data);
+        await Page.messageCloseButtonFunctionality(Data, inputs.assert);
     })
 
     params.test = Data.groups[1].tests[1];
@@ -77,42 +77,42 @@ describe(Page.groupId(params), () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[2];
         await Page.open();
-        await Page.cancelButtonFunctionality(Data);
+        await Page.migrationConfirmationMessage(Data, inputs.assert);
     })
 
     params.test = Data.groups[1].tests[3];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[3];
         await Page.open();
-        await Page.proceedButtonFunctionality(Data, inputs.assert);
+        await Page.migrationWindowCloseButton(Data);
     })
 
     params.test = Data.groups[1].tests[4];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[4];
         await Page.open();
-        await Page.backButtonFunctionality(Data, inputs.assert);
+        await Page.cancelButtonFunctionality(Data);
     })
 
     params.test = Data.groups[1].tests[5];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[5];
         await Page.open();
-        await Page.saveButtonFunctionality(Data, inputs.assert);
+        await Page.proceedButtonFunctionality(Data, inputs.assert);
     })
 
     params.test = Data.groups[1].tests[6];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[6];
         await Page.open();
-        await Page.migrationWindowCloseButton(Data);
+        await Page.backButtonFunctionality(Data, inputs.assert);
     })
 
     params.test = Data.groups[1].tests[7];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[7];
         await Page.open();
-        await Page.migrationConfirmationMessage(Data, inputs.assert);
+        await Page.saveButtonFunctionality(Data, inputs.assert);
     })
 
     params.group = Data.groups[2];
@@ -125,7 +125,7 @@ describe(Page.groupId(params), () => {
 
     params.test = Data.groups[2].tests[1];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[2].tests[0];
+        inputs = Data.groups[2].tests[1];
         await Page.open();
         await Page.validSaveButtonResponse(Data, inputs.assert);
     })

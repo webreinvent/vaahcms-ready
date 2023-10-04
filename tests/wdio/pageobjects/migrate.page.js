@@ -38,14 +38,26 @@ class MigratePage extends Page{
         await expect(Sl.testid(data.element.save_button_testid)).toExist();
     }
 
-    async messageCloseButtonFunctionality(data){
+    async messageCloseButtonFunctionality(data, assert){
         await Sl.testid(data.element.close_button_testid).click();
-        await expect(Sl.testid(data.element.migration_message_testid)).not.toExist();
+        await expect(Sl.role(data.element.migration_message_div_role)).toHaveAttribute(assert.attribute, assert.value);
     }
 
     async migrationButtonFunctionality(data){
         await Sl.testid(data.element.migration_button_testid).click();
         await expect(Sl.testid(data.element.migration_confirmation_message_testid)).toExist();
+    }
+
+    async migrationConfirmationMessage(data, assert){
+        await Sl.testid(data.element.migration_button_testid).click();
+        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).toHaveTextContaining(assert)
+    }
+
+    async migrationWindowCloseButton(data){
+        await Sl.testid(data.element.migration_button_testid).click();
+        await Sl.testid(data.element.migration_close_button_testid).click();
+        await asserts.pause();
+        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).not.toExist();
     }
 
     async cancelButtonFunctionality(data){
@@ -55,50 +67,45 @@ class MigratePage extends Page{
     }
 
     async proceedButtonFunctionality(data, assert){
+        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
         const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 6000});
-        await expect(message).toHaveTitleContaining(assert);
+        await message.waitForExist({timeout: 30000});
+        await expect(message).toHaveTextContaining(assert);
     }
 
     async backButtonFunctionality(data, assert){
         await Sl.testid(data.element.back_button_testid).click();
-        await this.pageUrl(assert);
+        await asserts.pageUrl(assert);
     }
 
     async saveButtonFunctionality(data, assert){
+        await browser.refresh();
+        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
         const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 6000});
+        await message.waitForExist({timeout: 30000});
         await Sl.testid(data.element.save_button_testid).click();
-        await this.pageUrl(assert);
-    }
-
-    async migrationWindowCloseButton(data){
-        await Sl.testid(data.element.migration_button_testid).click();
-        await Sl.testid(data.element.migration_close_button_testid).click();
-        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).not.toExist();
-    }
-
-    async migrationConfirmationMessage(data, assert){
-        await Sl.testid(data.element.migration_button_testid).click();
-        await expect(Sl.testid(data.element.migration_confirmation_message_testid)).toHaveTextContaining(assert)
+        await asserts.pause();
+        await asserts.pageUrl(assert);
     }
 
     async invalidSaveButtonResponse(data, assert){
+        await browser.refresh();
         await Sl.testid(data.element.save_button_testid).click();
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
     async validSaveButtonResponse(data, assert){
+        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
         const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 6000});
+        await message.waitForExist({timeout: 30000});
         await Sl.testid(data.element.save_button_testid).click();
-        await this.pageUrl(assert);
+        await asserts.pageUrl(assert);
     }
 }
 
