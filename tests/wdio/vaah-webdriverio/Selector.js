@@ -70,7 +70,7 @@ class El{
         }
         return el;
     }
-    arialabel(name, value=null)
+    label(name, value=null)
     {
         let el = this.attr('aria-label', name);
         if(value)

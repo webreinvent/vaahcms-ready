@@ -32,7 +32,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './tests/wdio/specs/setup.e2e.js'
+        './tests/wdio/specs/configuration.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -60,9 +60,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        browserName: 'chrome'
-    }],
+    capabilities: params.capabilities,
 
     //
     // ===================

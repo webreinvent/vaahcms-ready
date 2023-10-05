@@ -67,14 +67,24 @@ class Configuration extends Page{
             dbName: 'vaahcms',
             dbUsername: 'root',
             dbPassword: 'testing',
-            mailPassword: 'testing',
+            mailDriver: 'smtp',
+            mailHost: 'sandbox.smtp.mailtrap.io',
+            mailPort: '2525',
+            mailUsername: '0f11c753248d08',
+            mailPassword: '91b77e6314f800',
             from_Name:'TestCases',
             from_Email: 'we@webreinvent.com',
             invalid_dbhost: 'test123',
             invalid_dbport: 'test',
             invalid_dbname: 'test123',
             invalid_dbusername: 'testing123',
-            invalid_password: '123'
+            invalid_password: '123',
+            invalidMailDriver: 'test',
+            invalidMailHost: 'test',
+            invalidMailPort: 'test',
+            invalidMailUsername: 'test',
+            invalidMailPassword: 'test',
+            invalidfromEmail: '123',
         }
         this.params.page = {
             id: "CG",
@@ -303,7 +313,7 @@ class Configuration extends Page{
                         count: 1.2,
                         name: 'Verify if the user can type in the Mail Driver field or not',
                         expect: 'The user should be able to type in the Mail Driver field',
-                        assert: 'test'
+                        assert: 'smtp'
                     },
                     {
                         count: 1.3,
@@ -315,7 +325,7 @@ class Configuration extends Page{
                         count: 1.4,
                         name: 'Verify if the user can type in the Mail Host field or not',
                         expect: 'The user should be able to type in the Mail Host field',
-                        assert: 'test'
+                        assert: 'sandbox.smtp.mailtrap.io'
                     },
                     {
                         count: 1.5,
@@ -327,7 +337,7 @@ class Configuration extends Page{
                         count: 1.6,
                         name: 'Verify if the user can type in the Mail Port field or not',
                         expect: 'The user should be able to type in the Mail Port field',
-                        assert: 'test'
+                        assert: '2525'
                     },
                     {
                         count: 1.7,
@@ -339,7 +349,7 @@ class Configuration extends Page{
                         count: 1.8,
                         name: 'Verify if the user can type in the Mail Username field or not',
                         expect: 'The user should be able to type in the Mail Username field',
-                        assert: 'test'
+                        assert: '0f11c753248d08'
                     },
                     {
                         count: 1.9,
@@ -351,7 +361,7 @@ class Configuration extends Page{
                         count: 2.1,
                         name: 'Verify if the user can type in the Mail Password field or not',
                         expect: 'The user should be able to type in the Mail Password field',
-                        assert: 'test'
+                        assert: '91b77e6314f800'
                     },
                     {
                         count: 2.2,
@@ -376,8 +386,8 @@ class Configuration extends Page{
                     },
                     {
                         count: 2.5,
-                        name: 'Verify if the placeholder text is present in the From Name field or not',
-                        expect: 'The placeholder text should be present in the From Name field',
+                        name: 'Verify if the placeholder text is present in the From Email field or not',
+                        expect: 'The placeholder text should be present in the From Email field',
                         assert: 'placeholder'
                     },
                     {
