@@ -1,8 +1,7 @@
-//const chalk = import("chalk").then(m=>m.default);
+
 const chalk = require("chalk");
 const env = require('./../../../wdio.env');
 
-//import {chalk} from "chalk";
 let color  = require("cli-color");
 
 
@@ -20,8 +19,6 @@ module.exports = class Page {
 
     constructor() {
         this.base_url = params.base_url;
-        this.is_human_pause = params.is_human_pause;
-        this.is_human = params.is_human;
         this.params = {
             page: {
                 id: null,

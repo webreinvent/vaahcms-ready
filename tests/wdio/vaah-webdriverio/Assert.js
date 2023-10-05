@@ -1,12 +1,16 @@
 const env = require('./../../../wdio.env');
 
+const envObj = new env();
+
+const params = envObj.getParams();
+
 class Assert{
 
     pause()
     {
-        if(env.is_human)
+        if(params.is_human)
         {
-            browser.pause(env.is_human_pause*1000);
+            browser.pause(params.is_human_pause);
         }
     }
 
