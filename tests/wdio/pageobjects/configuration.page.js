@@ -1,6 +1,7 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
 const asserts = require('../vaah-webdriverio/Assert')
+const {waitForExist} = require("webdriverio/build/commands/element/waitForExist");
 
 class ConfigurationPage extends Page{
     constructor() {
@@ -55,9 +56,29 @@ class ConfigurationPage extends Page{
         await Sl.testid(data.element.From_Email_testid).setValue(data.value.from_Email);
     }
 
+    async setMailProvider(data){
+        await Sl.testid(data.element.Mail_Provider_testid).click();
+        await Sl.label(data.element.Mail_Provider_Option_MailTrap_label).click();
+        const port = Sl.testid(data.element.Mail_Port_testid);
+        await browser.waitUntil(async function () {
+            return (await port.getValue()) === (data.value.mailPort);
+        }, {timeout: 5000})
+    }
+
+    async setEmailCredential(data){
+        await Sl.testid(data.element.Mail_Username_testid).setValue(data.value.mailUsername);
+        await Sl.testid(data.element.Mail_Password_testid).setValue(data.value.mailPassword);
+    }
+
     async clickDatabaseButton(data){
         await Sl.testid(data.element.Database_Connection_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Database_Connection_Button_testid).click();
+    }
+
+    async testMailConfiguration(data){
+        await Sl.testid(data.element.Test_Mail_Button_testid).click();
+        await Sl.testid(data.element.Mail_Username_Dialog_testid).setValue(data.value.from_Email);
+        await Sl.testid(data.element.Mail_Username_Send_Button_testid).click();
     }
 
     async assertMessage(data, assert){
@@ -68,6 +89,12 @@ class ConfigurationPage extends Page{
     async assertSuccessMessage(data, assert){
         await Sl.testid(data.element.Save_Button_testid).scrollIntoView();
         await Sl.testid(data.element.Save_Button_testid).click();
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankSendMailButtonTest(data, assert){
+        await Sl.testid(data.element.Test_Mail_Button_testid).click();
+        await Sl.testid(data.element.Mail_Username_Send_Button_testid).click();
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
@@ -310,6 +337,148 @@ class ConfigurationPage extends Page{
     async fromEmailTypeFunctionality(data, assert){
         await Sl.testid(data.element.From_Email_testid).setValue(data.value.from_Email);
         await expect(Sl.testid(data.element.From_Email_testid)).toHaveValueContaining(assert);
+    }
+
+    async blankSendMailButtonResponse(data, assert){
+        await Sl.testid(data.element.Test_Mail_Button_testid).click();
+        await Sl.testid(data.element.Mail_Username_Send_Button_testid).click();
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankMailDriverTest(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.clear(data.element.Mail_Driver_testid);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidMailDriver(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await Sl.testid(data.element.Mail_Driver_testid).setValue(data.value.invalidMailDriver);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankMailHost(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.clear(data.element.Mail_Host_testid);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidMailHost(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await Sl.testid(data.element.Mail_Host_testid).setValue(data.value.invalidMailHost);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankMailPort(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.clear(data.element.Mail_Port_testid);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidMailPort(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await Sl.testid(data.element.Mail_Port_testid).setValue(data.value.invalidMailPort);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankMailUsername(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.clear(data.element.Mail_Username_testid);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidMailUsername(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await Sl.testid(data.element.Mail_Username_testid).setValue(data.value.invalidMailUsername);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankMailPassword(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.clear(data.element.Mail_Password_testid);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidMailPassword(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await Sl.testid(data.element.Mail_Password_testid).setValue(data.value.invalidMailPassword);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankFromName(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await this.clear(data.element.From_Name_testid);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async blankFromEmail(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await this.clear(data.element.From_Email_testid);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidFromEmail(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await Sl.testid(data.element.From_Email_testid).setValue(data.value.invalidFromEmail);
+        await this.testMailConfiguration(data);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async invalidDialogMailUsername(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await Sl.testid(data.element.Test_Mail_Button_testid).click();
+        await Sl.testid(data.element.Mail_Username_Dialog_testid).setValue(data.value.invalidMailUsername);
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async validResponseTest(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
+        const message = await Sl.class(data.element.Validation_Message_class);
+        await message.waitForExist({timeout: 10000});
+        await expect(message).toHaveTextContaining(assert);
     }
 
     async blankDataResponse(data, assert){
