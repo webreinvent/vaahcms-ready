@@ -84,7 +84,7 @@ class Configuration extends Page{
             invalidMailPort: 'test',
             invalidMailUsername: 'test',
             invalidMailPassword: 'test',
-            invalidfromEmail: '123',
+            invalidFromEmail: '123',
         }
         this.params.page = {
             id: "CG",
