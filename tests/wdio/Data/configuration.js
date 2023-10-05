@@ -123,37 +123,37 @@ class Configuration extends Page{
                     {
                         count: 1.1,
                         name: 'Verify the response of Test Database Button with invalid DataBase Host',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'No such host is known'
                     },
                     {
                         count: 1.2,
                         name: 'Verify the response of Test Database Button with blank DataBase Host',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database host'
                     },
                     {
                         count: 1.3,
                         name: 'Verify the response of Test Database Button with blank DataBase Port',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database port'
                     },
                     {
                         count: 1.4,
                         name: 'Verify the response of Test Database Button with invalid DataBase Port',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'Invalid database port'
                     },
                     {
                         count: 1.5,
                         name: 'Verify the response of Test Database Button with blank DataBase Name',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database name'
                     },
                     {
                         count: 1.6,
                         name: 'Verify the response of Test Database Button with invalid DataBase Name',
-                        expect: 'The user should see an validation message regarding the error.',
+                        expect: 'The user should see a validation message regarding the error.',
                         assert: 'Unknown database'
                     },
                     {
@@ -177,7 +177,7 @@ class Configuration extends Page{
                     {
                         count: 1.1,
                         name: 'Verify the functionality of Test Database connection button when mandatory fields are blank',
-                        expect: 'The user should see an error message with the fields that are mandatory',
+                        expect: 'The user should see an error message with the list of fields that are mandatory',
                         assert: 'Enter database name'
                     },
                     {
@@ -189,52 +189,52 @@ class Configuration extends Page{
                     {
                         count: 1.3,
                         name: 'Verify the functionality of Test Mail Configuration button',
-                        expect: 'Test Mail Configuration should open a dialog box with Mail Username field',
+                        expect: 'The test mail configuration button should open a dialog box with Mail Username field',
                     },
                     {
                         count: 1.4,
                         name: 'Verify if the close button in Mail Username dialog box is functional or not',
-                        expect: 'The Send Mail button should be clickable',
+                        expect: 'The close button should close the Mail Username dialog box',
                     },
                     {
                         count: 1.5,
-                        name: 'Verify if the user can select options from ENV dropdown menu',
+                        name: 'Verify if the user can select an option from ENV dropdown menu',
                         expect: 'The user should be able to select an option from the Debug dropdown menu',
                         assert: 'Staging'
                     },
                     {
                         count: 1.6,
-                        name: 'Verify if the user can select options from Debug dropdown menu',
+                        name: 'Verify if the user can select an option from Debug dropdown menu',
                         expect: 'The user should be able to select an option from the Debug dropdown menu',
                         assert: 'False'
                     },
                     {
                         count: 1.7,
-                        name: 'Verify if the user can select options from Timezone dropdown menu',
+                        name: 'Verify if the user can select an option from Timezone dropdown menu',
                         expect: 'The user should be able to select an option from the Timezone dropdown menu',
                         assert: '(GMT+01:00) Paris'
                     },
                     {
                         count: 1.8,
-                        name: 'Verify if the user can select options from Database Type dropdown menu',
+                        name: 'Verify if the user can select an option from Database Type dropdown menu',
                         expect: 'The user should be able to select an option from the Database Type dropdown menu',
                         assert: 'SQLite'
                     },
                     {
                         count: 1.9,
-                        name: 'Verify if the user can select options from Mail Provider dropdown menu',
+                        name: 'Verify if the user can select an option from Mail Provider dropdown menu',
                         expect: 'The user should be able to select an option from the Mail Provider dropdown menu',
                         assert: 'GMail'
                     },
                     {
                         count: 2.1,
-                        name: 'Verify if the user can select options from Mail Encryption dropdown menu',
+                        name: 'Verify if the user can select an option from Mail Encryption dropdown menu',
                         expect: 'The user should be able to select an option from the Mail Encryption dropdown menu',
                         assert: 'SSL'
                     },
                     {
                         count: 2.2,
-                        name: 'Verify if a textbox appears or not when the user selects Custom option from the ENV Dropdown Menu ',
+                        name: 'Verify if a textbox appears or not when the user select Custom option from the ENV Dropdown Menu ',
                         expect: 'A textbox should appear for the Custom option in ENV Dropdown menu',
                         assert: 'configuration-custom_evn'
                     },
@@ -254,20 +254,20 @@ class Configuration extends Page{
                     {
                         count: 2.5,
                         name: 'Verify if the database connection is established for the PostgreSQL Database Type',
-                        expect: 'The Database connection should establish for PostgreSQL if all the data is valid',
-                        assert: 'Successfully connect with Database'
+                        expect: 'The Database connection should not establish for PostgreSQL, and the user should see the reason for it',
+                        assert: 'could not find driver'
                     },
                     {
                         count: 2.6,
                         name: 'Verify if the database connection is established for the SQLite Database Type',
-                        expect: 'The Database connection should establish for SQLite if all the data is valid',
-                        assert: 'Successfully connect with Database'
+                        expect: 'The Database connection should not establish for SQLite',
+                        assert: 'unable to open database file'
                     },
                     {
                         count: 2.7,
                         name: 'Verify if the database connection is established for the SQL Server Database Type',
-                        expect: 'The Database connection should establish for SQL Server if all the data is valid',
-                        assert: 'Successfully connect with Database'
+                        expect: 'The Database connection should not establish for SQL Server',
+                        assert: 'could not find driver'
                     },
                     {
                         count: 2.8,
@@ -291,6 +291,207 @@ class Configuration extends Page{
             },
             {
                 count: 4,
+                name: 'Mail Section',
+                tests: [
+                    {
+                        count: 1.1,
+                        name: 'Verify if the placeholder text is present in the Mail Driver field or not',
+                        expect: 'The placeholder text should be present in the Mail Driver field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify if the user can type in the Mail Driver field or not',
+                        expect: 'The user should be able to type in the Mail Driver field',
+                        assert: 'test'
+                    },
+                    {
+                        count: 1.3,
+                        name: 'Verify if the placeholder text is present in the Mail Host field or not',
+                        expect: 'The placeholder text should be present in the Mail Host field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify if the user can type in the Mail Host field or not',
+                        expect: 'The user should be able to type in the Mail Host field',
+                        assert: 'test'
+                    },
+                    {
+                        count: 1.5,
+                        name: 'Verify if the placeholder text is present in the Mail Port field or not',
+                        expect: 'The placeholder text should be present in the Mail Port field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 1.6,
+                        name: 'Verify if the user can type in the Mail Port field or not',
+                        expect: 'The user should be able to type in the Mail Port field',
+                        assert: 'test'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify if the placeholder text is present in the Mail Username field or not',
+                        expect: 'The placeholder text should be present in the Mail Username field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify if the user can type in the Mail Username field or not',
+                        expect: 'The user should be able to type in the Mail Username field',
+                        assert: 'test'
+                    },
+                    {
+                        count: 1.9,
+                        name: 'Verify if the placeholder text is present in the Mail Password field or not',
+                        expect: 'The placeholder text should be present in the Mail Password field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 2.1,
+                        name: 'Verify if the user can type in the Mail Password field or not',
+                        expect: 'The user should be able to type in the Mail Password field',
+                        assert: 'test'
+                    },
+                    {
+                        count: 2.2,
+                        name: 'Verify if the text in password field is hidden by default or not',
+                        expect: 'The text in the password field should be hidden.',
+                        assert: {
+                            attribute: 'type',
+                            value: 'password'
+                        }
+                    },
+                    {
+                        count: 2.3,
+                        name: 'Verify if the placeholder text is present in the From Name field or not',
+                        expect: 'The placeholder text should be present in the From Name field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 2.4,
+                        name: 'Verify if the user can type in the From Name field or not',
+                        expect: 'The user should be able to type in the From Name field',
+                        assert: 'TestCases'
+                    },
+                    {
+                        count: 2.5,
+                        name: 'Verify if the placeholder text is present in the From Name field or not',
+                        expect: 'The placeholder text should be present in the From Name field',
+                        assert: 'placeholder'
+                    },
+                    {
+                        count: 2.6,
+                        name: 'Verify if the user can type in the From Email field or not',
+                        expect: 'The user should be able to type in the From Email field',
+                        assert: 'we@webreinvent.com'
+                    },
+                ]
+            },
+            {
+                count: 5,
+                name: 'Test Mail Configuration',
+                tests: [
+                    {
+                        count: 1.1,
+                        name: 'Verify the functionality of Send Email button in Test Mail Configuration window when mandatory fields are blank',
+                        expect: 'The user should see the error message with the list of mandatory fields',
+                        assert: 'The mail driver field is required.'
+                    },
+                    {
+                        count: 1.2,
+                        name: 'Verify the response of Send Email button for blank Mail Driver',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail driver field is required'
+                    },
+                    {
+                        count: 1.3,
+                        name: 'Verify the response of Send Email button for invalid Mail Driver',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'Unsupported mail transport'
+                    },
+                    {
+                        count: 1.4,
+                        name: 'Verify the response of Send Email button for blank Mail Host',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail host field is required'
+                    },
+                    {
+                        count: 1.5,
+                        name: 'Verify the response of Send Email button for invalid Mail Host',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'No such host is known'
+                    },
+                    {
+                        count: 1.6,
+                        name: 'Verify the response of Send Email button for blank Mail Port',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail port field is required'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify the response of Send Email button for invalid Mail Port',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'Something went wrong'
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify the response of Send Email button for blank Mail Username',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail username field is required'
+                    },
+                    {
+                        count: 1.9,
+                        name: 'Verify the response of Send Email button for invalid Mail Username',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'Failed to authenticate'
+                    },
+                    {
+                        count: 2.1,
+                        name: 'Verify the response of Send Email button for blank Mail Password',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail password field is required.'
+                    },
+                    {
+                        count: 2.2,
+                        name: 'Verify the response of Send Email button for invalid Mail Password',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'Failed to authenticate'
+                    },
+                    {
+                        count: 2.3,
+                        name: 'Verify the response of Send Email button for blank From Name field',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail from name field is required'
+                    },
+                    {
+                        count: 2.4,
+                        name: 'Verify the response of Send Email button for blank From Email field',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'The mail from address field is required'
+                    },
+                    {
+                        count: 2.5,
+                        name: 'Verify the response of Send Email button for invalid From Email field',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'does not comply with addr-spec'
+                    },
+                    {
+                        count: 2.6,
+                        name: 'Verify the response of Send Email button for invalid Mail Username field of Test Mail Configuration window',
+                        expect: 'The user should see the error message regarding the same',
+                        assert: 'does not comply with addr-spec'
+                    },
+                    {
+                        count: 2.7,
+                        name: 'Verify the functionality of Send Email button in Test Mail Configuration window when valid details are filled',
+                        expect: 'The user should see success message regarding the send email',
+                        assert: 'Test email successfully sent'
+                    },
+                ]
+            },
+            {
+                count: 5,
                 name: "End to End",
                 tests: [
                     {
