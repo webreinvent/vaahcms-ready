@@ -234,11 +234,18 @@ describe(Page.groupId(params), () => {
 
     //---------------------------Group: 4---------------------------
 
+    /*
+
     params.test = Data.groups[3];
     params.test = Data.groups[3].tests[0];
     it(Page.testId(params), async () => {
         inputs = Data.groups[3].tests[0];
+
         await Page.open();
+        // const output = await browser.mock('http://localhost/vaahcms-ready/public/backend/setup/json/assets', {
+        //     method: 'get'
+        // })
+        // console.log("This: "+output);
         await Page.mailDriverPlaceholder(Data, inputs.assert);
     })
 
@@ -339,6 +346,123 @@ describe(Page.groupId(params), () => {
         await Page.open();
         await Page.fromEmailTypeFunctionality(Data, inputs.assert);
     })
+
+    */
+
+    //---------------------------Group: 5---------------------------
+
+    params.test = Data.groups[4];
+    params.test = Data.groups[4].tests[0];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[0];
+        await Page.open();
+        await Page.blankSendMailButtonResponse(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[1];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[1];
+        await Page.open();
+        await Page.blankMailDriverTest(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[2];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[2];
+        await Page.open();
+        await Page.invalidMailDriver(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[3];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[3];
+        await Page.open();
+        await Page.blankMailHost(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[4];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[4];
+        await Page.open();
+        await Page.invalidMailHost(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[5];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[5];
+        await Page.open();
+        await Page.blankMailPort(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[6];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[6];
+        await Page.open();
+        await Page.invalidMailPort(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[7];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[7];
+        await Page.open();
+        await Page.blankMailUsername(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[8];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[8];
+        await Page.open();
+        await Page.invalidMailUsername(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[9];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[9];
+        await Page.open();
+        await Page.blankMailPassword(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[10];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[10];
+        await Page.open();
+        await Page.invalidMailPassword(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[11];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[11];
+        await Page.open();
+        await Page.blankFromName(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[12];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[12];
+        await Page.open();
+        await Page.blankFromEmail(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[13];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[13];
+        await Page.open();
+        await Page.invalidFromEmail(Data, inputs.assert);
+    })
+
+    params.test = Data.groups[4].tests[14];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[14];
+        await Page.open();
+        await Page.invalidDialogMailUsername(Data, inputs.assert);
+    })
+
+    // params.test = Data.groups[4].tests[15];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[4].tests[15];
+    //     await Page.open();
+    //     await Page.validSendMailButtonResponse(Data, inputs.assert);
+    // })
 
     //---------------------------Group: 5---------------------------
 
