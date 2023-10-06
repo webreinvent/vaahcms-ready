@@ -500,37 +500,37 @@ describe(Page.groupId(params), () => {
         await Page.validDataResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[6].tests[3];
+    params.test = Data.groups[5].tests[3];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[6].tests[3];
+        inputs = Data.groups[5].tests[3];
         await Page.open();
         await Page.customOptionPageResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[7].tests[4];
+    params.test = Data.groups[5].tests[4];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[7].tests[4];
+        inputs = Data.groups[5].tests[4];
         await Page.open();
         await Page.developOptionPageResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[8].tests[5];
+    params.test = Data.groups[5].tests[5];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[8].tests[5];
+        inputs = Data.groups[5].tests[5];
         await Page.open();
         await Page.stagingOptionPageResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[9].tests[6];
+    params.test = Data.groups[5].tests[6];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[9].tests[6];
+        inputs = Data.groups[5].tests[6];
         await Page.open();
         await Page.productionOptionPageResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[10].tests[7];
+    params.test = Data.groups[5].tests[7];
     it(Page.testId(params), async () => {
-        inputs = Data.groups[10].tests[7];
+        inputs = Data.groups[5].tests[7];
         await Page.open();
         await Page.wdiojsOptionPageResponse(Data, inputs.assert);
     })

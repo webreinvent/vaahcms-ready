@@ -23,7 +23,7 @@ class Configuration extends Page{
             Debug_Option_False_label: 'False',
             Timezone_testid: 'configuration-timezone',
             Timezone_Option_Paris_label: '(GMT+01:00) Paris',
-            App_Name_id: 'app-name',
+            App_Name_testid: 'configuration-app_name',
             Database_Type_testid: 'configuration-db_type',
             Database_Type_Option_MySQL_label: 'MySQL',
             Database_Type_Option_PostgreSQL_label: 'PostgreSQL',
