@@ -1,7 +1,6 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
 const asserts = require('../vaah-webdriverio/Assert')
-const {waitForExist} = require("webdriverio/build/commands/element/waitForExist");
 
 class ConfigurationPage extends Page{
     constructor() {
@@ -468,6 +467,15 @@ class ConfigurationPage extends Page{
         await this.setEmailValue(data);
         await Sl.testid(data.element.Test_Mail_Button_testid).click();
         await Sl.testid(data.element.Mail_Username_Dialog_testid).setValue(data.value.invalidMailUsername);
+        await Sl.testid(data.element.Mail_Username_Send_Button_testid).click();
+        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+    }
+
+    async validSendMailButtonResponse(data, assert){
+        await this.setMailProvider(data);
+        await this.setEmailCredential(data);
+        await this.setEmailValue(data);
+        await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
