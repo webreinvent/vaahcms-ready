@@ -19,7 +19,8 @@ class ConfigurationPage extends Page{
     }
 
     async clear(element){
-        await Sl.testid(element).doubleClick();
+        await Sl.testid(element).click();
+        await browser.keys(['Control', 'a']);
         await browser.keys('Backspace');
     }
 
@@ -58,7 +59,7 @@ class ConfigurationPage extends Page{
     async setMailProvider(data){
         await Sl.testid(data.element.Mail_Provider_testid).click();
         await Sl.label(data.element.Mail_Provider_Option_MailTrap_label).click();
-        const port = Sl.testid(data.element.Mail_Port_testid);
+        const port = await Sl.testid(data.element.Mail_Port_testid);
         await browser.waitUntil(async function () {
             return (await port.getValue()) === (data.value.mailPort);
         }, {timeout: 5000})

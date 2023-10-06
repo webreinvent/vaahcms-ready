@@ -501,7 +501,7 @@ class Configuration extends Page{
                 ]
             },
             {
-                count: 5,
+                count: 6,
                 name: "End to End",
                 tests: [
                     {
