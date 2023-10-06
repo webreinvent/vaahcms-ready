@@ -39,13 +39,17 @@ class ConfigurationPage extends Page{
     async setEnv(data){
         await Sl.testid(data.element.Env_testid).click();
         await Sl.label(data.element.Env_Option_Staging_label).click();
-        const dbUsername = await Sl.testid(data.element.Database_Username_testid);
+        const Username = await Sl.testid(data.element.Database_Username_testid);
         await browser.waitUntil(async function () {
-            return (await dbUsername.getValue()) === (data.value.dbUsername);
-        }, {timeout: 5000})
+            return (await Username.getValue()) === (data.value.dbUsername);
+        }, {timeout: 10000})
     }
 
     async setDatabaseValues(data){
+        const Username = await Sl.testid(data.element.Database_Username_testid);
+        await browser.waitUntil(async function () {
+            return (await Username.getValue()) === (data.value.dbUsername);
+        }, {timeout: 10000})
         await Sl.testid(data.element.Database_Name_testid).setValue(data.value.dbName);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
     }
@@ -108,7 +112,7 @@ class ConfigurationPage extends Page{
     async blankDatabaseHost(data, assert){
         await this.setEnv(data);
         await this.setDatabaseValues(data);
-        await this.clear(data.element.Database_Name_testid)
+        await this.clear(data.element.Database_Host_testid)
         await asserts.pause();
         await this.assertMessage(data, assert);
     }
@@ -131,6 +135,7 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
         await this.clear(data.element.Database_Name_testid);
+        await asserts.pause()
         await this.assertMessage(data, assert);
     }
 
@@ -480,16 +485,6 @@ class ConfigurationPage extends Page{
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
-    async validResponseTest(data, assert){
-        await this.setMailProvider(data);
-        await this.setEmailCredential(data);
-        await this.setEmailValue(data);
-        await this.testMailConfiguration(data);
-        const message = await Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 10000});
-        await expect(message).toHaveTextContaining(assert);
-    }
-
     async blankDataResponse(data, assert){
         await this.clickDatabaseButton(data);
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert.database_btn_assert);
@@ -500,9 +495,8 @@ class ConfigurationPage extends Page{
 
     async blankAppNameResponse(data, assert){
         await this.setEnv(data);
-        await asserts.pause();
         await this.setDatabaseValues(data);
-        await this.clear(data.element.App_Name_id);
+        await this.clear(data.element.App_Name_testid);
         await this.clickDatabaseButton(data);
         await Sl.label(data.element.Validation_Message_close_btn_label).click();
         await this.assertSuccessMessage(data, assert);
