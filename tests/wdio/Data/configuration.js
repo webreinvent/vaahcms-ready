@@ -62,7 +62,6 @@ class Configuration extends Page{
             Debugger_close_btn_class: 'phpdebugbar-close-btn'
         }
         this.value = {
-            env: 'Custom',
             env_file: 'Test',
             dbName: 'vaahcms',
             dbUsername: 'root',
@@ -75,7 +74,7 @@ class Configuration extends Page{
             from_Name:'TestCases',
             from_Email: 'we@webreinvent.com',
             invalid_dbhost: 'test123',
-            invalid_dbport: 'test',
+            invalid_dbport: 1234,
             invalid_dbname: 'test123',
             invalid_dbusername: 'testing123',
             invalid_password: '123',
@@ -128,7 +127,7 @@ class Configuration extends Page{
             },
             {
                 count: 2,
-                name: 'Validation',
+                name: 'Database Validation',
                 tests: [
                     {
                         count: 1.1,
@@ -152,7 +151,7 @@ class Configuration extends Page{
                         count: 1.4,
                         name: 'Verify the response of Test Database Button with invalid DataBase Port',
                         expect: 'The user should see a validation message regarding the error.',
-                        assert: 'Invalid database port'
+                        assert: 'No connection could be made'
                     },
                     {
                         count: 1.5,
@@ -209,7 +208,7 @@ class Configuration extends Page{
                     {
                         count: 1.5,
                         name: 'Verify if the user can select an option from ENV dropdown menu',
-                        expect: 'The user should be able to select an option from the Debug dropdown menu',
+                        expect: 'The user should be able to select an option from the ENV dropdown menu',
                         assert: 'Staging'
                     },
                     {
@@ -301,7 +300,7 @@ class Configuration extends Page{
             },
             {
                 count: 4,
-                name: 'Mail Section',
+                name: 'Mail Validation',
                 tests: [
                     {
                         count: 1.1,
@@ -400,7 +399,7 @@ class Configuration extends Page{
             },
             {
                 count: 5,
-                name: 'Test Mail Configuration',
+                name: 'Test Mail Configuration Functionality',
                 tests: [
                     {
                         count: 1.1,

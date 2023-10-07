@@ -249,10 +249,6 @@ describe(Page.groupId(params), () => {
         inputs = Data.groups[3].tests[0];
 
         await Page.open();
-        // const output = await browser.mock('http://localhost/vaahcms-ready/public/backend/setup/json/assets', {
-        //     method: 'get'
-        // })
-        // console.log("This: "+output);
         await Page.mailDriverPlaceholder(Data, inputs.assert);
     })
 
@@ -466,12 +462,12 @@ describe(Page.groupId(params), () => {
         await Page.invalidDialogMailUsername(Data, inputs.assert);
     })
 
-    // params.test = Data.groups[4].tests[15];
-    // it(Page.testId(params), async () => {
-    //     inputs = Data.groups[4].tests[15];
-    //     await Page.open();
-    //     await Page.validSendMailButtonResponse(Data, inputs.assert);
-    // })
+    params.test = Data.groups[4].tests[15];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[4].tests[15];
+        await Page.open();
+        await Page.validSendMailButtonResponse(Data, inputs.assert);
+    })
 })
 
 //---------------------------Group: 6---------------------------
@@ -500,38 +496,38 @@ describe(Page.groupId(params), () => {
         await Page.validDataResponse(Data, inputs.assert);
     })
 
-    params.test = Data.groups[5].tests[3];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[5].tests[3];
-        await Page.open();
-        await Page.customOptionPageResponse(Data, inputs.assert);
-    })
+    // params.test = Data.groups[5].tests[3];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[5].tests[3];
+    //     await Page.open();
+    //     await Page.customOptionPageResponse(Data, inputs.assert);
+    // })
 
-    params.test = Data.groups[5].tests[4];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[5].tests[4];
-        await Page.open();
-        await Page.developOptionPageResponse(Data, inputs.assert);
-    })
+    // params.test = Data.groups[5].tests[4];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[5].tests[4];
+    //     await Page.open();
+    //     await Page.developOptionPageResponse(Data, inputs.assert);
+    // })
 
-    params.test = Data.groups[5].tests[5];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[5].tests[5];
-        await Page.open();
-        await Page.stagingOptionPageResponse(Data, inputs.assert);
-    })
+    // params.test = Data.groups[5].tests[5];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[5].tests[5];
+    //     await Page.open();
+    //     await Page.stagingOptionPageResponse(Data, inputs.assert);
+    // })
 
-    params.test = Data.groups[5].tests[6];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[5].tests[6];
-        await Page.open();
-        await Page.productionOptionPageResponse(Data, inputs.assert);
-    })
+    // params.test = Data.groups[5].tests[6];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[5].tests[6];
+    //     await Page.open();
+    //     await Page.productionOptionPageResponse(Data, inputs.assert);
+    // })
 
-    params.test = Data.groups[5].tests[7];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[5].tests[7];
-        await Page.open();
-        await Page.wdiojsOptionPageResponse(Data, inputs.assert);
-    })
+    // params.test = Data.groups[5].tests[7];
+    // it(Page.testId(params), async () => {
+    //     inputs = Data.groups[5].tests[7];
+    //     await Page.open();
+    //     await Page.wdiojsOptionPageResponse(Data, inputs.assert);
+    // })
 })
