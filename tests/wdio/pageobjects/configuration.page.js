@@ -41,15 +41,11 @@ class ConfigurationPage extends Page{
         await Sl.label(data.element.Env_Option_Staging_label).click();
         const Username = await Sl.testid(data.element.Database_Username_testid);
         await browser.waitUntil(async function () {
-            return (await Username.getValue()) === (data.value.dbUsername);
+            return (await Username.getValue()) === (data.value.dbUsername)
         }, {timeout: 10000})
     }
 
     async setDatabaseValues(data){
-        const Username = await Sl.testid(data.element.Database_Username_testid);
-        await browser.waitUntil(async function () {
-            return (await Username.getValue()) === (data.value.dbUsername);
-        }, {timeout: 10000})
         await Sl.testid(data.element.Database_Name_testid).setValue(data.value.dbName);
         await Sl.testid(data.element.Database_Username_testid).setValue(data.value.dbUsername);
     }
@@ -96,12 +92,6 @@ class ConfigurationPage extends Page{
         await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
     }
 
-    async blankSendMailButtonTest(data, assert){
-        await Sl.testid(data.element.Test_Mail_Button_testid).click();
-        await Sl.testid(data.element.Mail_Username_Send_Button_testid).click();
-        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
-    }
-
     async invalidDatabaseHost(data, assert){
         await this.setEnv(data);
         await this.setDatabaseValues(data);
@@ -127,6 +117,7 @@ class ConfigurationPage extends Page{
     async invalidDatabasePort(data, assert){
         await this.setEnv(data);
         await this.setDatabaseValues(data);
+        await this.clear(data.element.Database_Port_testid);
         await Sl.testid(data.element.Database_Port_testid).setValue(data.value.invalid_dbport);
         await this.assertMessage(data, assert);
     }
