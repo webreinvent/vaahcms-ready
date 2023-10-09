@@ -10,7 +10,7 @@ class Setup extends Page{
             }
         }
         this.element = {
-            install_button: '[data-testid="setup-install_vaahcms"]'
+            install_button_testid: 'setup-install_vaahcms'
         }
         this.params.page = {
             id: "SP",
