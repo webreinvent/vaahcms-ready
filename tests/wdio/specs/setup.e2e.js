@@ -1,5 +1,5 @@
 const Page = require('../pageobjects/Setup.page')
-const Data = require('../Data/Setup')
+const Data = require('../data/Setup')
 const assert = require('../vaah-webdriverio/Assert')
 
 let params = Data.params;
