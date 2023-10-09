@@ -43,4 +43,3 @@ describe(Page.groupId(params), () => {
 
     })
 })
-
