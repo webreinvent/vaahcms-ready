@@ -109,17 +109,17 @@ class Configuration extends Page{
                     },
                     {
                         count: 1.3,
-                        name: 'Verify the if the Test Database Connection Button exists or not',
+                        name: 'Verify if the Test Database Connection Button exists or not',
                         expect: 'The Test Database Connection button should exist on the page',
                     },
                     {
                         count: 1.4,
-                        name: 'Verify the if the Test Mail Configuration Button exists or not',
+                        name: 'Verify if the Test Mail Configuration Button exists or not',
                         expect: 'The Test Mail Configuration button should exist on the page',
                     },
                     {
                         count: 1.5,
-                        name: 'Verify the if the Save & Next Button exists or not',
+                        name: 'Verify if the Save & Next Button exists or not',
                         expect: 'The Save & Next button should exist on the page',
                     }
                 ]
@@ -130,49 +130,49 @@ class Configuration extends Page{
                 tests: [
                     {
                         count: 1.1,
-                        name: 'Verify the response of Test Database Button with invalid DataBase Host',
+                        name: 'Verify the response of Test Database Button with invalid Database Host',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'No such host is known'
                     },
                     {
                         count: 1.2,
-                        name: 'Verify the response of Test Database Button with blank DataBase Host',
+                        name: 'Verify the response of Test Database Button with blank Database Host',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database host'
                     },
                     {
                         count: 1.3,
-                        name: 'Verify the response of Test Database Button with blank DataBase Port',
+                        name: 'Verify the response of Test Database Button with blank Database Port',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database port'
                     },
                     {
                         count: 1.4,
-                        name: 'Verify the response of Test Database Button with invalid DataBase Port',
+                        name: 'Verify the response of Test Database Button with invalid Database Port',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'No connection could be made'
                     },
                     {
                         count: 1.5,
-                        name: 'Verify the response of Test Database Button with blank DataBase Name',
+                        name: 'Verify the response of Test Database Button with blank Database Name',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'Enter database name'
                     },
                     {
                         count: 1.6,
-                        name: 'Verify the response of Test Database Button with invalid DataBase Name',
+                        name: 'Verify the response of Test Database Button with invalid Database Name',
                         expect: 'The user should see a validation message regarding the error.',
                         assert: 'Unknown database'
                     },
                     {
                         count: 1.7,
-                        name: 'Verify the response of Test Database Button with blank DataBase Username',
+                        name: 'Verify the response of Test Database Button with blank Database Username',
                         expect: 'The user should see an validation message regarding the error.',
                         assert: 'Enter database username'
                     },
                     {
                         count: 1.8,
-                        name: 'Verify the response of Test Database Button with invalid DataBase Username',
+                        name: 'Verify the response of Test Database Button with invalid Database Username',
                         expect: 'The user should see an validation message regarding the error.',
                         assert: 'Access denied for user'
                     },
