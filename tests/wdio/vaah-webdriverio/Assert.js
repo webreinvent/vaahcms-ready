@@ -6,11 +6,13 @@ const params = envObj.getParams();
 
 class Assert{
 
-    async pause()
+    async pause(seconds = null)
     {
-        if(params.is_human)
-        {
-            await browser.pause(params.is_human_pause);
+        if(seconds === null) {
+            seconds = params.is_human_pause;
+        }
+        if(params.is_human) {
+            await browser.pause(seconds);
         }
     }
 
