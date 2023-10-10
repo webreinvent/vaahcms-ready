@@ -7,6 +7,8 @@ let inputs;
 
 params.group = Data.groups[0];
 
+//-----------------------------------------Group: 1-----------------------------------------
+
 describe(Page.groupId(params), () => {
 
     params.test = Data.groups[0].tests[0];
@@ -57,8 +59,13 @@ describe(Page.groupId(params), () => {
         await Page.open();
         await Page.saveButtonAvailability(Data);
     })
+})
 
-    params.group = Data.groups[1];
+//-----------------------------------------Group: 2-----------------------------------------
+
+params.group = Data.groups[0];
+describe(Page.groupId(params), () => {
+
     params.test = Data.groups[1].tests[0];
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[0];
@@ -114,8 +121,13 @@ describe(Page.groupId(params), () => {
         await Page.open();
         await Page.saveButtonFunctionality(Data, inputs.assert);
     })
+})
 
-    params.group = Data.groups[2];
+//-----------------------------------------Group: 2-----------------------------------------
+
+params.group = Data.groups[2];
+describe(Page.groupId(params), () => {
+
     params.test = Data.groups[2].tests[0];
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[0];

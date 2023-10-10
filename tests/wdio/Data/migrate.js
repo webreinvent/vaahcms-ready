@@ -21,7 +21,7 @@ class Migrate extends Page {
             close_button_testid: 'migrate-message_close_btn',
             migration_close_button_testid: 'migrate-confirmation_close_btn',
             migration_confirmation_message_testid: 'migrate-confirmation_message',
-            Validation_Message_class: 'p-toast-detail'
+            validation_message_class: 'p-toast-detail'
         }
         this.params.page = {
             id: "MG",

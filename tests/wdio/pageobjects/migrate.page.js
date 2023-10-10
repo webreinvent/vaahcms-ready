@@ -1,6 +1,7 @@
 const Page = require('../vaah-webdriverio/Page');
 const Sl = require('../vaah-webdriverio/Selector');
 const asserts = require('../vaah-webdriverio/Assert');
+const helper = require('../vaah-webdriverio/Helper');
 
 class MigratePage extends Page{
     constructor() {
@@ -16,6 +17,14 @@ class MigratePage extends Page{
         await browser.maximizeWindow();
         await asserts.pause();
         await super.open(this.params.page.url);
+    }
+
+    async waitExist(element){
+        await element.waitForExist({timeout: helper.long_pause});
+    }
+
+    async waitDisplayed(element){
+        await element.waitForDisplayed({timeout: helper.long_pause, interval: helper.small_pause});
     }
 
     async envFileVisibility(data){
@@ -67,11 +76,11 @@ class MigratePage extends Page{
     }
 
     async proceedButtonFunctionality(data, assert){
-        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
+        await this.waitDisplayed(Sl.testid(data.element.env_file_testid))
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
-        const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 30000});
+        const message = Sl.class(data.element.validation_message_class);
+        await this.waitExist(message);
         await expect(message).toHaveTextContaining(assert);
     }
 
@@ -82,11 +91,10 @@ class MigratePage extends Page{
 
     async saveButtonFunctionality(data, assert){
         await browser.refresh();
-        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
+        await this.waitDisplayed(Sl.testid(data.element.env_file_testid))
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
-        const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 30000});
+        await this.waitExist(Sl.class(data.element.validation_message_class));
         await Sl.testid(data.element.save_button_testid).click();
         await asserts.pause();
         await asserts.pageUrl(assert);
@@ -95,15 +103,14 @@ class MigratePage extends Page{
     async invalidSaveButtonResponse(data, assert){
         await browser.refresh();
         await Sl.testid(data.element.save_button_testid).click();
-        await expect(Sl.class(data.element.Validation_Message_class)).toHaveTextContaining(assert);
+        await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
 
     async validSaveButtonResponse(data, assert){
-        await Sl.testid(data.element.env_file_testid).waitForDisplayed({timeout: 20000, interval: 2000});
+        await this.waitDisplayed(Sl.testid(data.element.env_file_testid))
         await Sl.testid(data.element.migration_button_testid).click();
         await Sl.testid(data.element.proceed_button_testid).click();
-        const message = Sl.class(data.element.Validation_Message_class);
-        await message.waitForExist({timeout: 30000});
+        await this.waitExist(Sl.class(data.element.validation_message_class));
         await Sl.testid(data.element.save_button_testid).click();
         await asserts.pageUrl(assert);
     }
