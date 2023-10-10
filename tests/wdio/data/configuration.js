@@ -403,97 +403,97 @@ class Configuration extends Page{
                     {
                         count: 1.1,
                         name: 'Verify the functionality of Send Email button in Test Mail Configuration window when mandatory fields are blank',
-                        expect: 'The user should see the error message with the list of mandatory fields',
+                        expect: 'The user should see an error message with the list of mandatory fields',
                         assert: 'The mail driver field is required.'
                     },
                     {
                         count: 1.2,
                         name: 'Verify the response of Send Email button for blank Mail Driver',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail driver field is required'
                     },
                     {
                         count: 1.3,
                         name: 'Verify the response of Send Email button for invalid Mail Driver',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'Unsupported mail transport'
                     },
                     {
                         count: 1.4,
                         name: 'Verify the response of Send Email button for blank Mail Host',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail host field is required'
                     },
                     {
                         count: 1.5,
                         name: 'Verify the response of Send Email button for invalid Mail Host',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'No such host is known'
                     },
                     {
                         count: 1.6,
                         name: 'Verify the response of Send Email button for blank Mail Port',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail port field is required'
                     },
                     {
                         count: 1.7,
                         name: 'Verify the response of Send Email button for invalid Mail Port',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'Something went wrong'
                     },
                     {
                         count: 1.8,
                         name: 'Verify the response of Send Email button for blank Mail Username',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail username field is required'
                     },
                     {
                         count: 1.9,
                         name: 'Verify the response of Send Email button for invalid Mail Username',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'Failed to authenticate'
                     },
                     {
                         count: 2.1,
                         name: 'Verify the response of Send Email button for blank Mail Password',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail password field is required.'
                     },
                     {
                         count: 2.2,
                         name: 'Verify the response of Send Email button for invalid Mail Password',
-                        expect: 'The user should see the error message regarding the same',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'Failed to authenticate'
                     },
                     {
                         count: 2.3,
-                        name: 'Verify the response of Send Email button for blank From Name field',
-                        expect: 'The user should see the error message regarding the same',
+                        name: 'Verify the response of Send Email button for blank From Name',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail from name field is required'
                     },
                     {
                         count: 2.4,
-                        name: 'Verify the response of Send Email button for blank From Email field',
-                        expect: 'The user should see the error message regarding the same',
+                        name: 'Verify the response of Send Email button for blank From Email',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'The mail from address field is required'
                     },
                     {
                         count: 2.5,
-                        name: 'Verify the response of Send Email button for invalid From Email field',
-                        expect: 'The user should see the error message regarding the same',
+                        name: 'Verify the response of Send Email button for invalid From Email data',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'does not comply with addr-spec'
                     },
                     {
                         count: 2.6,
-                        name: 'Verify the response of Send Email button for invalid Mail Username field of Test Mail Configuration window',
-                        expect: 'The user should see the error message regarding the same',
+                        name: 'Verify the response of Send Email button for invalid Mail Username of Test Mail Configuration window',
+                        expect: 'The user should see an error message regarding the same',
                         assert: 'does not comply with addr-spec'
                     },
                     {
                         count: 2.7,
                         name: 'Verify the functionality of Send Email button in Test Mail Configuration window when valid details are filled',
-                        expect: 'The user should see success message regarding the send email',
+                        expect: 'The user should see a success message regarding the send email',
                         assert: 'Test email successfully sent'
                     },
                 ]
@@ -513,7 +513,7 @@ class Configuration extends Page{
                     },
                     {
                         count: 1.2,
-                        name: 'Verify if the user can proceed or not if the App Name fields blank',
+                        name: 'Verify if the user can proceed or not if the App Name fields is blank',
                         expect: 'The user should not be able to proceed if App Name field is blank',
                         assert: 'The app name field is required'
                     },
