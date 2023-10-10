@@ -32,7 +32,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './tests/wdio/specs/configuration.e2e.js'
+        './tests/wdio/specs/setup.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
