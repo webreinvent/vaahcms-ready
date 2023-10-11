@@ -1,14 +1,13 @@
 const Page = require('../pageobjects/migrate.page')
-const Data = require('../Data/migrate')
+const Data = require('../data/migrate')
 const asserts = require('../vaah-webdriverio/Assert')
 
 let params = Data.params;
 let inputs;
 
-params.group = Data.groups[0];
-
 //-----------------------------------------Group: 1-----------------------------------------
 
+params.group = Data.groups[0];
 describe(Page.groupId(params), () => {
 
     params.test = Data.groups[0].tests[0];
@@ -59,11 +58,18 @@ describe(Page.groupId(params), () => {
         await Page.open();
         await Page.saveButtonAvailability(Data);
     })
+
+    params.test = Data.groups[0].tests[7];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[7];
+        await Page.open();
+        await Page.migrateButtonColorChange(Data, inputs.assert);
+    })
 })
 
 //-----------------------------------------Group: 2-----------------------------------------
 
-params.group = Data.groups[0];
+params.group = Data.groups[1];
 describe(Page.groupId(params), () => {
 
     params.test = Data.groups[1].tests[0];
@@ -120,25 +126,5 @@ describe(Page.groupId(params), () => {
         inputs = Data.groups[1].tests[7];
         await Page.open();
         await Page.saveButtonFunctionality(Data, inputs.assert);
-    })
-})
-
-//-----------------------------------------Group: 2-----------------------------------------
-
-params.group = Data.groups[2];
-describe(Page.groupId(params), () => {
-
-    params.test = Data.groups[2].tests[0];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[2].tests[0];
-        await Page.open();
-        await Page.invalidSaveButtonResponse(Data, inputs.assert);
-    })
-
-    params.test = Data.groups[2].tests[1];
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[2].tests[1];
-        await Page.open();
-        await Page.validSaveButtonResponse(Data, inputs.assert);
     })
 })

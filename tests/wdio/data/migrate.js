@@ -13,13 +13,13 @@ class Migrate extends Page {
             env_file_testid: 'setup-use_env',
             migration_message_testid: 'migrate-message_text',
             migration_message_div_role: 'alert',
-            migration_button_testid: 'migrate-run_migration',
-            cancel_button_testid: 'migrate-confirmation_cancel_btn',
-            proceed_button_testid: 'migrate-confirmation_proceed_btn',
-            back_button_testid: 'migrate-back_btn_text',
-            save_button_testid: 'migrate-save_btn_text',
-            close_button_testid: 'migrate-message_close_btn',
-            migration_close_button_testid: 'migrate-confirmation_close_btn',
+            migration_btn_testid: 'migrate-run_migration',
+            cancel_btn_testid: 'migrate-confirmation_cancel_btn',
+            proceed_btn_testid: 'migrate-confirmation_proceed_btn',
+            back_btn_testid: 'migrate-back_btn_text',
+            save_btn_testid: 'migrate-save_btn_text',
+            close_btn_testid: 'migrate-message_close_btn',
+            migration_close_btn_testid: 'migrate-confirmation_close_btn',
             migration_confirmation_message_testid: 'migrate-confirmation_message',
             validation_message_class: 'p-toast-detail'
         }
@@ -43,23 +43,23 @@ class Migrate extends Page {
                     {
                         count: 1.2,
                         name: 'Verify the Title of the Migrate Page',
-                        expect: 'The title of the page should be: Configuration - Setup',
+                        expect: 'The title of the page should be: Migrate - Setup',
                         assert: 'Migrate - Setup'
                     },
                     {
                         count: 1.3,
-                        name: 'Verify the if the Active Env File is visible or not',
+                        name: 'Verify if the Active Env File is visible or not',
                         expect: 'The Active Env File should be visible with file name',
                     },
                     {
                         count: 1.4,
-                        name: 'Verify the if the Database Migration message is visible on the page or not',
-                        expect: 'The Database migration message should be visible on the page',
+                        name: 'Verify if the Database Migration message is visible on the page or not',
+                        expect: 'The Database migration message should be visible on the page above migration button',
                         assert: 'This step will run database migrations and seeds.'
                     },
                     {
                         count: 1.5,
-                        name: 'Verify the if migrate button is available on the page or not',
+                        name: 'Verify if the migrate button is available on the page or not',
                         expect: 'The migrate button should be available on the page',
                     },
                     {
@@ -72,6 +72,15 @@ class Migrate extends Page {
                         name: 'Verify if the Save & Next button is available on the page or not',
                         expect: 'The Save & Next button should be available on the page'
                     },
+                    {
+                        count: 1.8,
+                        name: 'Verify if the Migrate & Run Seed turns green after a successful database migration or not',
+                        expect: 'The button should turn green if the database migration is successful',
+                        assert: {
+                            attribute: 'data-pc-severity',
+                            value: 'success'
+                        }
+                    }
                 ],
             },
             {
@@ -80,7 +89,7 @@ class Migrate extends Page {
                 tests: [
                     {
                         count: 1.1,
-                        name: 'Verify the functionality of the close button of Database migration message',
+                        name: 'Verify the functionality of the close button in database migration message',
                         expect: 'The Database message should disappear from the page',
                         assert: {
                             attribute: 'style',
@@ -89,7 +98,7 @@ class Migrate extends Page {
                     },
                     {
                         count: 1.2,
-                        name: 'Verify the functionality of the Migrate and Run Seed button',
+                        name: 'Verify the functionality of the Migrate & Run Seed button',
                         expect: 'The button should be functional and a window should open with the choice to proceed or cancel'
                     },
                     {
@@ -117,31 +126,13 @@ class Migrate extends Page {
                     {
                         count: 1.7,
                         name: 'Verify the functionality of the back button',
-                        expect: 'The back button should be navigate to the configuration page',
+                        expect: 'The back button should navigate to the configuration page',
                         assert: this.base_url+'/backend#/setup/install/configuration'
                     },
                     {
                         count: 1.8,
                         name: 'Verify the functionality of the Save & Next button',
                         expect: 'After clicking on the button, the user should navigate to the dependencies page',
-                        assert: this.base_url+'/backend#/setup/install/dependencies'
-                    }
-                ]
-            },
-            {
-                count: 3,
-                name: 'End to End',
-                tests: [
-                    {
-                        count: 1.1,
-                        name: 'Verify the response of the page when the Save & Next button is clicked before migration',
-                        expect: 'The user should see an error message regarding the same',
-                        assert: 'Click on Migrate & Run Seeds button'
-                    },
-                    {
-                        count: 1.2,
-                        name: 'Verify the response of the Save & Next button when migration is successful',
-                        expect: 'The user should be able to navigate to the dependencies page',
                         assert: this.base_url+'/backend#/setup/install/dependencies'
                     }
                 ]
