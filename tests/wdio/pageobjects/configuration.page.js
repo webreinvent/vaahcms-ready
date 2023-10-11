@@ -52,7 +52,7 @@ class ConfigurationPage extends Page{
 
     async waitForFilled(data){
         console.log("File: "+env_file_name);
-        if(env_file_name!='.env' && env_file_name!=null){
+        if(env_file_name!='.env'){
             const element = await Sl.testid(data.element.db_username_testid);
             const value = data.value.db_username;
             await this.wait(element, value);
