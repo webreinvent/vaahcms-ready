@@ -3,6 +3,8 @@ const Sl = require('../vaah-webdriverio/Selector');
 const asserts = require('../vaah-webdriverio/Assert')
 const helper = require('../vaah-webdriverio/Helper')
 
+let env_file_name = '';
+
 class ConfigurationPage extends Page{
     constructor() {
         super();
@@ -19,28 +21,52 @@ class ConfigurationPage extends Page{
         await super.open(this.params.page.url);
     }
 
+    async getEnvFile(){
+        await fetch("http://localhost/vaahcms-ready/public/backend/setup/json/assets")
+            .then((response) => response.json())
+            .then( async (api) => {
+                env_file_name = api.data.env_file;
+            })
+    }
+
     async assertTestDatabaseButton(data){
+        await asserts.pause();
         await expect(Sl.testid(data.element.db_connection_btn_testid)).toExist();
     }
 
     async assertTestMailButton(data){
+        await asserts.pause();
         await expect(Sl.testid(data.element.test_mail_btn_testid)).toExist();
     }
 
     async assertTestSaveButton(data){
+        await asserts.pause();
         await expect(Sl.testid(data.element.save_btn_testid)).toExist();
     }
 
     async setEnv(data){
         await Sl.testid(data.element.env_testid).click();
         await Sl.label(data.element.env_option_staging_label).click();
-        const Username = await Sl.testid(data.element.db_username_testid);
+        await this.waitForFilled(data);
+    }
+
+    async waitForFilled(data){
+        console.log("File: "+env_file_name);
+        if(env_file_name!='.env' && env_file_name!=null){
+            const element = await Sl.testid(data.element.db_username_testid);
+            const value = data.value.db_username;
+            await this.wait(element, value);
+        }
+    }
+
+    async wait(element, value){
         await browser.waitUntil(async function () {
-            return (await Username.getValue()) === (data.value.db_username)
+            return (await element.getValue()) === (value);
         }, {timeout: helper.long_pause})
     }
 
     async setDatabaseValues(data){
+        await asserts.pause();
         await Sl.testid(data.element.db_name_testid).setValue(data.value.db_name);
         await Sl.testid(data.element.db_username_testid).setValue(data.value.db_username);
     }
@@ -48,38 +74,44 @@ class ConfigurationPage extends Page{
     async setEmailValue(data){
         await Sl.testid(data.element.from_name_testid).setValue(data.value.from_name);
         await Sl.testid(data.element.from_email_testid).setValue(data.value.from_email);
+        await asserts.pause();
     }
 
     async setMailProvider(data){
         await Sl.testid(data.element.mail_provider_testid).click();
         await Sl.label(data.element.mail_provider_option_mailtrap_label).click();
         const port = await Sl.testid(data.element.mail_port_testid);
-        await browser.waitUntil(async function () {
-            return (await port.getValue()) === (data.value.mail_port);
-        }, {timeout: helper.long_pause})
+        const value = data.value.mail_port;
+        await this.wait(port, value);
+        await asserts.pause();
     }
 
     async setEmailCredential(data){
         await Sl.testid(data.element.mail_username_testid).setValue(data.value.mail_username);
         await Sl.testid(data.element.mail_password_testid).setValue(data.value.mail_password);
+        await asserts.pause();
     }
 
     async clickDatabaseButton(data){
+        await asserts.pause();
         await Sl.testid(data.element.db_connection_btn_testid).click();
     }
 
     async testMailConfiguration(data){
+        await asserts.pause();
         await Sl.testid(data.element.test_mail_btn_testid).click();
         await Sl.testid(data.element.mail_username_dialog_testid).setValue(data.value.from_email);
         await Sl.testid(data.element.mail_username_send_btn_testid).click();
     }
 
     async assertMessage(data, assert){
+        await asserts.pause();
         await this.clickDatabaseButton(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
 
     async assertSuccessMessage(data, assert){
+        await asserts.pause();
         await Sl.testid(data.element.save_btn_testid).click();
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -88,6 +120,7 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await Sl.testid(data.element.db_host_testid).setValue(data.value.invalid_db_host);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -103,6 +136,7 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await helper.VueClear(data.element.db_port_testid);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -110,7 +144,9 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await helper.VueClear(data.element.db_port_testid);
+        await asserts.pause();
         await Sl.testid(data.element.db_port_testid).setValue(data.value.invalid_db_port);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -124,8 +160,10 @@ class ConfigurationPage extends Page{
 
     async invalidDatabaseName(data, assert){
         await this.setEnv(data);
+        await asserts.pause();
         await Sl.testid(data.element.db_name_testid).setValue(data.value.invalid_db_name);
         await Sl.testid(data.element.db_username_testid).setValue(data.value.db_username);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -133,6 +171,7 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await helper.VueClear(data.element.db_username_testid);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -140,71 +179,84 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.db_name_testid).setValue(data.value.db_name);
         await Sl.testid(data.element.db_username_testid).setValue(data.value.invalid_db_username);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
     async databaseButtonBlankTest(data, assert){
         await this.setEnv(data);
         await helper.VueClear(data.element.db_name_testid);
+        await asserts.pause();
         await helper.VueClear(data.element.db_username_testid);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
     async databaseButtonValidTest(data, assert){
         await this.setEnv(data);
         await this.setDatabaseValues(data);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
     async testMailButtonFunctionality(data){
         await Sl.testid(data.element.test_mail_btn_testid).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_username_dialog_testid)).toExist();
     }
 
     async mailUsernameCloseButton(data){
         await Sl.testid(data.element.test_mail_btn_testid).click();
         await Sl.testid(data.element.mail_username_close_btn_testid).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_username_dialog_testid)).not.toExist();
     }
 
     async envDropdownTest(data, assert){
         await this.setEnv(data);
+        await asserts.pause();
         await expect(Sl.testid(data.element.env_testid)).toHaveTextContaining(assert);
     }
 
     async debugDropdownTest(data, assert){
         await Sl.testid(data.element.debug_testid).click();
         await Sl.label(data.element.debug_option_false_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.debug_testid)).toHaveTextContaining(assert);
     }
 
     async timezoneDropdownTest(data, assert){
         await Sl.testid(data.element.timezone_testid).click();
         await Sl.label(data.element.timezone_option_paris_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.timezone_testid)).toHaveTextContaining(assert);
     }
 
     async databaseTypeDropdownTest(data, assert){
         await Sl.testid(data.element.db_type_testid).click();
         await Sl.label(data.element.db_type_option_sqlite_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.db_type_testid)).toHaveTextContaining(assert);
     }
 
     async mailProviderDropdownTest(data, assert){
         await Sl.testid(data.element.mail_provider_testid).click();
         await Sl.label(data.element.mail_provider_option_gmail_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_provider_testid)).toHaveTextContaining(assert);
     }
 
     async mailEncryptionDropdownText(data, assert){
         await Sl.testid(data.element.mail_encryption_testid).click();
         await Sl.label(data.element.mail_encryption_ssl_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_encryption_testid)).toHaveTextContaining(assert);
     }
 
     async customTextbox(data, assert){
         await Sl.testid(data.element.env_testid).click();
         await Sl.label(data.element.env_option_custom_label).click();
+        await asserts.pause();
         await expect(Sl.testid(assert)).toExist();
     }
 
@@ -212,6 +264,7 @@ class ConfigurationPage extends Page{
         await Sl.testid(data.element.env_testid).click();
         await Sl.label(data.element.env_option_custom_label).click();
         await Sl.testid(data.element.env_file_name_testid).setValue(data.value.env_file);
+        await asserts.pause();
         await expect(Sl.testid(data.element.env_file_name_testid)).toHaveValueContaining(assert);
     }
 
@@ -219,7 +272,9 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
         await Sl.label(data.element.db_type_option_mysql_label).click();
+        await asserts.pause();
         await this.setDatabaseValues(data);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -227,7 +282,9 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
         await Sl.label(data.element.db_type_option_postgresql_label).click();
+        await asserts.pause();
         await this.setDatabaseValues(data);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -235,7 +292,9 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
         await Sl.label(data.element.db_type_option_sqlite_label).click();
+        await asserts.pause();
         await this.setDatabaseValues(data);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
@@ -243,92 +302,112 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
         await Sl.label(data.element.db_type_option_sql_server_label).click();
+        await asserts.pause();
         await this.setDatabaseValues(data);
+        await asserts.pause();
         await this.assertMessage(data, assert);
     }
 
     async databasePasswordEyeIconFunctionality(data, assert){
         await Sl.testid(data.element.db_password_testid).setValue(data.value.db_password);
         await Sl.testid(data.element.db_password_eye_btn_testid).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.db_password_testid)).toHaveAttribute(assert.attribute,assert.value);
     }
 
     async mailPasswordEyeIconFunctionality(data, assert){
         await Sl.testid(data.element.mail_password_testid).setValue(data.value.mail_password);
         await Sl.testid(data.element.mail_password_eye_btn_testid).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_password_testid)).toHaveAttribute(assert.attribute,assert.value);
     }
 
     async mailDriverPlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_driver_testid)).toHaveAttribute(assert);
     }
 
     async mailDriverTypeFunctionality(data, assert){
         await Sl.testid(data.element.mail_driver_testid).setValue(data.value.mail_driver);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_driver_testid)).toHaveValueContaining(assert);
     }
 
     async mailHostPlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_host_testid)).toHaveAttribute(assert);
     }
 
     async mailHostTypeFunctionality(data, assert){
         await Sl.testid(data.element.mail_host_testid).setValue(data.value.mail_host);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_host_testid)).toHaveValueContaining(assert);
     }
 
     async mailPortPlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_port_testid)).toHaveAttribute(assert);
     }
 
     async mailPortTypeFunctionality(data, assert){
         await Sl.testid(data.element.mail_port_testid).setValue(data.value.mail_port);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_port_testid)).toHaveValueContaining(assert);
     }
 
     async mailUsernamePlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_username_testid)).toHaveAttribute(assert);
     }
 
     async mailUsernameTypeFunctionality(data, assert){
         await Sl.testid(data.element.mail_username_testid).setValue(data.value.mail_username);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_username_testid)).toHaveValueContaining(assert);
     }
 
     async mailPasswordPlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_password_testid)).toHaveAttribute(assert);
     }
 
     async mailPasswordTypeFunctionality(data, assert){
         await Sl.testid(data.element.mail_password_testid).setValue(data.value.mail_password);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_password_testid)).toHaveValueContaining(assert);
     }
 
     async mailPasswordHidden(data, assert){
         await Sl.testid(data.element.mail_password_testid).setValue(data.value.mail_password);
+        await asserts.pause();
         await expect(Sl.testid(data.element.mail_password_testid)).toHaveAttribute(assert.attribute, assert.value);
     }
 
     async fromNamePlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.from_name_testid)).toHaveAttribute(assert);
     }
 
     async fromNameTypeFunctionality(data, assert){
         await Sl.testid(data.element.from_name_testid).setValue(data.value.from_name);
+        await asserts.pause();
         await expect(Sl.testid(data.element.from_name_testid)).toHaveValueContaining(assert);
     }
 
     async fromEmailPlaceholder(data, assert){
+        await asserts.pause();
         await expect(Sl.testid(data.element.from_email_testid)).toHaveAttribute(assert);
     }
 
     async fromEmailTypeFunctionality(data, assert){
         await Sl.testid(data.element.from_email_testid).setValue(data.value.from_email);
+        await asserts.pause();
         await expect(Sl.testid(data.element.from_email_testid)).toHaveValueContaining(assert);
     }
 
     async blankSendMailButtonResponse(data, assert){
         await Sl.testid(data.element.test_mail_btn_testid).click();
+        await asserts.pause();
         await Sl.testid(data.element.mail_username_send_btn_testid).click();
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -337,6 +416,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await helper.VueClear(data.element.mail_driver_testid);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -346,6 +426,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await Sl.testid(data.element.mail_driver_testid).setValue(data.value.invalid_mail_driver);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -355,6 +436,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await helper.VueClear(data.element.mail_host_testid);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -364,6 +446,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await Sl.testid(data.element.mail_host_testid).setValue(data.value.invalid_mail_host);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -373,6 +456,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await helper.VueClear(data.element.mail_port_testid);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -382,6 +466,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await Sl.testid(data.element.mail_port_testid).setValue(data.value.invalid_mail_port);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -391,6 +476,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await helper.VueClear(data.element.mail_username_testid);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -400,6 +486,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await Sl.testid(data.element.mail_username_testid).setValue(data.value.invalid_mail_username);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -409,6 +496,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await helper.VueClear(data.element.mail_password_testid);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -418,6 +506,7 @@ class ConfigurationPage extends Page{
         await this.setMailProvider(data);
         await this.setEmailCredential(data);
         await Sl.testid(data.element.mail_password_testid).setValue(data.value.invalid_mail_password);
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
@@ -428,6 +517,7 @@ class ConfigurationPage extends Page{
         await this.setEmailCredential(data);
         await this.setEmailValue(data);
         await helper.VueClear(data.element.from_name_testid);
+        await asserts.pause();
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -437,6 +527,7 @@ class ConfigurationPage extends Page{
         await this.setEmailCredential(data);
         await this.setEmailValue(data);
         await helper.VueClear(data.element.from_email_testid);
+        await asserts.pause();
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -446,6 +537,7 @@ class ConfigurationPage extends Page{
         await this.setEmailCredential(data);
         await this.setEmailValue(data);
         await Sl.testid(data.element.from_email_testid).setValue(data.value.invalid_from_email);
+        await asserts.pause();
         await this.testMailConfiguration(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -456,6 +548,7 @@ class ConfigurationPage extends Page{
         await this.setEmailValue(data);
         await Sl.testid(data.element.test_mail_btn_testid).click();
         await Sl.testid(data.element.mail_username_dialog_testid).setValue(data.value.invalid_mail_username);
+        await asserts.pause();
         await Sl.testid(data.element.mail_username_send_btn_testid).click();
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert);
     }
@@ -472,6 +565,7 @@ class ConfigurationPage extends Page{
         await this.clickDatabaseButton(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert.database_btn_assert);
         await Sl.label(data.element.validation_message_close_btn_label).click();
+        await asserts.pause();
         await expect(Sl.testid(data.element.save_btn_testid)).toHaveAttribute(assert.save_btn_assert);
     }
 
@@ -479,8 +573,10 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await helper.VueClear(data.element.app_name_testid);
+        await asserts.pause();
         await this.clickDatabaseButton(data);
         await Sl.label(data.element.validation_message_close_btn_label).click();
+        await asserts.pause();
         await this.assertSuccessMessage(data, assert);
     }
 
@@ -489,6 +585,7 @@ class ConfigurationPage extends Page{
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
         await Sl.label(data.element.validation_message_close_btn_label).click();
+        await asserts.pause();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
@@ -497,6 +594,7 @@ class ConfigurationPage extends Page{
         await Sl.testid(data.element.env_testid).click();
         await Sl.label(data.element.env_option_custom_label).click();
         await Sl.testid(data.element.env_file_name_testid).setValue(data.value.env_file);
+        await asserts.pause();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
         await Sl.label(data.element.validation_message_close_btn_label).click();

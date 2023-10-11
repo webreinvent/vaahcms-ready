@@ -4,6 +4,7 @@ const asserts = require('../vaah-webdriverio/Assert')
 
 let params = Data.params;
 let inputs;
+Page.getEnvFile();
 
 //---------------------------Group: 1---------------------------
 
