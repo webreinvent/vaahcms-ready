@@ -3,7 +3,7 @@ const Sl = require('../vaah-webdriverio/Selector');
 const asserts = require('../vaah-webdriverio/Assert')
 const helper = require('../vaah-webdriverio/Helper')
 
-let env_file_name = '';
+let env_file_name = null;
 
 class ConfigurationPage extends Page{
     constructor() {
@@ -22,7 +22,7 @@ class ConfigurationPage extends Page{
     }
 
     async getEnvFile(){
-        await fetch("http://localhost/vaahcms-ready/public/backend/setup/json/assets")
+        await fetch(this.base_url+"/backend/setup/json/assets")
             .then((response) => response.json())
             .then( async (api) => {
                 env_file_name = api.data.env_file;
@@ -46,13 +46,13 @@ class ConfigurationPage extends Page{
 
     async setEnv(data){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_staging_label).click();
+        await Sl.arialabel(data.element.env_option_staging_label).click();
         await this.waitForFilled(data);
     }
 
     async waitForFilled(data){
         console.log("File: "+env_file_name);
-        if(env_file_name!='.env'){
+        if(env_file_name === '.env.staging'){
             const element = await Sl.testid(data.element.db_username_testid);
             const value = data.value.db_username;
             await this.wait(element, value);
@@ -62,7 +62,7 @@ class ConfigurationPage extends Page{
     async wait(element, value){
         await browser.waitUntil(async function () {
             return (await element.getValue()) === (value);
-        }, {timeout: helper.long_pause})
+        }, {timeout: this.long_pause})
     }
 
     async setDatabaseValues(data){
@@ -79,7 +79,7 @@ class ConfigurationPage extends Page{
 
     async setMailProvider(data){
         await Sl.testid(data.element.mail_provider_testid).click();
-        await Sl.label(data.element.mail_provider_option_mailtrap_label).click();
+        await Sl.arialabel(data.element.mail_provider_option_mailtrap_label).click();
         const port = await Sl.testid(data.element.mail_port_testid);
         const value = data.value.mail_port;
         await this.wait(port, value);
@@ -220,49 +220,49 @@ class ConfigurationPage extends Page{
 
     async debugDropdownTest(data, assert){
         await Sl.testid(data.element.debug_testid).click();
-        await Sl.label(data.element.debug_option_false_label).click();
+        await Sl.arialabel(data.element.debug_option_false_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.debug_testid)).toHaveTextContaining(assert);
     }
 
     async timezoneDropdownTest(data, assert){
         await Sl.testid(data.element.timezone_testid).click();
-        await Sl.label(data.element.timezone_option_paris_label).click();
+        await Sl.arialabel(data.element.timezone_option_paris_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.timezone_testid)).toHaveTextContaining(assert);
     }
 
     async databaseTypeDropdownTest(data, assert){
         await Sl.testid(data.element.db_type_testid).click();
-        await Sl.label(data.element.db_type_option_sqlite_label).click();
+        await Sl.arialabel(data.element.db_type_option_sqlite_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.db_type_testid)).toHaveTextContaining(assert);
     }
 
     async mailProviderDropdownTest(data, assert){
         await Sl.testid(data.element.mail_provider_testid).click();
-        await Sl.label(data.element.mail_provider_option_gmail_label).click();
+        await Sl.arialabel(data.element.mail_provider_option_gmail_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.mail_provider_testid)).toHaveTextContaining(assert);
     }
 
     async mailEncryptionDropdownText(data, assert){
         await Sl.testid(data.element.mail_encryption_testid).click();
-        await Sl.label(data.element.mail_encryption_ssl_label).click();
+        await Sl.arialabel(data.element.mail_encryption_ssl_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.mail_encryption_testid)).toHaveTextContaining(assert);
     }
 
     async customTextbox(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_custom_label).click();
+        await Sl.arialabel(data.element.env_option_custom_label).click();
         await asserts.pause();
         await expect(Sl.testid(assert)).toExist();
     }
 
     async customeTextboxFunctionality(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_custom_label).click();
+        await Sl.arialabel(data.element.env_option_custom_label).click();
         await Sl.testid(data.element.env_file_name_testid).setValue(data.value.env_file);
         await asserts.pause();
         await expect(Sl.testid(data.element.env_file_name_testid)).toHaveValueContaining(assert);
@@ -271,7 +271,7 @@ class ConfigurationPage extends Page{
     async mysqlDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
-        await Sl.label(data.element.db_type_option_mysql_label).click();
+        await Sl.arialabel(data.element.db_type_option_mysql_label).click();
         await asserts.pause();
         await this.setDatabaseValues(data);
         await asserts.pause();
@@ -281,7 +281,7 @@ class ConfigurationPage extends Page{
     async postgresqlDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
-        await Sl.label(data.element.db_type_option_postgresql_label).click();
+        await Sl.arialabel(data.element.db_type_option_postgresql_label).click();
         await asserts.pause();
         await this.setDatabaseValues(data);
         await asserts.pause();
@@ -291,7 +291,7 @@ class ConfigurationPage extends Page{
     async sqliteDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
-        await Sl.label(data.element.db_type_option_sqlite_label).click();
+        await Sl.arialabel(data.element.db_type_option_sqlite_label).click();
         await asserts.pause();
         await this.setDatabaseValues(data);
         await asserts.pause();
@@ -301,7 +301,7 @@ class ConfigurationPage extends Page{
     async sqlServerDatabaseTest(data, assert){
         await this.setEnv(data);
         await Sl.testid(data.element.db_type_testid).click();
-        await Sl.label(data.element.db_type_option_sql_server_label).click();
+        await Sl.arialabel(data.element.db_type_option_sql_server_label).click();
         await asserts.pause();
         await this.setDatabaseValues(data);
         await asserts.pause();
@@ -564,7 +564,7 @@ class ConfigurationPage extends Page{
     async blankDataResponse(data, assert){
         await this.clickDatabaseButton(data);
         await expect(Sl.class(data.element.validation_message_class)).toHaveTextContaining(assert.database_btn_assert);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await asserts.pause();
         await expect(Sl.testid(data.element.save_btn_testid)).toHaveAttribute(assert.save_btn_assert);
     }
@@ -575,7 +575,7 @@ class ConfigurationPage extends Page{
         await helper.VueClear(data.element.app_name_testid);
         await asserts.pause();
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await asserts.pause();
         await this.assertSuccessMessage(data, assert);
     }
@@ -584,7 +584,7 @@ class ConfigurationPage extends Page{
         await this.setEnv(data);
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await asserts.pause();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
@@ -592,52 +592,52 @@ class ConfigurationPage extends Page{
 
     async customOptionPageResponse(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_custom_label).click();
+        await Sl.arialabel(data.element.env_option_custom_label).click();
         await Sl.testid(data.element.env_file_name_testid).setValue(data.value.env_file);
         await asserts.pause();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
 
     async developOptionPageResponse(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_develop_label).click();
+        await Sl.arialabel(data.element.env_option_develop_label).click();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
 
     async stagingOptionPageResponse(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_staging_label).click();
+        await Sl.arialabel(data.element.env_option_staging_label).click();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
 
     async productionOptionPageResponse(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_production_label).click();
+        await Sl.arialabel(data.element.env_option_production_label).click();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
 
     async wdiojsOptionPageResponse(data, assert){
         await Sl.testid(data.element.env_testid).click();
-        await Sl.label(data.element.env_option_wdiojs_label).click();
+        await Sl.arialabel(data.element.env_option_wdiojs_label).click();
         await this.setDatabaseValues(data);
         await this.clickDatabaseButton(data);
-        await Sl.label(data.element.validation_message_close_btn_label).click();
+        await Sl.arialabel(data.element.validation_message_close_btn_label).click();
         await this.setEmailValue(data);
         await this.assertSuccessMessage(data, assert);
     }
