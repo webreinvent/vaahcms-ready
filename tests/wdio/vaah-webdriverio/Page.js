@@ -13,14 +13,17 @@ const params = envObj.getParams();
 
 
 /**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
+ * main page object containing all methods, selectors and functionality
+ * that is shared across all page objects
+ */
 module.exports = class Page {
 
     constructor() {
         this.base_url = params.base_url;
         this.is_human_pause = params.is_human_pause;
+        this.small_pause = params.small_pause;
+        this.medium_pause = params.medium_pause;
+        this.long_pause = params.long_pause;
         this.params = {
             page: {
                 id: null,

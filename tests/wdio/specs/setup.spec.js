@@ -1,5 +1,5 @@
-const Page = require('../pageobjects/Setup.page')
-const Data = require('../Data/Setup')
+const Page = require('../pageobjects/setup.page')
+const Data = require('../data/setup')
 const assert = require('../vaah-webdriverio/Assert')
 
 let params = Data.params;
@@ -43,5 +43,3 @@ describe(Page.groupId(params), () => {
 
     })
 })
-
-
