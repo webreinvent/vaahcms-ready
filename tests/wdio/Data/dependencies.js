@@ -18,6 +18,9 @@ class Dependencies extends Page{
             vaah_link: '=Vaah',
             webreinvent_link: '=WebReinvent',
             cms_import_data_checkbox_testid: 'dependencies-select_module',
+            cms_progress_bar_testid: 'dependencies-module_install_progressbar',
+            bulma_progress_bar_testid: 'dependencies-module_install_progressbar',
+            progress_bar_testid: 'dependencies-install_progressbar',
             install_dependencies_btn_testid: 'dependencies-install_dependencies_btn_text',
             skip_btn_testid: 'dependencies-skip',
             back_btn_testid: 'dependencies-back_btn',
@@ -141,13 +144,25 @@ class Dependencies extends Page{
                         }
                     },
                     {
-                        count: 1.4,
-                        name: 'Verify if the Import Sample data checkbox of BulmaBlogTheme module is functional or not',
-                        expect: 'The Import Sample data checkbox of BulmaBlogTheme module should be functional',
+                        count: 1.6,
+                        name: 'Verify if the Back button present in the page is functional or not',
+                        expect: 'The Back button should navigate to the migrate page',
+                        assert: 'http://localhost/vaahcms-ready/public/backend#/setup/install/migrate'
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify if the Skip button present in the page is functional or not',
+                        expect: 'The Skip button should skip the installation and the progress bar should complete',
                         assert: {
-                            attribute: 'data-p-highlight',
-                            value: 'true'
+                            attribute: 'aria-valuenow',
+                            value: '100'
                         }
+                    },
+                    {
+                        count: 1.8,
+                        name: 'Verify if the Install Dependencies button present in the page is functional or not',
+                        expect: 'The Install Dependencies button should install the CMS module',
+                        assert: 'Cms module is installed.'
                     }
                 ]
             }
