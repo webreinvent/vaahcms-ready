@@ -19,14 +19,6 @@ class MigratePage extends Page{
         await super.open(this.params.page.url);
     }
 
-    async waitExist(element){
-        await element.waitForExist({timeout: helper.large_pause});
-    }
-
-    async waitDisplayed(element){
-        await element.waitForDisplayed({timeout: helper.long_pause, interval: helper.small_pause});
-    }
-
     async envFileVisibility(data){
         await asserts.pause();
         await expect(Sl.testid(data.element.env_file_testid)).toExist();
@@ -54,10 +46,10 @@ class MigratePage extends Page{
 
     async migrateButtonColorChange(data, assert){
         await asserts.pause();
-        await this.waitDisplayed(Sl.testid(data.element.env_file_testid));
+        await helper.waitDisplayed(Sl.testid(data.element.env_file_testid), this.long_pause, this.small_pause);
         await Sl.testid(data.element.migration_btn_testid).click();
         await Sl.testid(data.element.proceed_btn_testid).click();
-        await this.waitExist(Sl.class(data.element.validation_message_class));
+        await helper.waitExist(Sl.class(data.element.validation_message_class), this.long_pause);
         await expect(Sl.testid(data.element.migration_btn_testid)).toHaveAttributeContaining(assert.attribute, assert.value);
     }
 
@@ -94,12 +86,12 @@ class MigratePage extends Page{
     }
 
     async proceedButtonFunctionality(data, assert){
-        await this.waitDisplayed(Sl.testid(data.element.env_file_testid))
+        await helper.waitDisplayed(Sl.testid(data.element.env_file_testid), this.long_pause, this.small_pause)
         await Sl.testid(data.element.migration_btn_testid).click();
         await asserts.pause();
         await Sl.testid(data.element.proceed_btn_testid).click();
         const message = Sl.class(data.element.validation_message_class);
-        await this.waitExist(message);
+        await helper.waitExist(message, this.long_pause);
         await expect(message).toHaveTextContaining(assert);
     }
 
@@ -110,7 +102,11 @@ class MigratePage extends Page{
     }
 
     async saveButtonFunctionality(data, assert){
-        await this.waitDisplayed(Sl.testid(data.element.env_file_testid))
+        await helper.waitDisplayed(Sl.testid(data.element.env_file_testid), this.long_pause, this.small_pause);
+        await Sl.testid(data.element.migration_btn_testid).click();
+        await asserts.pause();
+        await Sl.testid(data.element.proceed_btn_testid).click();
+        await helper.waitExist(Sl.class(data.element.validation_message_class), this.long_pause);
         await Sl.testid(data.element.save_btn_testid).click();
         await asserts.pause();
         await asserts.pageUrl(assert);
