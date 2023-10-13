@@ -56,7 +56,7 @@ class MigratePage extends Page{
     async messageCloseButtonFunctionality(data, assert){
         await Sl.testid(data.element.close_btn_testid).click();
         await asserts.pause();
-        await expect(Sl.role(data.element.migration_message_div_role)).toHaveAttribute(assert.attribute, assert.value);
+        await expect(Sl.role(data.element.migration_message_role)).toHaveAttribute(assert.attribute, assert.value);
     }
 
     async migrationButtonFunctionality(data){

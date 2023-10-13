@@ -12,7 +12,7 @@ class Migrate extends Page {
         this.element = {
             env_file_testid: 'setup-use_env',
             migration_message_testid: 'migrate-message_text',
-            migration_message_div_role: 'alert',
+            migration_message_role: 'alert',
             migration_btn_testid: 'migrate-run_migration',
             cancel_btn_testid: 'migrate-confirmation_cancel_btn',
             proceed_btn_testid: 'migrate-confirmation_proceed_btn',
