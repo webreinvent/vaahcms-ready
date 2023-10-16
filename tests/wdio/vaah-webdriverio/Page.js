@@ -1,14 +1,29 @@
-const chalk = require('chalk');
+//const chalk = import("chalk").then(m=>m.default);
+const chalk = require("chalk");
 const env = require('./../../../wdio.env');
 
+//import {chalk} from "chalk";
+let color  = require("cli-color");
+
+
+
+const envObj = new env();
+
+const params = envObj.getParams();
+
+
 /**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
+ * main page object containing all methods, selectors and functionality
+ * that is shared across all page objects
+ */
 module.exports = class Page {
 
     constructor() {
-        this.base_url = env.base_url;
+        this.base_url = params.base_url;
+        this.is_human_pause = params.is_human_pause;
+        this.small_pause = params.small_pause;
+        this.medium_pause = params.medium_pause;
+        this.long_pause = params.long_pause;
         this.params = {
             page: {
                 id: null,
@@ -50,7 +65,7 @@ module.exports = class Page {
     groupId(params)
     {
         let id = chalk.red(`
----------------------------------------------------------------`);
+--------------------------------------------------------------------------------------------------------`);
         id += this.pageId(params);
         id += `
 [GROUP ID: `+this.highlight(params.page.id+"_"+params.group.count)+"] "+params.group.name;
@@ -64,7 +79,7 @@ module.exports = class Page {
         if(params.test.expect)
         {
             id += `
-    ${chalk.blue('Expect:')} ${params.test.expect}`;
+    ${color.blue('Expect:')} ${params.test.expect}`;
         }
 
 
