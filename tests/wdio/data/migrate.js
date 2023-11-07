@@ -1,6 +1,6 @@
-const Page = require('../vaah-webdriverio/Page');
+import Page from '../vaah-webdriverio/Page.js'
 
-class Migrate extends Page {
+export default class Migrate extends Page {
     constructor() {
         super();
         this.params = {
@@ -141,4 +141,3 @@ class Migrate extends Page {
     }
 }
 
-module.exports = new Migrate();

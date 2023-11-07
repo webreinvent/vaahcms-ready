@@ -1,6 +1,6 @@
-const Sl = require("../vaah-webdriverio/Selector");
+import Sl from '../vaah-webdriverio/Selector.js'
 
-class Helper{
+export default class Helper{
 
     async waitExist(element, timeout_pause=null, interval_pause=null){
         await element.waitForExist({timeout: timeout_pause, interval: interval_pause});
@@ -16,5 +16,3 @@ class Helper{
         await browser.keys('Backspace');
     }
 }
-
-module.exports = new Helper();

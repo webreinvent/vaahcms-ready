@@ -1,8 +1,11 @@
-const Page = require('../vaah-webdriverio/Page');
-const Sl = require('../vaah-webdriverio/Selector');
-const asserts = require('../vaah-webdriverio/Assert');
+import Page from '../vaah-webdriverio/Page.js'
+import Selector from '../vaah-webdriverio/Selector.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
 
-class SetupPage extends Page{
+let asserts = new VaahAsserts();
+let Sl = new Selector();
+
+export default class SetupPage extends Page{
     constructor() {
         super();
         this.params.page.id = "SP";
@@ -39,5 +42,3 @@ class SetupPage extends Page{
         await asserts.pageUrl(assert);
     }
 }
-
-module.exports = new SetupPage()

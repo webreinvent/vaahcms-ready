@@ -1,4 +1,4 @@
-class El{
+export default class Selector{
 
     //-----------------------------------------------------
     id(id)
@@ -79,8 +79,22 @@ class El{
         }
         return el;
     }
+    for(name){
+        let el = this.attr('for', name);
+        return el;
+    }
+    placeholder(name, value=null){
+        let el = this.attr('placeholder', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    title(name, value=null){
+        let el = this.attr('title', name);
+        return el;
+    }
     //-----------------------------------------------------
 
 }
-
-module.exports = new El()

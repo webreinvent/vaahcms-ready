@@ -1,9 +1,13 @@
-const Page = require('../pageobjects/configuration.page')
-const Data = require('../data/configuration')
-const asserts = require('../vaah-webdriverio/Assert')
+import ConfigurationPage from '../pageobjects/configuration.page.js'
+import Configuration from '../data/configuration.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
 
+let Page = new ConfigurationPage();
+let Data = new Configuration();
+let asserts = new VaahAsserts();
 let params = Data.params;
 let inputs;
+
 Page.getEnvFile();
 
 //---------------------------Group: 1---------------------------

@@ -1,13 +1,11 @@
-const env = require('./wdio.env');
+
+import env from "./wdio.env.js";
 
 const envObj = new env();
 
 const params = envObj.getParams();
 
-console.log('params-->', params)
-console.log('base_url-->', params.base_url)
-
-exports.config = {
+export const config = {
     env: params,
     //
     // ====================
@@ -15,6 +13,7 @@ exports.config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
+    port: 4723,
     //
     // ==================
     // Specify Test Files
@@ -32,7 +31,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './tests/wdio/specs/setup.e2e.js'
+        './tests/wdio/specs/*'
     ],
     // Patterns to exclude.
     exclude: [
@@ -54,7 +53,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -69,7 +68,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: params.log_level,
     //
     // Set specific log levels per logger
     // loggers:
@@ -109,7 +108,23 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    //services: ['vite'],
+    services: [
+        /*[
+           'chromedriver'
+        ],*/
+        /*[
+            'devtools',
+        ],*/
+        [
+            'appium',
+            {
+                args:{
+                    allowInsecure: ['chromedriver_autodownload', 'adb_shell'],
+                }
+            }
+        ]
+    ],
+
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -118,6 +133,7 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
+
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -131,28 +147,28 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: [
-        ['spec', {
-            symbols: {
-                passed: `
+        reporters: [
+            ['spec',
+                {
+                symbols: {
+                    passed: `
 [✓] PASSED: `,
-                failed: `
+                    failed: `
 [✖] FAILED: `,
-            },
-        },
+                },
+                realtimeReporting: false,
+                showPreface: false
+                },
+            ],
         ],
-    ],
 
-
-
-
-    //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
     },
+
     //
     // =====
     // Hooks
@@ -229,13 +245,13 @@ exports.config = {
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
      */
-    // beforeHook: function (test, context) {
+    // beforeHook: function (test, context, hookName) {
     // },
     /**
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
      */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+    // afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
     // },
     /**
      * Function to be executed after a test (in Mocha/Jasmine only)
@@ -294,10 +310,10 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-    * Gets executed when a refresh happens.
-    * @param {string} oldSessionId session ID of the old session
-    * @param {string} newSessionId session ID of the new session
-    */
+     * Gets executed when a refresh happens.
+     * @param {string} oldSessionId session ID of the old session
+     * @param {string} newSessionId session ID of the new session
+     */
     // onReload: function(oldSessionId, newSessionId) {
     // }
 }

@@ -1,6 +1,6 @@
-const Page = require('../vaah-webdriverio/Page');
+import Page from '../vaah-webdriverio/Page.js'
 
-class Configuration extends Page{
+export default class Configuration extends Page{
     constructor() {
         super();
         this.params = {
@@ -558,5 +558,3 @@ class Configuration extends Page{
         ]
     }
 }
-
-module.exports = new Configuration();

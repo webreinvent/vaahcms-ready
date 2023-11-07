@@ -1,7 +1,10 @@
-const Page = require('../pageobjects/migrate.page')
-const Data = require('../data/migrate')
-const asserts = require('../vaah-webdriverio/Assert')
+import MigratePage from '../pageobjects/migrate.page.js'
+import Migrate from '../data/migrate.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
 
+let Page = new MigratePage();
+let Data = new Migrate();
+let asserts = new VaahAsserts();
 let params = Data.params;
 let inputs;
 

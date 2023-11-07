@@ -21,7 +21,7 @@
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1.48",
         "webreinvent/laravel-nestable": "^0.0.3",
-        "webreinvent/vaahcms": "2.*",
+        "webreinvent/vaahcms": "dev-2.x-feature/prime-vue-upgrade",
         "webreinvent/vaahextend": "2.*",
         "zanysoft/laravel-zip": "^2.0"
     },

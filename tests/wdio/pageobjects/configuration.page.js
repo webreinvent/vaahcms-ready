@@ -1,11 +1,16 @@
-const Page = require('../vaah-webdriverio/Page');
-const Sl = require('../vaah-webdriverio/Selector');
-const asserts = require('../vaah-webdriverio/Assert')
-const helper = require('../vaah-webdriverio/Helper')
+import Helper from '../vaah-webdriverio/Helper.js';
+import Page from '../vaah-webdriverio/Page.js'
+import Selector from '../vaah-webdriverio/Selector.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
+
+let asserts = new VaahAsserts();
+let Sl = new Selector();
+let helper = new Helper();
+
 
 let env_file_name = null;
 
-class ConfigurationPage extends Page{
+export default class ConfigurationPage extends Page{
     constructor() {
         super();
         this.params.page.id = "CG";
@@ -641,5 +646,3 @@ class ConfigurationPage extends Page{
         await this.assertSuccessMessage(data, assert);
     }
 }
-
-module.exports = new ConfigurationPage()

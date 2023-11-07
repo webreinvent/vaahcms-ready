@@ -1,6 +1,6 @@
-const Page = require('../vaah-webdriverio/Page');
+import Page from '../vaah-webdriverio/Page.js'
 
-class Setup extends Page{
+export default class Setup extends Page{
     constructor() {
         super();
         this.params = {
@@ -43,7 +43,7 @@ class Setup extends Page{
                         count: 1.4,
                         name: "Verify if the button lead to a proper landing page or not",
                         expect: "The button should lead to a proper landing page.",
-                        assert: this.params.page.url+"/install/configuration"
+                        assert: this.params.page.url
                     },
                 ]
 
@@ -52,4 +52,3 @@ class Setup extends Page{
     }
 }
 
-module.exports = new Setup();

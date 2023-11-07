@@ -1,9 +1,13 @@
-const Page = require('../vaah-webdriverio/Page');
-const Sl = require('../vaah-webdriverio/Selector');
-const asserts = require('../vaah-webdriverio/Assert');
-const helper = require('../vaah-webdriverio/Helper');
+import Helper from '../vaah-webdriverio/Helper.js';
+import Page from '../vaah-webdriverio/Page.js'
+import Selector from '../vaah-webdriverio/Selector.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
 
-class MigratePage extends Page{
+let asserts = new VaahAsserts();
+let Sl = new Selector();
+let helper = new Helper();
+
+export default class MigratePage extends Page{
     constructor() {
         super();
         this.params.page.id = "MG";
@@ -112,5 +116,3 @@ class MigratePage extends Page{
         await asserts.pageUrl(assert);
     }
 }
-
-module.exports = new MigratePage();

@@ -1,10 +1,11 @@
-const env = require('./../../../wdio.env');
+
+import env from '../../../wdio.env.js'
 
 const envObj = new env();
 
 const params = envObj.getParams();
 
-class Assert{
+export default class VaahAsserts{
 
     async pause(seconds = null)
     {
@@ -36,4 +37,3 @@ class Assert{
 
 };
 
-module.exports = new Assert()

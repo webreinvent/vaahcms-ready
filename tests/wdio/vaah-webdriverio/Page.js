@@ -1,11 +1,10 @@
-//const chalk = import("chalk").then(m=>m.default);
-const chalk = require("chalk");
-const env = require('./../../../wdio.env');
 
-//import {chalk} from "chalk";
-let color  = require("cli-color");
+import chalk from 'chalk';
+import color from 'cli-color'
+import env from '../../../wdio.env.js'
 
-
+chalk.enabled = true
+chalk.level = 3
 
 const envObj = new env();
 
@@ -16,7 +15,7 @@ const params = envObj.getParams();
  * main page object containing all methods, selectors and functionality
  * that is shared across all page objects
  */
-module.exports = class Page {
+export default class Page {
 
     constructor() {
         this.base_url = params.base_url;
@@ -50,6 +49,11 @@ module.exports = class Page {
         return browser.url(url);
     }
     //-------------------------------------------------
+    bold(str)
+    {
+        return chalk.bold(str);
+    }
+    //-------------------------------------------------
     highlight(str)
     {
         return chalk.magenta(str);
@@ -58,8 +62,8 @@ module.exports = class Page {
     pageId(params)
     {
 
-        return `
-[PAGE ID: ${this.highlight(params.page.id)}] Page: `+params.page.name+` URL: `+params.page.url;
+        return this.bold(`
+[PAGE ID: ${this.highlight(params.page.id)}] Page: `+params.page.name+` URL: `+params.page.url);
     }
     //-------------------------------------------------
     groupId(params)

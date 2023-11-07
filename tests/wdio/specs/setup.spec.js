@@ -1,9 +1,13 @@
-const Page = require('../pageobjects/setup.page')
-const Data = require('../data/setup')
-const assert = require('../vaah-webdriverio/Assert')
+import SetupPage from '../pageobjects/setup.page.js'
+import Setup from '../data/setup.js'
+import VaahAsserts from "../vaah-webdriverio/Assert.js";
 
+let Page = new SetupPage();
+let Data = new Setup();
+let assert = new VaahAsserts();
 let params = Data.params;
 let inputs;
+
 
 params.group = Data.groups[0];
 
