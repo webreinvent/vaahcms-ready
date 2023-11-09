@@ -12,7 +12,7 @@
         "@wdio/spec-reporter": "^8.16.12",
         "@wdio/sync": "^7.27.0",
         "axios": "^1.5.0",
-        "chromedriver": "^117.0.2",
+        "chromedriver": "^119.0.1",
         "laravel-vite-plugin": "^0.8.0",
         "vite": "^4.4.9",
         "wdio-chromedriver-service": "^8.1.1",
