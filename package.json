@@ -11,7 +11,7 @@
         "@wdio/mocha-framework": "^8.16.12",
         "@wdio/spec-reporter": "^8.16.12",
         "@wdio/sync": "^7.27.0",
-        "axios": "^1.5.0",
+        "axios": "^1.6.0",
         "chromedriver": "^117.0.2",
         "laravel-vite-plugin": "^0.8.0",
         "vite": "^4.4.9",
