@@ -14,7 +14,7 @@
         "axios": "^1.5.0",
         "chromedriver": "^117.0.2",
         "laravel-vite-plugin": "^0.8.0",
-        "vite": "^4.4.9",
+        "vite": "^4.4.12",
         "wdio-chromedriver-service": "^8.1.1",
         "wdio-docker-service": "^3.2.1",
         "wdio-intercept-service": "^4.4.0",
