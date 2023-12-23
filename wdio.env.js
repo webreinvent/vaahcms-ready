@@ -10,8 +10,8 @@ class Env {
             log_level: 'error',
             small_pause: 2000,
             medium_pause: 5000,
-            long_pause: 10000,
-            base_url: 'https://www.toolstation.com',
+            long_pause: 20000,
+            base_url: 'http://localhost/testing/vaahcms-ready/public',
             version: null,
             capabilities: [
                 {

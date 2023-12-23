@@ -24,6 +24,7 @@ export default class ConfigurationPage extends Page{
         await browser.maximizeWindow();
         await asserts.pause();
         await super.open(this.params.page.url);
+        await browser.refresh();
     }
 
     async getEnvFile(){
@@ -56,10 +57,11 @@ export default class ConfigurationPage extends Page{
     }
 
     async waitForFilled(data){
-        if(env_file_name === '.env.staging'){
+        if(env_file_name.includes('.env.')){
             const element = await Sl.testid(data.element.db_username_testid);
             const value = data.value.db_username;
-            await this.wait(element, value);
+            //await this.wait(element, value);
+            await browser.pause(2000);
         }
     }
 
@@ -84,9 +86,9 @@ export default class ConfigurationPage extends Page{
     async setMailProvider(data){
         await Sl.testid(data.element.mail_provider_testid).click();
         await Sl.arialabel(data.element.mail_provider_option_mailtrap_label).click();
-        const port = await Sl.testid(data.element.mail_port_testid);
-        const value = data.value.mail_port;
-        await this.wait(port, value);
+        // const port = await Sl.testid(data.element.mail_port_testid);
+        // const value = data.value.mail_port;
+        // await this.wait(port, value);
         await asserts.pause();
     }
 

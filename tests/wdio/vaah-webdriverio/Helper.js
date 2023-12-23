@@ -1,4 +1,6 @@
-import Sl from '../vaah-webdriverio/Selector.js'
+import Selector from '../vaah-webdriverio/Selector.js'
+
+const Sl = new Selector();
 
 export default class Helper{
 

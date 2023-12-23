@@ -31,7 +31,7 @@ export const config = {
     // will be called from there.
     //
     specs: [
-        './tests/wdio/specs/setup.spec.js'
+        './tests/wdio/specs/*.spec.js'
     ],
     // Patterns to exclude.
     exclude: [

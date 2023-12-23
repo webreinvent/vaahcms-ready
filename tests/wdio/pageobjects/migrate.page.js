@@ -21,6 +21,7 @@ export default class MigratePage extends Page{
         await browser.maximizeWindow();
         await asserts.pause();
         await super.open(this.params.page.url);
+        await browser.refresh();
     }
 
     async envFileVisibility(data){

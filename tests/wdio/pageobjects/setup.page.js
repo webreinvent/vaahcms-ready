@@ -25,6 +25,7 @@ export default class SetupPage extends Page{
         await this.pause(this.is_human);
         await browser.maximizeWindow();
         await super.open(this.params.page.url);
+        await browser.refresh();
     }
 
     async installButtonAssert(data){
