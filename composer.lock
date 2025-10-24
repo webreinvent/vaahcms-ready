@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d113058b20e39e03264c3bb466ff8d96",
+    "content-hash": "d252ef6305bcd11c35d3940fcdf67c89",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -211,130 +211,6 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
-        },
-        {
-            "name": "cartalyst/stripe",
-            "version": "v2.4.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cartalyst/stripe.git",
-                "reference": "e75b4d714fec5f034d533e55f5365f0229b5686d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/stripe/zipball/e75b4d714fec5f034d533e55f5365f0229b5686d",
-                "reference": "e75b4d714fec5f034d533e55f5365f0229b5686d",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0|~7.0",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "2.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cartalyst\\Stripe\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com",
-                    "homepage": "https://cartalyst.com"
-                }
-            ],
-            "description": "A comprehensive Stripe API package.",
-            "keywords": [
-                "cartalyst",
-                "php",
-                "stripe"
-            ],
-            "support": {
-                "issues": "https://github.com/cartalyst/stripe/issues",
-                "source": "https://github.com/cartalyst/stripe/tree/v2.4.6"
-            },
-            "time": "2021-10-09T10:40:49+00:00"
-        },
-        {
-            "name": "cartalyst/stripe-laravel",
-            "version": "v17.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cartalyst/stripe-laravel.git",
-                "reference": "b05d0af242f2a3fa2699f0929822ead57ba22aa0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/stripe-laravel/zipball/b05d0af242f2a3fa2699f0929822ead57ba22aa0",
-                "reference": "b05d0af242f2a3fa2699f0929822ead57ba22aa0",
-                "shasum": ""
-            },
-            "require": {
-                "cartalyst/stripe": "^2.0",
-                "illuminate/support": "^12.0",
-                "php": "^8.3"
-            },
-            "require-dev": {
-                "cartalyst/php-cs-fixer-config": "^1.0",
-                "phpunit/phpunit": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Stripe": "Cartalyst\\Stripe\\Laravel\\Facades\\Stripe"
-                    },
-                    "providers": [
-                        "Cartalyst\\Stripe\\Laravel\\StripeServiceProvider"
-                    ]
-                },
-                "component": "implementation",
-                "branch-alias": {
-                    "dev-master": "17.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cartalyst\\Stripe\\Laravel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com",
-                    "homepage": "https://cartalyst.com"
-                }
-            ],
-            "description": "Laravel 11 integration for the Cartalyst Stripe package.",
-            "keywords": [
-                "cartalyst",
-                "laravel",
-                "php",
-                "stripe"
-            ],
-            "support": {
-                "issues": "https://github.com/cartalyst/stripe-laravel/issues",
-                "source": "https://github.com/cartalyst/stripe-laravel/tree/v17.0.0"
-            },
-            "time": "2025-02-28T21:52:34+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -8889,16 +8765,16 @@
         },
         {
             "name": "webreinvent/vaahcms",
-            "version": "dev-2.x-hotfix/upgrade-laravel-12",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webreinvent/vaahcms.git",
-                "reference": "9738c3c14317cb2fe2392325c7857ee70af223a3"
+                "reference": "a14abf687058d45fcb67d6cf2437157f14d13790"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/9738c3c14317cb2fe2392325c7857ee70af223a3",
-                "reference": "9738c3c14317cb2fe2392325c7857ee70af223a3",
+                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/a14abf687058d45fcb67d6cf2437157f14d13790",
+                "reference": "a14abf687058d45fcb67d6cf2437157f14d13790",
                 "shasum": ""
             },
             "require": {
@@ -8952,7 +8828,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webreinvent/vaahcms/issues",
-                "source": "https://github.com/webreinvent/vaahcms/tree/2.x-hotfix/upgrade-laravel-12"
+                "source": "https://github.com/webreinvent/vaahcms/tree/v2.3.1"
             },
             "funding": [
                 {
@@ -8960,7 +8836,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-07-01T06:07:33+00:00"
+            "time": "2025-07-22T12:20:21+00:00"
         },
         {
             "name": "webreinvent/vaahextend",
@@ -11835,9 +11711,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "webreinvent/vaahcms": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -11845,6 +11719,6 @@
         "ext-gd": "*",
         "ext-imap": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

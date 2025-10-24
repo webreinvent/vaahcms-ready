@@ -9,7 +9,6 @@
         "ext-gd": "*",
         "ext-imap": "*",
         "barryvdh/laravel-dompdf": "^v3.1",
-        "cartalyst/stripe-laravel": "^v17.0",
         "creativeorange/gravatar": "^1.0",
         "doctrine/dbal": "^4.2",
         "guzzlehttp/guzzle": "^7.9",
@@ -21,7 +20,7 @@
         "laravel/tinker": "^2.10",
         "maatwebsite/excel": "^3.1.64",
         "webreinvent/laravel-nestable": "^0.0.3",
-        "webreinvent/vaahcms": "2.*",
+        "webreinvent/vaahcms": "^2.3",
         "webreinvent/vaahextend": "2.*",
         "zanysoft/laravel-zip": "^1.0.3"
     },
