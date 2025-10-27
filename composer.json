@@ -9,7 +9,6 @@
         "ext-gd": "*",
         "ext-imap": "*",
         "barryvdh/laravel-dompdf": "^v3.1",
-        "cartalyst/stripe-laravel": "^v17.0",
         "creativeorange/gravatar": "^1.0",
         "doctrine/dbal": "^4.2",
         "guzzlehttp/guzzle": "^7.9",
