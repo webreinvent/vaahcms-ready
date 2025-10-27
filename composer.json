@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.10",
         "maatwebsite/excel": "^3.1.64",
         "webreinvent/laravel-nestable": "^0.0.3",
-        "webreinvent/vaahcms": "^2.*",
+        "webreinvent/vaahcms": "2.*",
         "webreinvent/vaahextend": "2.*",
         "zanysoft/laravel-zip": "^1.0.3"
     },
