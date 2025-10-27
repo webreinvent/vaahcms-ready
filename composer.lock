@@ -8765,16 +8765,16 @@
         },
         {
             "name": "webreinvent/vaahcms",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webreinvent/vaahcms.git",
-                "reference": "a14abf687058d45fcb67d6cf2437157f14d13790"
+                "reference": "fbd03220e2b18a7f050d61b2431675a3338c6bcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/a14abf687058d45fcb67d6cf2437157f14d13790",
-                "reference": "a14abf687058d45fcb67d6cf2437157f14d13790",
+                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/fbd03220e2b18a7f050d61b2431675a3338c6bcf",
+                "reference": "fbd03220e2b18a7f050d61b2431675a3338c6bcf",
                 "shasum": ""
             },
             "require": {
@@ -8828,7 +8828,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webreinvent/vaahcms/issues",
-                "source": "https://github.com/webreinvent/vaahcms/tree/v2.3.1"
+                "source": "https://github.com/webreinvent/vaahcms/tree/v2.3.2"
             },
             "funding": [
                 {
@@ -8836,7 +8836,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-07-22T12:20:21+00:00"
+            "time": "2025-10-25T07:17:05+00:00"
         },
         {
             "name": "webreinvent/vaahextend",
