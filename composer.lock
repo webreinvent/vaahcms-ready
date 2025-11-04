@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d252ef6305bcd11c35d3940fcdf67c89",
+    "content-hash": "e3f1f6c58b9564feb14ccecf7fd05427",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -8765,16 +8765,16 @@
         },
         {
             "name": "webreinvent/vaahcms",
-            "version": "2.3.2",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webreinvent/vaahcms.git",
-                "reference": "fbd03220e2b18a7f050d61b2431675a3338c6bcf"
+                "reference": "7149b584990dfebba7e8a61519298a89f2593b86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/fbd03220e2b18a7f050d61b2431675a3338c6bcf",
-                "reference": "fbd03220e2b18a7f050d61b2431675a3338c6bcf",
+                "url": "https://api.github.com/repos/webreinvent/vaahcms/zipball/7149b584990dfebba7e8a61519298a89f2593b86",
+                "reference": "7149b584990dfebba7e8a61519298a89f2593b86",
                 "shasum": ""
             },
             "require": {
@@ -8828,7 +8828,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webreinvent/vaahcms/issues",
-                "source": "https://github.com/webreinvent/vaahcms/tree/v2.3.2"
+                "source": "https://github.com/webreinvent/vaahcms/tree/v2.3.4"
             },
             "funding": [
                 {
@@ -8836,7 +8836,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-10-25T07:17:05+00:00"
+            "time": "2025-11-04T10:20:47+00:00"
         },
         {
             "name": "webreinvent/vaahextend",
@@ -8891,28 +8891,37 @@
         },
         {
             "name": "zanysoft/laravel-zip",
-            "version": "1.0.3",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CalumChamberlain/laravel-zip.git",
-                "reference": "466663746c92154c48a2d490efc6724f9f6e9652"
+                "url": "https://github.com/zanysoft/laravel-zip.git",
+                "reference": "ddecbf63c9682aea6732b88fbe1c4893d4608493"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zanysoft/laravel-zip/zipball/ddecbf63c9682aea6732b88fbe1c4893d4608493",
+                "reference": "ddecbf63c9682aea6732b88fbe1c4893d4608493",
+                "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "ext-zip": "*",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": ">=8.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0",
-                "scrutinizer/ocular": "^1.0"
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0",
+                "scrutinizer/ocular": "^1.9"
             },
             "type": "library",
             "extra": {
                 "laravel": {
+                    "aliases": {
+                        "Zip": "ZanySoft\\Zip\\Facades\\Zip"
+                    },
                     "providers": [
                         "ZanySoft\\Zip\\ZipServiceProvider"
-                    ],
-                    "aliases": {
-                        "Zip": "ZanySoft\\Zip\\ZipFacade"
-                    }
+                    ]
                 }
             },
             "autoload": {
@@ -8920,26 +8929,36 @@
                     "ZanySoft\\Zip\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Zany Soft",
-                    "email": "info@zanysoft.co",
-                    "homepage": "http://www.zanysoft.co"
+                    "email": "zanysoft@outlook.com"
                 }
             ],
-            "description": "ZipArchive toolbox",
-            "homepage": "http://www.zanysoft.co",
+            "description": "laravel-zip is the world's leading zip utility for file compression and backup.",
             "keywords": [
-                "ZipArchive",
+                "backup",
+                "extract",
+                "laravel",
+                "laravel-zip",
+                "laravel8",
+                "laravel9",
                 "merge",
                 "multiple",
                 "unzip",
-                "zip"
+                "zip",
+                "ziparchive"
             ],
-            "time": "2017-10-10T03:22:41+00:00"
+            "support": {
+                "email": "zanysoft@outlook.com",
+                "issues": "https://github.com/zanysoft/laravel-zip/issues",
+                "source": "https://github.com/zanysoft/laravel-zip/tree/3.0.1"
+            },
+            "time": "2025-03-13T15:36:35+00:00"
         }
     ],
     "packages-dev": [
