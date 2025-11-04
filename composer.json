@@ -22,7 +22,7 @@
         "webreinvent/laravel-nestable": "^0.0.3",
         "webreinvent/vaahcms": "2.3.4",
         "webreinvent/vaahextend": "2.*",
-        "zanysoft/laravel-zip": "^1.0.3"
+        "zanysoft/laravel-zip": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
@@ -38,12 +38,6 @@
         "composer/composer": "^2.7"
 
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/CalumChamberlain/laravel-zip.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
